@@ -1,21 +1,25 @@
+from drf_extra_fields.fields import Base64ImageField
 from rest_framework.serializers import ModelSerializer
 
 from .models import Banner, Imput, Video
 
 
 class BannerSerializer(ModelSerializer):
+    image = Base64ImageField()
     class Meta:
         model = Banner
-        fields = "__all__"
+        fields = ["id", "text", "description", "image", "link"]
 
 
 class ImputSerializer(ModelSerializer):
+    image = Base64ImageField()
     class Meta:
         model = Imput
-        fields = "__all__"
+        fields = ["id", "image", "link"]
 
 
 class VideoSerializer(ModelSerializer):
+    image = Base64ImageField()
     class Meta:
         model = Video
-        fields = "__all__"
+        fields = ["id", "image", "link"]

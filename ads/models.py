@@ -24,8 +24,6 @@ class Banner(models.Model):
     image = WEBPField(
         verbose_name='Image',
         upload_to=banner_folder,
-        height_field='height',
-        width_field='width'
     )
     link = models.URLField()
 
@@ -54,7 +52,5 @@ class Imput(models.Model):
     image = WEBPField(
         verbose_name='Image',
         upload_to=imput_folder,
-        height_field='height',
-        width_field='width'
     )
     link = models.URLField()
