@@ -26,10 +26,14 @@ class Banner(models.Model):
         upload_to=banner_folder,
     )
     link = models.URLField()
+    view_count = models.PositiveIntegerField(default=0)
 
     def __str__(self):
-        return self.text
-    
+        return f"{self.id}. {self.text}"
+
+    def count_increase(self):
+        self.view_count += 1
+        self.save()
 
 
 class Video(models.Model):
@@ -42,10 +46,14 @@ class Video(models.Model):
     video = models.FileField(upload_to='video/',
                              validators=[FileExtensionValidator(allowed_extensions=['MOV', 'avi', 'mp4', 'webm', 'mkv'])])
     link = models.URLField()
+    view_count = models.PositiveIntegerField(default=0)
 
     def __str__(self):
-        return self.text
-    
+        return f"{self.id}. {self.text}"
+
+    def count_increase(self):
+        self.view_count += 1
+        self.save()
 
 
 class Imput(models.Model):
@@ -54,3 +62,11 @@ class Imput(models.Model):
         upload_to=imput_folder,
     )
     link = models.URLField()
+    view_count = models.PositiveIntegerField(default=0)
+
+    def __str__(self):
+        return f"{self.id}"
+
+    def count_increase(self):
+        self.view_count += 1
+        self.save()
