@@ -16,6 +16,11 @@ class BannerViewSet(ModelViewSet):
 
 
 class BannerDetailAPIView(APIView):
+    """Banner getter by less view count"""
+
+    def get_serializer(self, *args, **kwargs):
+        return BannerSerializer(*args, **kwargs)
+
     def get(self, request):
         banner_count = Banner.objects.all().count()
         if banner_count != 0:
@@ -33,6 +38,11 @@ class ImputViewSet(ModelViewSet):
 
 
 class ImputDetailAPIView(APIView):
+    """Imput getter by less view count"""
+
+    def get_serializer(self, *args, **kwargs):
+        return ImputSerializer(*args, **kwargs)
+
     def get(self, request):
         imput_count = Imput.objects.all().count()
         if imput_count != 0:
@@ -50,6 +60,11 @@ class VideoViewSet(ModelViewSet):
 
 
 class VideoDetailAPIView(APIView):
+    """Video getter by less view count"""
+
+    def get_serializer(self, *args, **kwargs):
+        return VideoSerializer(*args, **kwargs)
+
     def get(self, request):
         video_count = Video.objects.all().count()
         if video_count != 0:

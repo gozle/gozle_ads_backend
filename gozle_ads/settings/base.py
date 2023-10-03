@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # 3rd party
     "rest_framework",
+    "drf_spectacular",
     # my apps
     "ads",
 ]
@@ -66,6 +67,10 @@ TEMPLATES = [
         },
     },
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
 
 WSGI_APPLICATION = 'gozle_ads.wsgi.application'
 
@@ -102,6 +107,12 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Gozle ADS',
+    'DESCRIPTION': 'Gozle ADS API',
+    'VERSION': '0.2.0',
+}
 
 
 # Internationalization

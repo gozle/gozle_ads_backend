@@ -1,0 +1,625 @@
+openapi: 3.0.3
+info:
+  title: Gozle ADS
+  version: 0.2.0
+  description: Gozle ADS API
+paths:
+  /api/v1/banner/:
+    get:
+      operationId: banner_list
+      tags:
+      - banner
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Banner'
+          description: ''
+    post:
+      operationId: banner_create
+      tags:
+      - banner
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Banner'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Banner'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Banner'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Banner'
+          description: ''
+  /api/v1/banner/{id}/:
+    get:
+      operationId: banner_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this banner.
+        required: true
+      tags:
+      - banner
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Banner'
+          description: ''
+    put:
+      operationId: banner_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this banner.
+        required: true
+      tags:
+      - banner
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Banner'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Banner'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Banner'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Banner'
+          description: ''
+    patch:
+      operationId: banner_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this banner.
+        required: true
+      tags:
+      - banner
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedBanner'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedBanner'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedBanner'
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Banner'
+          description: ''
+    delete:
+      operationId: banner_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this banner.
+        required: true
+      tags:
+      - banner
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /api/v1/banner/ads/:
+    get:
+      operationId: banner_ads_retrieve
+      tags:
+      - banner
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Banner'
+          description: 'Banner getter by less view count'
+  /api/v1/imput/:
+    get:
+      operationId: imput_list
+      tags:
+      - imput
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Imput'
+          description: ''
+    post:
+      operationId: imput_create
+      tags:
+      - imput
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Imput'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Imput'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Imput'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Imput'
+          description: ''
+  /api/v1/imput/{id}/:
+    get:
+      operationId: imput_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this imput.
+        required: true
+      tags:
+      - imput
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Imput'
+          description: ''
+    put:
+      operationId: imput_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this imput.
+        required: true
+      tags:
+      - imput
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Imput'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Imput'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Imput'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Imput'
+          description: ''
+    patch:
+      operationId: imput_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this imput.
+        required: true
+      tags:
+      - imput
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedImput'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedImput'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedImput'
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Imput'
+          description: ''
+    delete:
+      operationId: imput_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this imput.
+        required: true
+      tags:
+      - imput
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /api/v1/imput/ads/:
+    get:
+      operationId: imput_ads_retrieve
+      tags:
+      - imput
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Imput'
+          description: 'Imput getter by less view count'
+  /api/v1/video/:
+    get:
+      operationId: video_list
+      tags:
+      - video
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Video'
+          description: ''
+    post:
+      operationId: video_create
+      tags:
+      - video
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Video'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Video'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Video'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Video'
+          description: ''
+  /api/v1/video/{id}/:
+    get:
+      operationId: video_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this video.
+        required: true
+      tags:
+      - video
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Video'
+          description: ''
+    put:
+      operationId: video_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this video.
+        required: true
+      tags:
+      - video
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Video'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Video'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Video'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Video'
+          description: ''
+    patch:
+      operationId: video_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this video.
+        required: true
+      tags:
+      - video
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedVideo'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedVideo'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedVideo'
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Video'
+          description: ''
+    delete:
+      operationId: video_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this video.
+        required: true
+      tags:
+      - video
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /api/v1/video/ads/:
+    get:
+      operationId: video_ads_retrieve
+      tags:
+      - video
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Video'
+          description: 'Video getter by less view count'
+components:
+  schemas:
+    Banner:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        text:
+          type: string
+          maxLength: 255
+        description:
+          type: string
+        image:
+          type: string
+          format: uri
+        link:
+          type: string
+          format: uri
+          maxLength: 200
+      required:
+      - description
+      - id
+      - image
+      - link
+      - text
+    Imput:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        image:
+          type: string
+          format: uri
+        link:
+          type: string
+          format: uri
+          maxLength: 200
+      required:
+      - id
+      - image
+      - link
+    PatchedBanner:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        text:
+          type: string
+          maxLength: 255
+        description:
+          type: string
+        image:
+          type: string
+          format: uri
+        link:
+          type: string
+          format: uri
+          maxLength: 200
+    PatchedImput:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        image:
+          type: string
+          format: uri
+        link:
+          type: string
+          format: uri
+          maxLength: 200
+    PatchedVideo:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        image:
+          type: string
+          format: uri
+        link:
+          type: string
+          format: uri
+          maxLength: 200
+    Video:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        image:
+          type: string
+          format: uri
+        link:
+          type: string
+          format: uri
+          maxLength: 200
+      required:
+      - id
+      - image
+      - link
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: sessionid
