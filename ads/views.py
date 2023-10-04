@@ -5,9 +5,13 @@ from rest_framework.viewsets import ModelViewSet
 from .serializers import (
     BannerSerializer,
     ImputSerializer,
-    VideoSerializer
+    VideoSerializer,
+    BannerAdsSerializer,
+    ImputAdsSerializer,
+    VideoAdsSerializer
 )
 from .models import Banner, Imput, Video
+from helpers.views import ads_data
 
 
 class BannerViewSet(ModelViewSet):
@@ -22,14 +26,7 @@ class BannerDetailAPIView(APIView):
         return BannerSerializer(*args, **kwargs)
 
     def get(self, request):
-        banner_count = Banner.objects.all().count()
-        if banner_count != 0:
-            queryset = Banner.objects.all().order_by("view_count")[0]
-            serializer = BannerSerializer(queryset)
-            queryset.count_increase()
-            return Response(serializer.data)
-
-        return Response(status=404)
+        return ads_data(Banner, BannerAdsSerializer)
 
 
 class ImputViewSet(ModelViewSet):
@@ -44,14 +41,7 @@ class ImputDetailAPIView(APIView):
         return ImputSerializer(*args, **kwargs)
 
     def get(self, request):
-        imput_count = Imput.objects.all().count()
-        if imput_count != 0:
-            queryset = Imput.objects.all().order_by("view_count")[0]
-            serializer = ImputSerializer(queryset)
-            queryset.count_increase()
-            return Response(serializer.data)
-
-        return Response(status=404)
+        return ads_data(Imput, ImputAdsSerializer)
 
 
 class VideoViewSet(ModelViewSet):
@@ -66,11 +56,4 @@ class VideoDetailAPIView(APIView):
         return VideoSerializer(*args, **kwargs)
 
     def get(self, request):
-        video_count = Video.objects.all().count()
-        if video_count != 0:
-            queryset = Video.objects.all().order_by("view_count")[0]
-            serializer = VideoSerializer(queryset)
-            queryset.count_increase()
-            return Response(serializer.data)
-
-        return Response(status=404)
+        return ads_data(Video, VideoAdsSerializer)

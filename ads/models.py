@@ -1,6 +1,6 @@
 import uuid
 
-from django.core.validators import FileExtensionValidator
+from django.core.validators import FileExtensionValidator, MaxValueValidator
 from django.db import models
 
 from .fields import WEBPField
@@ -27,6 +27,10 @@ class Banner(models.Model):
     )
     link = models.URLField()
     view_count = models.PositiveIntegerField(default=0)
+    age_from = models.PositiveSmallIntegerField(
+        blank=True, null=True, validators=[MaxValueValidator(80)])
+    age_to = models.PositiveSmallIntegerField(
+        blank=True, null=True, validators=[MaxValueValidator(80)])
 
     def __str__(self):
         return f"{self.id}. {self.text}"
@@ -44,9 +48,14 @@ class Video(models.Model):
         upload_to=video_folder,
     )
     video = models.FileField(upload_to='video/',
-                             validators=[FileExtensionValidator(allowed_extensions=['MOV', 'avi', 'mp4', 'webm', 'mkv'])])
+                             validators=[FileExtensionValidator(
+                                 allowed_extensions=['MOV', 'avi', 'mp4', 'webm', 'mkv'])])
     link = models.URLField()
     view_count = models.PositiveIntegerField(default=0)
+    age_from = models.PositiveSmallIntegerField(
+        blank=True, null=True, validators=[MaxValueValidator(80)])
+    age_to = models.PositiveSmallIntegerField(
+        blank=True, null=True, validators=[MaxValueValidator(80)])
 
     def __str__(self):
         return f"{self.id}. {self.text}"
@@ -63,6 +72,10 @@ class Imput(models.Model):
     )
     link = models.URLField()
     view_count = models.PositiveIntegerField(default=0)
+    age_from = models.PositiveSmallIntegerField(
+        blank=True, null=True, validators=[MaxValueValidator(80)])
+    age_to = models.PositiveSmallIntegerField(
+        blank=True, null=True, validators=[MaxValueValidator(80)])
 
     def __str__(self):
         return f"{self.id}"
