@@ -37,15 +37,3 @@ def create_imput(
     imput = Imput.objects.create(link=link)
 
     return imput
-
-
-def create_video(
-    text: str = "Gozle Portal",
-    description: str = "Market where you can buy computer games and apps",
-    link: str = "https://store.gozle.com.tm/",
-    age_from: int = 12,
-    **kwargs
-):
-    imput = Imput.objects.create(link=link)
-
-    return imput
