@@ -3,7 +3,7 @@ from django.urls import reverse
 from rest_framework import test
 
 from ads.serializers import BannerAdsSerializer, ImputAdsSerializer, VideoAdsSerializer
-from helpers.tests import create_banner, create_imput, create_video
+from helpers.tests import create_banner, create_imput
 
 
 class BannerAdsTestCase(test.APITestCase):
