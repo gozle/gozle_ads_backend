@@ -1,4 +1,4 @@
-from ads.models import Banner
+from ads.models import Banner, Imput
 
 
 def banner_model(
@@ -28,3 +28,24 @@ def create_banner(
     )
 
     return banner
+
+
+def create_imput(
+    link: str = "https://store.gozle.com.tm/",
+    **kwargs
+):
+    imput = Imput.objects.create(link=link)
+
+    return imput
+
+
+def create_video(
+    text: str = "Gozle Portal",
+    description: str = "Market where you can buy computer games and apps",
+    link: str = "https://store.gozle.com.tm/",
+    age_from: int = 12,
+    **kwargs
+):
+    imput = Imput.objects.create(link=link)
+
+    return imput
