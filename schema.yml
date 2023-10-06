@@ -681,14 +681,18 @@ components:
           maxLength: 200
         age_from:
           type: integer
-          maximum: 32767
+          maximum: 80
           minimum: 0
           nullable: true
         age_to:
           type: integer
-          maximum: 32767
+          maximum: 80
           minimum: 0
           nullable: true
+        view_count:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
       required:
       - description
       - id
@@ -710,14 +714,18 @@ components:
           maxLength: 200
         age_from:
           type: integer
-          maximum: 32767
+          maximum: 80
           minimum: 0
           nullable: true
         age_to:
           type: integer
-          maximum: 32767
+          maximum: 80
           minimum: 0
           nullable: true
+        view_count:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
       required:
       - id
       - image
@@ -742,14 +750,18 @@ components:
           maxLength: 200
         age_from:
           type: integer
-          maximum: 32767
+          maximum: 80
           minimum: 0
           nullable: true
         age_to:
           type: integer
-          maximum: 32767
+          maximum: 80
           minimum: 0
           nullable: true
+        view_count:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
     PatchedImput:
       type: object
       properties:
@@ -765,14 +777,18 @@ components:
           maxLength: 200
         age_from:
           type: integer
-          maximum: 32767
+          maximum: 80
           minimum: 0
           nullable: true
         age_to:
           type: integer
-          maximum: 32767
+          maximum: 80
           minimum: 0
           nullable: true
+        view_count:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
     PatchedVideo:
       type: object
       properties:
@@ -788,14 +804,18 @@ components:
           maxLength: 200
         age_from:
           type: integer
-          maximum: 32767
+          maximum: 80
           minimum: 0
           nullable: true
         age_to:
           type: integer
-          maximum: 32767
+          maximum: 80
           minimum: 0
           nullable: true
+        view_count:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
     Video:
       type: object
       properties:
@@ -811,14 +831,18 @@ components:
           maxLength: 200
         age_from:
           type: integer
-          maximum: 32767
+          maximum: 80
           minimum: 0
           nullable: true
         age_to:
           type: integer
-          maximum: 32767
+          maximum: 80
           minimum: 0
           nullable: true
+        view_count:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
       required:
       - id
       - image
