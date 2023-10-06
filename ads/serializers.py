@@ -14,7 +14,7 @@ class BannerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Banner
         fields = ["id", "text", "description",
-                  "image", "link", "age_from", "age_to"]
+                  "image", "link", "age_from", "age_to", "view_count"]
 
 
 class BannerAdsSerializer(serializers.ModelSerializer):
@@ -28,7 +28,8 @@ class BannerAdsSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Banner
-        fields = ["id", "text", "description", "image", "link", "age_limit"]
+        fields = ["id", "text", "description",
+                  "image", "link", "age_limit", "view_count"]
 
 
 class ImputSerializer(serializers.ModelSerializer):
@@ -39,7 +40,7 @@ class ImputSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Imput
-        fields = ["id", "image", "link", "age_from", "age_to"]
+        fields = ["id", "image", "link", "age_from", "age_to", "view_count"]
 
 
 class ImputAdsSerializer(serializers.ModelSerializer):
@@ -53,7 +54,7 @@ class ImputAdsSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Imput
-        fields = ["id", "image", "link", "age_limit"]
+        fields = ["id", "image", "link", "age_limit", "view_count"]
 
 
 class VideoSerializer(serializers.ModelSerializer):
@@ -64,7 +65,7 @@ class VideoSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Video
-        fields = ["id", "image", "link", "age_from", "age_to"]
+        fields = ["id", "image", "link", "age_from", "age_to", "view_count"]
 
 
 class VideoAdsSerializer(serializers.ModelSerializer):
@@ -78,4 +79,4 @@ class VideoAdsSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Video
-        fields = ["id", "image", "link", "age_limit"]
+        fields = ["id", "image", "link", "age_limit", "view_count"]
