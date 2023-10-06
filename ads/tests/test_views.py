@@ -23,6 +23,7 @@ class BannerViewsTestCase(test.APITestCase):
         response = self.client.get(self.url)
         serializer_data = BannerSerializer(
             [banner_1, banner_2], many=True).data
+
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.data, serializer_data)
 
@@ -30,24 +31,28 @@ class BannerViewsTestCase(test.APITestCase):
         self.data["age_from"] = None
         self.data["age_to"] = None
         request = self.client.post(self.url, self.data, format="json")
+
         self.assertEqual(request.status_code, 201)
 
     def test_banner_wrong_from_age(self):
         self.data["age_from"] = 18
         self.data["age_to"] = 6
         request = self.client.post(self.url, self.data, format="json")
+
         self.assertEqual(request.status_code, 400)
 
     def test_banner_age_max_validator(self):
         self.data["age_from"] = 100
         self.data["age_to"] = 100
         request = self.client.post(self.url, self.data, format="json")
+
         self.assertEqual(request.status_code, 400)
 
     def test_banner_age_equality_wrong(self):
         self.data["age_from"] = 18
         self.data["age_to"] = 18
         request = self.client.post(self.url, self.data, format="json")
+
         self.assertEqual(request.status_code, 400)
 
 
@@ -65,6 +70,7 @@ class ImputViewsTestCase(test.APITestCase):
         response = self.client.get(self.url)
         serializer_data = ImputSerializer(
             [imput_1, imput_2], many=True).data
+
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.data, serializer_data)
 
@@ -72,22 +78,26 @@ class ImputViewsTestCase(test.APITestCase):
         self.data["age_from"] = None
         self.data["age_to"] = None
         request = self.client.post(self.url, self.data, format="json")
+
         self.assertEqual(request.status_code, 201)
 
     def test_imput_wrong_from_age(self):
         self.data["age_from"] = 18
         self.data["age_to"] = 6
         request = self.client.post(self.url, self.data, format="json")
+
         self.assertEqual(request.status_code, 400)
 
     def test_imput_age_max_validator(self):
         self.data["age_from"] = 100
         self.data["age_to"] = 100
         request = self.client.post(self.url, self.data, format="json")
+
         self.assertEqual(request.status_code, 400)
 
     def test_imput_age_equality_wrong(self):
         self.data["age_from"] = 18
         self.data["age_to"] = 18
         request = self.client.post(self.url, self.data, format="json")
+
         self.assertEqual(request.status_code, 400)
