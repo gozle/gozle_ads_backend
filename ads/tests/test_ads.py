@@ -49,11 +49,11 @@ class ImputAdsTestCase(test.APITestCase):
     client = test.APIClient()
     url = reverse("imput-ads")
 
-    def test_imput_ads_views_status_code(self):
-        # Test Status code 204
+    def test_imput_ads_views_status_code_204(self):
         response = self.client.get(self.url)
         self.assertEqual(response.status_code, 204)
-        # Test Status code 200
+
+    def test_imput_ads_views_status_code_200(self):
         create_imput()
         response = self.client.get(self.url)
         self.assertEqual(response.status_code, 200)

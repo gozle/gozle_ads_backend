@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     "drf_spectacular",
     # my apps
     "ads",
+    "devices",
 ]
 
 MIDDLEWARE = [

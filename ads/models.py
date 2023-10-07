@@ -4,6 +4,7 @@ from django.core.validators import FileExtensionValidator, MaxValueValidator
 from django.db import models
 
 from .fields import WEBPField
+from devices.models import Device
 
 
 def banner_folder(instance, filename):
@@ -18,29 +19,36 @@ def imput_folder(instance, filename):
     return 'imput/{}.webp'.format(uuid.uuid4().hex)
 
 
-class Banner(models.Model):
-    text = models.CharField(max_length=255)
-    description = models.TextField()
-    image = WEBPField(
-        verbose_name='Image',
-        upload_to=banner_folder,
-    )
+class AdvertisementMixin(models.Model):
     link = models.URLField()
     view_count = models.PositiveIntegerField(default=0)
     age_from = models.PositiveSmallIntegerField(
         blank=True, null=True, validators=[MaxValueValidator(80)])
     age_to = models.PositiveSmallIntegerField(
         blank=True, null=True, validators=[MaxValueValidator(80)])
-
-    def __str__(self):
-        return f"{self.id}. {self.text}"
+    platform = models.ManyToManyField(Device, verbose_name="ads")
 
     def count_increase(self):
         self.view_count += 1
         self.save()
 
+    class Meta:
+        abstract = True
 
-class Video(models.Model):
+
+class Banner(AdvertisementMixin):
+    text = models.CharField(max_length=255)
+    description = models.TextField()
+    image = WEBPField(
+        verbose_name='Image',
+        upload_to=banner_folder,
+    )
+
+    def __str__(self):
+        return f"{self.id}. {self.text}"
+
+
+class Video(AdvertisementMixin):
     text = models.CharField(max_length=255)
     description = models.TextField()
     image = WEBPField(
@@ -50,36 +58,16 @@ class Video(models.Model):
     video = models.FileField(upload_to='video/',
                              validators=[FileExtensionValidator(
                                  allowed_extensions=['MOV', 'avi', 'mp4', 'webm', 'mkv'])])
-    link = models.URLField()
-    view_count = models.PositiveIntegerField(default=0)
-    age_from = models.PositiveSmallIntegerField(
-        blank=True, null=True, validators=[MaxValueValidator(80)])
-    age_to = models.PositiveSmallIntegerField(
-        blank=True, null=True, validators=[MaxValueValidator(80)])
 
     def __str__(self):
         return f"{self.id}. {self.text}"
 
-    def count_increase(self):
-        self.view_count += 1
-        self.save()
 
-
-class Imput(models.Model):
+class Imput(AdvertisementMixin):
     image = WEBPField(
         verbose_name='Image',
         upload_to=imput_folder,
     )
-    link = models.URLField()
-    view_count = models.PositiveIntegerField(default=0)
-    age_from = models.PositiveSmallIntegerField(
-        blank=True, null=True, validators=[MaxValueValidator(80)])
-    age_to = models.PositiveSmallIntegerField(
-        blank=True, null=True, validators=[MaxValueValidator(80)])
 
     def __str__(self):
         return f"{self.id}"
-
-    def count_increase(self):
-        self.view_count += 1
-        self.save()
