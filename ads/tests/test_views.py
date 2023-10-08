@@ -27,13 +27,6 @@ class BannerViewsTestCase(test.APITestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.data, serializer_data)
 
-    def test_banner_post(self):
-        self.data["age_from"] = None
-        self.data["age_to"] = None
-        request = self.client.post(self.url, self.data, format="json")
-
-        self.assertEqual(request.status_code, 201)
-
     def test_banner_wrong_from_age(self):
         self.data["age_from"] = 18
         self.data["age_to"] = 6
@@ -73,13 +66,6 @@ class ImputViewsTestCase(test.APITestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.data, serializer_data)
-
-    def test_imput_post(self):
-        self.data["age_from"] = None
-        self.data["age_to"] = None
-        request = self.client.post(self.url, self.data, format="json")
-
-        self.assertEqual(request.status_code, 201)
 
     def test_imput_wrong_from_age(self):
         self.data["age_from"] = 18

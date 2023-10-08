@@ -5,9 +5,6 @@ from .serializers import (
     BannerSerializer,
     ImputSerializer,
     VideoSerializer,
-    BannerAdsSerializer,
-    ImputAdsSerializer,
-    VideoAdsSerializer
 )
 from .models import Banner, Imput, Video
 from helpers.views import ads_data
@@ -15,7 +12,7 @@ from helpers.views import ads_data
 
 class BannerViewSet(ModelViewSet):
     serializer_class = BannerSerializer
-    queryset = Banner.objects.all()
+    queryset = Banner.objects.all().prefetch_related("platforms")
 
 
 class BannerDetailAPIView(APIView):
@@ -25,12 +22,12 @@ class BannerDetailAPIView(APIView):
         return BannerSerializer(*args, **kwargs)
 
     def get(self, request):
-        return ads_data(Banner, BannerAdsSerializer)
+        return ads_data(Banner, BannerSerializer)
 
 
 class ImputViewSet(ModelViewSet):
     serializer_class = ImputSerializer
-    queryset = Imput.objects.all()
+    queryset = Imput.objects.all().prefetch_related("platforms")
 
 
 class ImputDetailAPIView(APIView):
@@ -40,12 +37,12 @@ class ImputDetailAPIView(APIView):
         return ImputSerializer(*args, **kwargs)
 
     def get(self, request):
-        return ads_data(Imput, ImputAdsSerializer)
+        return ads_data(Imput, ImputSerializer)
 
 
 class VideoViewSet(ModelViewSet):
     serializer_class = VideoSerializer
-    queryset = Video.objects.all()
+    queryset = Video.objects.all().prefetch_related("platforms")
 
 
 class VideoDetailAPIView(APIView):
@@ -55,4 +52,4 @@ class VideoDetailAPIView(APIView):
         return VideoSerializer(*args, **kwargs)
 
     def get(self, request):
-        return ads_data(Video, VideoAdsSerializer)
+        return ads_data(Video, VideoSerializer)

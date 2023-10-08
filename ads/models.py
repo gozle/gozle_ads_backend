@@ -19,14 +19,14 @@ def imput_folder(instance, filename):
     return 'imput/{}.webp'.format(uuid.uuid4().hex)
 
 
-class AdvertisementMixin(models.Model):
+class AdvertisementModelMixin(models.Model):
     link = models.URLField()
     view_count = models.PositiveIntegerField(default=0)
     age_from = models.PositiveSmallIntegerField(
         blank=True, null=True, validators=[MaxValueValidator(80)])
     age_to = models.PositiveSmallIntegerField(
         blank=True, null=True, validators=[MaxValueValidator(80)])
-    platform = models.ManyToManyField(Device, verbose_name="ads")
+    devices = models.ManyToManyField(Device, verbose_name="platforms", )
 
     def count_increase(self):
         self.view_count += 1
@@ -36,7 +36,7 @@ class AdvertisementMixin(models.Model):
         abstract = True
 
 
-class Banner(AdvertisementMixin):
+class Banner(AdvertisementModelMixin):
     text = models.CharField(max_length=255)
     description = models.TextField()
     image = WEBPField(
@@ -48,7 +48,7 @@ class Banner(AdvertisementMixin):
         return f"{self.id}. {self.text}"
 
 
-class Video(AdvertisementMixin):
+class Video(AdvertisementModelMixin):
     text = models.CharField(max_length=255)
     description = models.TextField()
     image = WEBPField(
@@ -63,7 +63,7 @@ class Video(AdvertisementMixin):
         return f"{self.id}. {self.text}"
 
 
-class Imput(AdvertisementMixin):
+class Imput(AdvertisementModelMixin):
     image = WEBPField(
         verbose_name='Image',
         upload_to=imput_folder,

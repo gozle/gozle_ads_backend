@@ -2,7 +2,7 @@ from django.urls import reverse
 
 from rest_framework import test
 
-from ads.serializers import BannerAdsSerializer, ImputAdsSerializer
+from ads.serializers import BannerSerializer, ImputSerializer
 from helpers.tests import create_banner, create_imput
 
 
@@ -22,7 +22,7 @@ class BannerAdsTestCase(test.APITestCase):
     def test_banner_ads_queryset(self):
         banner = create_banner()
         response_data = self.client.get(self.url).data
-        serializer_data = BannerAdsSerializer(banner).data
+        serializer_data = BannerSerializer(banner).data
         response_data["view_count"] = serializer_data["view_count"]
 
         self.assertEqual(response_data, serializer_data)
@@ -61,7 +61,7 @@ class ImputAdsTestCase(test.APITestCase):
     def test_imput_ads_queryset(self):
         imput = create_imput()
         response_data = self.client.get(self.url).data
-        serializer_data = ImputAdsSerializer(imput).data
+        serializer_data = ImputSerializer(imput).data
         response_data["view_count"] = serializer_data["view_count"]
         self.assertEqual(response_data, serializer_data)
 

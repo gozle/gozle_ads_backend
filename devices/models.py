@@ -11,4 +11,4 @@ class Device(models.Model):
     platform = models.CharField(max_length=10, choices=Platforms.choices)
 
     def __str__(self):
-        return self.name
+        return f"{Device.Platforms(self.platform).label} {self.name}"
