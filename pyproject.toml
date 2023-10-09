@@ -16,6 +16,7 @@ channels = "^4.0.0"
 daphne = "^4.0.0"
 drf-extra-fields = "^3.7.0"
 drf-spectacular = "^0.26.5"
+django-multiselectfield = "^0.1.12"
 
 
 [build-system]

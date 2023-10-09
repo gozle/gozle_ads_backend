@@ -26,7 +26,7 @@ class AdvertisementModelMixin(models.Model):
         blank=True, null=True, validators=[MaxValueValidator(80)])
     age_to = models.PositiveSmallIntegerField(
         blank=True, null=True, validators=[MaxValueValidator(80)])
-    devices = models.ManyToManyField(Device, verbose_name="platforms", )
+    devices = models.ManyToManyField(Device, verbose_name="platforms",)
 
     def count_increase(self):
         self.view_count += 1
@@ -70,4 +70,4 @@ class Imput(AdvertisementModelMixin):
     )
 
     def __str__(self):
-        return f"{self.id}"
+        return f"{self.link}"

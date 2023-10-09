@@ -284,6 +284,20 @@ django = ">=3.2.4"
 sqlparse = ">=0.2"
 
 [[package]]
+name = "django-multiselectfield"
+version = "0.1.12"
+description = "Django multiple select field"
+optional = false
+python-versions = "*"
+files = [
+    {file = "django-multiselectfield-0.1.12.tar.gz", hash = "sha256:d0a4c71568fb2332c71478ffac9f8708e01314a35cf923dfd7a191343452f9f9"},
+    {file = "django_multiselectfield-0.1.12-py3-none-any.whl", hash = "sha256:c270faa7f80588214c55f2d68cbddb2add525c2aa830c216b8a198de914eb470"},
+]
+
+[package.dependencies]
+django = ">=1.4"
+
+[[package]]
 name = "django-rest-framework"
 version = "0.1.0"
 description = "alias."
@@ -1006,4 +1020,4 @@ testing = ["coverage (>=5.0.3)", "zope.event", "zope.testing"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "af2949d53fe6a9a258799ee52c914f974b70ba23607820097872eeed4cc3ce47"
+content-hash = "bd5975b7d1dfe5d5c42bae99a8cba6261e7b9a48ffeefea9ab839607d540009e"

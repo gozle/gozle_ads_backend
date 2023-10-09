@@ -34,8 +34,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # 3rd party
-    "rest_framework",
     "drf_spectacular",
+    "rest_framework",
+    "multiselectfield",
     # my apps
     "ads",
     "devices",

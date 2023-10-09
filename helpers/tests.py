@@ -40,21 +40,3 @@ def create_imput(
     imput = Imput.objects.create(link=link)
 
     return imput
-
-
-def create_device(
-    name: str = "Android",
-    platform: Tuple[str, Any] = Device.Platforms.APP,
-    **kwargs
-):
-    device = Device.objects.create(name=name, platform=platform)
-
-    return device
-
-
-def create_device_to_each_platforms(
-    name: str = "Android",
-    **kwargs
-):
-    create_device(platform=Device.Platforms.APP)
-    create_device(platform=Device.Platforms.WEB)
