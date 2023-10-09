@@ -27,6 +27,9 @@ SECRET_KEY = os.environ.get("SECRET_KEY", "secret_key")
 # Application definition
 
 INSTALLED_APPS = [
+    # admin interface
+    'jet',
+    # django apps
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
