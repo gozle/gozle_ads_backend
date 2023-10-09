@@ -1,4 +1,4 @@
-from rest_framework import serializers, fields
+from rest_framework import fields, serializers
 
 from .models import Device
 
@@ -6,7 +6,7 @@ from .models import Device
 class PlatformNameField(serializers.RelatedField):
 
     def to_representation(self, value):
-        return f"{value.name}" # 
+        return f"{value.name}"
 
 
 class DeviceSerializer(serializers.ModelSerializer):

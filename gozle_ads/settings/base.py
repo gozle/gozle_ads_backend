@@ -116,7 +116,7 @@ AUTH_PASSWORD_VALIDATORS = [
 SPECTACULAR_SETTINGS = {
     'TITLE': 'Gozle ADS',
     'DESCRIPTION': 'Gozle ADS API',
-    'VERSION': '0.2.0',
+    'VERSION': '0.3.0',
 }
 
 
