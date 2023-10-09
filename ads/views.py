@@ -12,7 +12,7 @@ from helpers.views import ads_data
 
 class BannerViewSet(ModelViewSet):
     serializer_class = BannerSerializer
-    queryset = Banner.objects.all()
+    queryset = Banner.objects.all().prefetch_related("devices")
 
 
 class BannerDetailAPIView(APIView):
@@ -27,7 +27,7 @@ class BannerDetailAPIView(APIView):
 
 class ImputViewSet(ModelViewSet):
     serializer_class = ImputSerializer
-    queryset = Imput.objects.all()
+    queryset = Imput.objects.all().prefetch_related("devices")
 
 
 class ImputDetailAPIView(APIView):
@@ -42,7 +42,7 @@ class ImputDetailAPIView(APIView):
 
 class VideoViewSet(ModelViewSet):
     serializer_class = VideoSerializer
-    queryset = Video.objects.all()
+    queryset = Video.objects.all().prefetch_related("devices")
 
 
 class VideoDetailAPIView(APIView):
