@@ -174,6 +174,159 @@ paths:
               schema:
                 $ref: '#/components/schemas/Banner'
           description: ''
+  /api/v1/devices/:
+    get:
+      operationId: devices_list
+      tags:
+      - devices
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Device'
+          description: ''
+    post:
+      operationId: devices_create
+      tags:
+      - devices
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Device'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Device'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Device'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Device'
+          description: ''
+  /api/v1/devices/{id}/:
+    get:
+      operationId: devices_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this device.
+        required: true
+      tags:
+      - devices
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Device'
+          description: ''
+    put:
+      operationId: devices_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this device.
+        required: true
+      tags:
+      - devices
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Device'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Device'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Device'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Device'
+          description: ''
+    patch:
+      operationId: devices_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this device.
+        required: true
+      tags:
+      - devices
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedDevice'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedDevice'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedDevice'
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Device'
+          description: ''
+    delete:
+      operationId: devices_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this device.
+        required: true
+      tags:
+      - devices
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
   /api/v1/imput/:
     get:
       operationId: imput_list
@@ -667,11 +820,6 @@ components:
         id:
           type: integer
           readOnly: true
-        text:
-          type: string
-          maxLength: 255
-        description:
-          type: string
         image:
           type: string
           format: uri
@@ -693,12 +841,34 @@ components:
           type: integer
           maximum: 2147483647
           minimum: 0
+        devices:
+          type: array
+          items:
+            type: integer
+            title: Platforms
+          title: Platforms
       required:
-      - description
+      - devices
       - id
       - image
       - link
-      - text
+    Device:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 50
+        platforms:
+          type: array
+          items:
+            $ref: '#/components/schemas/PlatformsEnum'
+      required:
+      - id
+      - name
+      - platforms
     Imput:
       type: object
       properties:
@@ -726,7 +896,14 @@ components:
           type: integer
           maximum: 2147483647
           minimum: 0
+        devices:
+          type: array
+          items:
+            type: integer
+            title: Platforms
+          title: Platforms
       required:
+      - devices
       - id
       - image
       - link
@@ -736,11 +913,6 @@ components:
         id:
           type: integer
           readOnly: true
-        text:
-          type: string
-          maxLength: 255
-        description:
-          type: string
         image:
           type: string
           format: uri
@@ -762,6 +934,25 @@ components:
           type: integer
           maximum: 2147483647
           minimum: 0
+        devices:
+          type: array
+          items:
+            type: integer
+            title: Platforms
+          title: Platforms
+    PatchedDevice:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 50
+        platforms:
+          type: array
+          items:
+            $ref: '#/components/schemas/PlatformsEnum'
     PatchedImput:
       type: object
       properties:
@@ -789,6 +980,12 @@ components:
           type: integer
           maximum: 2147483647
           minimum: 0
+        devices:
+          type: array
+          items:
+            type: integer
+            title: Platforms
+          title: Platforms
     PatchedVideo:
       type: object
       properties:
@@ -802,6 +999,10 @@ components:
           type: string
           format: uri
           maxLength: 200
+        video:
+          type: string
+          format: uri
+          pattern: (?:mov|avi|mp4|webm|mkv)$
         age_from:
           type: integer
           maximum: 80
@@ -816,6 +1017,20 @@ components:
           type: integer
           maximum: 2147483647
           minimum: 0
+        devices:
+          type: array
+          items:
+            type: integer
+            title: Platforms
+          title: Platforms
+    PlatformsEnum:
+      enum:
+      - app
+      - web
+      type: string
+      description: |-
+        * `app` - App
+        * `web` - Web
     Video:
       type: object
       properties:
@@ -829,6 +1044,10 @@ components:
           type: string
           format: uri
           maxLength: 200
+        video:
+          type: string
+          format: uri
+          pattern: (?:mov|avi|mp4|webm|mkv)$
         age_from:
           type: integer
           maximum: 80
@@ -843,10 +1062,18 @@ components:
           type: integer
           maximum: 2147483647
           minimum: 0
+        devices:
+          type: array
+          items:
+            type: integer
+            title: Platforms
+          title: Platforms
       required:
+      - devices
       - id
       - image
       - link
+      - video
   securitySchemes:
     basicAuth:
       type: http
