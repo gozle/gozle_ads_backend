@@ -27,6 +27,8 @@ class AdvertisementModelMixin(models.Model):
     age_to = models.PositiveSmallIntegerField(
         blank=True, null=True, validators=[MaxValueValidator(80)])
     devices = models.ManyToManyField(Device, verbose_name="platforms",)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def count_increase(self):
         self.view_count += 1
