@@ -3,11 +3,20 @@ from rest_framework.viewsets import ModelViewSet
 
 from .serializers import (
     BannerSerializer,
+    DeviceSerializer,
     ImputSerializer,
     VideoSerializer,
 )
-from .models import Banner, Imput, Video
+from .models import Banner, Device, Imput, Video
 from helpers.views import ads_data
+
+
+class DeviceViewSet(ModelViewSet):
+    model = Device
+    serializer_class = DeviceSerializer
+
+    def get_queryset(self):
+        return self.model.objects.all()
 
 
 class BannerViewSet(ModelViewSet):

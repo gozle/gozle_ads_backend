@@ -2,9 +2,11 @@ import uuid
 
 from django.core.validators import FileExtensionValidator, MaxValueValidator
 from django.db import models
+from django.utils.translation import gettext as _
+
+from multiselectfield import MultiSelectField
 
 from .fields import WEBPField
-from devices.models import Device
 
 
 def banner_folder(instance, filename):
@@ -17,6 +19,18 @@ def video_folder(instance, filename):
 
 def imput_folder(instance, filename):
     return 'imput/{}.webp'.format(uuid.uuid4().hex)
+
+
+class Device(models.Model):
+    class Platforms(models.TextChoices):
+        APP = "app", _("App")
+        WEB = "web", _("Web")
+
+    name = models.CharField(max_length=50)
+    platforms = MultiSelectField(choices=Platforms.choices, max_length=10)
+
+    def __str__(self):
+        return f"{self.name}"
 
 
 class AdvertisementModelMixin(models.Model):

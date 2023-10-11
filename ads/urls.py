@@ -15,5 +15,6 @@ router = SimpleRouter()
 router.register("banner", views.BannerViewSet, basename="banner")
 router.register("imput", views.ImputViewSet, basename="imput")
 router.register("video", views.VideoViewSet, basename="video")
+router.register("devices", views.DeviceViewSet, basename="devices")
 
 urlpatterns += router.urls

@@ -1,7 +1,6 @@
 from typing import Any, Tuple
 
 from ads.models import Banner, Imput
-from devices.models import Device
 
 
 def banner_model(

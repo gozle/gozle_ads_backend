@@ -42,7 +42,6 @@ INSTALLED_APPS = [
     "multiselectfield",
     # my apps
     "ads",
-    "devices",
 ]
 
 MIDDLEWARE = [
