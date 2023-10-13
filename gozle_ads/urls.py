@@ -17,13 +17,17 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 
+from django_otp.admin import OTPAdminSite
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 
 from gozle_ads import settings
 
+if settings.DEBUG is True:
+    admin.site.__class__ = OTPAdminSite
+
 urlpatterns = [
     path('jet/', include('jet.urls', 'jet')),
-    path('admin/', admin.site.urls),
+    path('gozle-admin/', admin.site.urls),
 
     path("api/v1/", include("ads.urls")),
     path("api/v1/schema/", SpectacularAPIView.as_view(), name="schema"),
