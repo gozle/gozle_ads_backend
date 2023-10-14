@@ -4,6 +4,7 @@ from rest_framework import fields, serializers
 from .models import Banner, Device, Imput, Video
 from helpers.validators import age_validator
 
+
 class NameField(serializers.RelatedField):
 
     def to_representation(self, value):
@@ -26,9 +27,8 @@ class BannerSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Banner
-        fields = ["id", "image", "link",
-                  "age_from", "age_to",
-                  "view_count", "devices"]
+        fields = ["id", "text", "description", "link", "age_from", "age_to",
+                  "status", "duration", "view_count", "image", "devices"]
 
 
 class ImputSerializer(serializers.ModelSerializer):
@@ -39,9 +39,8 @@ class ImputSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Imput
-        fields = ["id", "image", "link",
-                  "age_from", "age_to",
-                  "view_count", "devices"]
+        fields = ["id", "link", "age_from", "age_to", "status",
+                  "duration", "view_count", "image", "devices"]
 
 
 class VideoSerializer(serializers.ModelSerializer):
@@ -52,6 +51,6 @@ class VideoSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Video
-        fields = ["id", "image", "link",
-                  "video", "age_from", "age_to",
-                  "view_count", "devices"]
+        fields = ["id", "text", "description", "link",
+                  "video", "age_from", "age_to", "status",
+                  "duration", "view_count", "image", "devices"]

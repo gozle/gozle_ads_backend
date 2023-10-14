@@ -34,6 +34,12 @@ class Device(models.Model):
 
 
 class AdvertisementModelMixin(models.Model):
+    class Statuses(models.TextChoices):
+        ACTIVE = "active", _("Active")
+        HIDDEN = "hidden", _("Hidden")
+        DELETED = "deleted", _("Deleted")
+        TEST = "test", _("Test")
+
     link = models.URLField()
     view_count = models.PositiveIntegerField(default=0)
     age_from = models.PositiveSmallIntegerField(
@@ -41,8 +47,10 @@ class AdvertisementModelMixin(models.Model):
     age_to = models.PositiveSmallIntegerField(
         blank=True, null=True, validators=[MaxValueValidator(80)])
     devices = models.ManyToManyField(Device, verbose_name="platforms",)
+    duration = models.DurationField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    status = models.CharField(max_length=30, choices=Statuses.choices, default=Statuses.ACTIVE)
 
     def count_increase(self):
         self.view_count += 1

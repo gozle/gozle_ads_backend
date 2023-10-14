@@ -820,9 +820,11 @@ components:
         id:
           type: integer
           readOnly: true
-        image:
+        text:
           type: string
-          format: uri
+          maxLength: 255
+        description:
+          type: string
         link:
           type: string
           format: uri
@@ -837,10 +839,17 @@ components:
           maximum: 80
           minimum: 0
           nullable: true
+        status:
+          $ref: '#/components/schemas/StatusEnum'
+        duration:
+          type: string
         view_count:
           type: integer
           maximum: 2147483647
           minimum: 0
+        image:
+          type: string
+          format: uri
         devices:
           type: array
           items:
@@ -848,10 +857,13 @@ components:
             title: Platforms
           title: Platforms
       required:
+      - description
       - devices
+      - duration
       - id
       - image
       - link
+      - text
     Device:
       type: object
       properties:
@@ -875,9 +887,6 @@ components:
         id:
           type: integer
           readOnly: true
-        image:
-          type: string
-          format: uri
         link:
           type: string
           format: uri
@@ -892,10 +901,17 @@ components:
           maximum: 80
           minimum: 0
           nullable: true
+        status:
+          $ref: '#/components/schemas/StatusEnum'
+        duration:
+          type: string
         view_count:
           type: integer
           maximum: 2147483647
           minimum: 0
+        image:
+          type: string
+          format: uri
         devices:
           type: array
           items:
@@ -904,6 +920,7 @@ components:
           title: Platforms
       required:
       - devices
+      - duration
       - id
       - image
       - link
@@ -913,9 +930,11 @@ components:
         id:
           type: integer
           readOnly: true
-        image:
+        text:
           type: string
-          format: uri
+          maxLength: 255
+        description:
+          type: string
         link:
           type: string
           format: uri
@@ -930,10 +949,17 @@ components:
           maximum: 80
           minimum: 0
           nullable: true
+        status:
+          $ref: '#/components/schemas/StatusEnum'
+        duration:
+          type: string
         view_count:
           type: integer
           maximum: 2147483647
           minimum: 0
+        image:
+          type: string
+          format: uri
         devices:
           type: array
           items:
@@ -959,9 +985,6 @@ components:
         id:
           type: integer
           readOnly: true
-        image:
-          type: string
-          format: uri
         link:
           type: string
           format: uri
@@ -976,10 +999,17 @@ components:
           maximum: 80
           minimum: 0
           nullable: true
+        status:
+          $ref: '#/components/schemas/StatusEnum'
+        duration:
+          type: string
         view_count:
           type: integer
           maximum: 2147483647
           minimum: 0
+        image:
+          type: string
+          format: uri
         devices:
           type: array
           items:
@@ -992,9 +1022,11 @@ components:
         id:
           type: integer
           readOnly: true
-        image:
+        text:
           type: string
-          format: uri
+          maxLength: 255
+        description:
+          type: string
         link:
           type: string
           format: uri
@@ -1013,10 +1045,17 @@ components:
           maximum: 80
           minimum: 0
           nullable: true
+        status:
+          $ref: '#/components/schemas/StatusEnum'
+        duration:
+          type: string
         view_count:
           type: integer
           maximum: 2147483647
           minimum: 0
+        image:
+          type: string
+          format: uri
         devices:
           type: array
           items:
@@ -1031,15 +1070,29 @@ components:
       description: |-
         * `app` - App
         * `web` - Web
+    StatusEnum:
+      enum:
+      - active
+      - hidden
+      - deleted
+      - test
+      type: string
+      description: |-
+        * `active` - Active
+        * `hidden` - Hidden
+        * `deleted` - Deleted
+        * `test` - Test
     Video:
       type: object
       properties:
         id:
           type: integer
           readOnly: true
-        image:
+        text:
           type: string
-          format: uri
+          maxLength: 255
+        description:
+          type: string
         link:
           type: string
           format: uri
@@ -1058,10 +1111,17 @@ components:
           maximum: 80
           minimum: 0
           nullable: true
+        status:
+          $ref: '#/components/schemas/StatusEnum'
+        duration:
+          type: string
         view_count:
           type: integer
           maximum: 2147483647
           minimum: 0
+        image:
+          type: string
+          format: uri
         devices:
           type: array
           items:
@@ -1069,10 +1129,13 @@ components:
             title: Platforms
           title: Platforms
       required:
+      - description
       - devices
+      - duration
       - id
       - image
       - link
+      - text
       - video
   securitySchemes:
     basicAuth:

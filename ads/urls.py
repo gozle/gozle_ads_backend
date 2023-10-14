@@ -5,9 +5,9 @@ from rest_framework.routers import SimpleRouter
 from . import views
 
 urlpatterns = [
-    path("banner/ads/", views.BannerDetailAPIView.as_view(), name="banner-ads"),
-    path("imput/ads/", views.ImputDetailAPIView.as_view(), name="imput-ads"),
-    path("video/ads/", views.VideoDetailAPIView.as_view(), name="video-ads"),
+    path("banner/ads/", views.BannerAdsAPIView.as_view(), name="banner-ads"),
+    path("imput/ads/", views.ImputAdsAPIView.as_view(), name="imput-ads"),
+    path("video/ads/", views.VideoAdsAPIView.as_view(), name="video-ads"),
 ]
 
 

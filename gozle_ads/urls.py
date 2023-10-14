@@ -22,7 +22,7 @@ from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 
 from gozle_ads import settings
 
-if settings.DEBUG is True:
+if settings.DEBUG is False:
     admin.site.__class__ = OTPAdminSite
 
 urlpatterns = [

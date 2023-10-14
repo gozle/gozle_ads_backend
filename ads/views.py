@@ -12,11 +12,8 @@ from helpers.views import ads_data
 
 
 class DeviceViewSet(ModelViewSet):
-    model = Device
+    queryset = Device.objects.all()
     serializer_class = DeviceSerializer
-
-    def get_queryset(self):
-        return self.model.objects.all()
 
 
 class BannerViewSet(ModelViewSet):
@@ -24,7 +21,7 @@ class BannerViewSet(ModelViewSet):
     queryset = Banner.objects.all().prefetch_related("devices")
 
 
-class BannerDetailAPIView(APIView):
+class BannerAdsAPIView(APIView):
     """Banner getter by less view count"""
 
     def get_serializer(self, *args, **kwargs):
@@ -39,7 +36,7 @@ class ImputViewSet(ModelViewSet):
     queryset = Imput.objects.all().prefetch_related("devices")
 
 
-class ImputDetailAPIView(APIView):
+class ImputAdsAPIView(APIView):
     """Imput getter by less view count"""
 
     def get_serializer(self, *args, **kwargs):
@@ -54,7 +51,7 @@ class VideoViewSet(ModelViewSet):
     queryset = Video.objects.all().prefetch_related("devices")
 
 
-class VideoDetailAPIView(APIView):
+class VideoAdsAPIView(APIView):
     """Video getter by less view count"""
 
     def get_serializer(self, *args, **kwargs):
