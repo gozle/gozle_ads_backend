@@ -55,6 +55,10 @@ class AdvertisementModelMixin(models.Model):
     def count_increase(self):
         self.view_count += 1
         self.save()
+    
+    def set_as_hidden(self):
+        self.status = self.Statuses.HIDDEN
+        self.save()
 
     class Meta:
         abstract = True

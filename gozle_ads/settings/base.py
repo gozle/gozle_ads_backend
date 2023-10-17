@@ -39,9 +39,11 @@ INSTALLED_APPS = [
     # 3rd party
     'django_otp',
     'django_otp.plugins.otp_totp',
-    "drf_spectacular",
-    "rest_framework",
-    "multiselectfield",
+    'drf_spectacular',
+    'rest_framework',
+    'multiselectfield',
+    'django_celery_results',
+    'django_celery_beat',
     # my apps
     "ads",
 ]
@@ -90,11 +92,11 @@ WSGI_APPLICATION = 'gozle_ads.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get("POSTGRES_NAME", "gozle_ads"),
-        'USER': os.environ.get("POSTGRES_USER", "postgres"),
-        'PASSWORD': os.environ.get("POSTGRES_PASSWORD", "postgres"),
-        'HOST': os.environ.get("POSTGRES_HOST", "localhost"),
-        'PORT': os.environ.get("POSTGRES_PORT", "5432"),
+        'NAME': os.getenv("POSTGRES_NAME", "gozle_ads"),
+        'USER': os.getenv("POSTGRES_USER", "postgres"),
+        'PASSWORD': os.getenv("POSTGRES_PASSWORD", "postgres"),
+        'HOST': os.getenv("POSTGRES_HOST", "localhost"),
+        'PORT': os.getenv("POSTGRES_PORT", "5432"),
     }
 }
 
@@ -122,6 +124,32 @@ SPECTACULAR_SETTINGS = {
     'DESCRIPTION': 'Gozle ADS API',
     'VERSION': '0.3.0',
 }
+
+BROKER_URL = os.getenv("BROKER_URL", "redis://127.0.0.1:6379/1")
+
+# REDIS CACHE
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": BROKER_URL,
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        },
+    }
+}
+
+
+# CELERY SETTINGS
+CELERY_BROKER_URL = BROKER_URL
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_BACKEND = 'django-db'
+CELERY_TIMEZONE = 'UTC'
+
+
+# CELERY BEAT SCHEDULER
+CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
 
 
 # Internationalization
