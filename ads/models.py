@@ -51,6 +51,7 @@ class AdvertisementModelMixin(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=30, choices=Statuses.choices, default=Statuses.ACTIVE)
+    uuid = models.UUIDField(default=uuid.uuid4)
 
     def count_increase(self):
         self.view_count += 1

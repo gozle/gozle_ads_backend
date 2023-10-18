@@ -139,19 +139,6 @@ CACHES = {
 }
 
 
-# CELERY SETTINGS
-CELERY_BROKER_URL = BROKER_URL
-CELERY_ACCEPT_CONTENT = ['application/json']
-CELERY_RESULT_SERIALIZER = 'json'
-CELERY_TASK_SERIALIZER = 'json'
-CELERY_RESULT_BACKEND = 'django-db'
-CELERY_TIMEZONE = 'UTC'
-
-
-# CELERY BEAT SCHEDULER
-CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
-
-
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
@@ -162,6 +149,19 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
+
+
+# CELERY SETTINGS
+CELERY_BROKER_URL = BROKER_URL
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_BACKEND = 'django-db'
+CELERY_TIMEZONE = TIME_ZONE
+
+
+# CELERY BEAT SCHEDULER
+CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
 
 
 # Static files (CSS, JavaScript, Images)

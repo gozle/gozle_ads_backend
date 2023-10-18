@@ -1,9 +1,13 @@
+import json
+from datetime import timedelta
+from uuid import uuid4
+
 from django.utils import timezone
 
-from datetime import timedelta
-
-from django_celery_beat.models import ClockedSchedule
+from django_celery_beat.models import ClockedSchedule, PeriodicTask
 from rest_framework.response import Response
+
+from ads.models import Banner
 
 
 def ads_data(model, serializer_class):
@@ -25,3 +29,45 @@ def create_clock_schedule(duration: int):
     return ClockedSchedule.objects.create(
         clocked_time=clocked_time
     )
+
+
+def create_hide_banner_task(schedule, uuid):
+    periodic_task = PeriodicTask.objects.create(
+        clocked=schedule,
+        name=f"{uuid4()}",
+        task="ads.tasks.hide_banner",
+        kwargs=json.dumps({
+            "uuid": str(uuid)
+        }),
+        enabled=True,
+        one_off=True,
+    )
+    return periodic_task
+
+
+def create_hide_imput_task(schedule, uuid):
+    periodic_task = PeriodicTask.objects.create(
+        clocked=schedule,
+        name=f"{uuid4()}",
+        task="ads.tasks.hide_imput",
+        kwargs=json.dumps({
+            "uuid": str(uuid)
+        }),
+        enabled=True,
+        one_off=True,
+    )
+    return periodic_task
+
+
+def create_hide_video_task(schedule, uuid):
+    periodic_task = PeriodicTask.objects.create(
+        clocked=schedule,
+        name=f"{uuid4()}",
+        task="ads.tasks.hide_video",
+        kwargs=json.dumps({
+            "uuid": str(uuid)
+        }),
+        enabled=True,
+        one_off=True,
+    )
+    return periodic_task

@@ -4,6 +4,11 @@ from rest_framework import serializers
 
 
 def age_validator(data):
+    if ("age_from" not in data
+            or "age_to" not in data):
+        raise serializers.ValidationError(
+            _("Age from and age to are required."))
+
     ages = (data["age_from"], data["age_to"])
     if None not in ages:
         if ages[0] > ages[1]:
