@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: Gozle ADS
-  version: 0.3.0
+  version: 0.3.1
   description: Gozle ADS API
 paths:
   /api/v1/banner/:
@@ -856,6 +856,9 @@ components:
             type: integer
             title: Platforms
           title: Platforms
+        uuid:
+          type: string
+          format: uuid
       required:
       - description
       - devices
@@ -918,6 +921,9 @@ components:
             type: integer
             title: Platforms
           title: Platforms
+        uuid:
+          type: string
+          format: uuid
       required:
       - devices
       - duration
@@ -966,6 +972,9 @@ components:
             type: integer
             title: Platforms
           title: Platforms
+        uuid:
+          type: string
+          format: uuid
     PatchedDevice:
       type: object
       properties:
@@ -1016,6 +1025,9 @@ components:
             type: integer
             title: Platforms
           title: Platforms
+        uuid:
+          type: string
+          format: uuid
     PatchedVideo:
       type: object
       properties:
@@ -1062,6 +1074,9 @@ components:
             type: integer
             title: Platforms
           title: Platforms
+        uuid:
+          type: string
+          format: uuid
     PlatformsEnum:
       enum:
       - app
@@ -1128,6 +1143,9 @@ components:
             type: integer
             title: Platforms
           title: Platforms
+        uuid:
+          type: string
+          format: uuid
       required:
       - description
       - devices

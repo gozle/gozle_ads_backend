@@ -122,7 +122,7 @@ AUTH_PASSWORD_VALIDATORS = [
 SPECTACULAR_SETTINGS = {
     'TITLE': 'Gozle ADS',
     'DESCRIPTION': 'Gozle ADS API',
-    'VERSION': '0.3.0',
+    'VERSION': '0.3.1',
 }
 
 BROKER_URL = os.getenv("BROKER_URL", "redis://127.0.0.1:6379/1")
