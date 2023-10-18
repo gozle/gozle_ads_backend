@@ -53,6 +53,12 @@ python -m pip install --upgrade pip
 docker run -d --name postgres --restart always -p 127.0.0.1:5432:5432 -e POSTGRES_PASSWORD=postgres -e POSTGRES_USER=postgres -e POSTGRES_DB=gozle_ads postgres:14.8-alpine
 ```
 
+## Run redis for caching
+
+```
+docker run -d --name redis -p 6379:6379 -d redis:7.0.5-alpine
+```
+
 **Your terminal must be in the root of the gozle ads project for all the commands below !!**
 
 ## Install Poetry
@@ -95,6 +101,13 @@ poetry add package_name
 
 ```
 poetry remove package_name
+```
+
+## Run Celery and Celery Beat
+
+```
+celery -A gozle_ads worker -l info
+celery -A gozle_ads beat -l INFO
 ```
 
 ## Migrate

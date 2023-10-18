@@ -7,12 +7,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
-# Local Memory Cache
-CACHES = {
-    "default": {
-        "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
-    }
-}
 
 # Django Debug Toolbar
 try:
