@@ -108,8 +108,9 @@ poetry remove package_name
 ```
 celery -A gozle_ads worker -l info
 ```
-
+ 
 ## Run Celery Beat
+
 ```
 celery -A gozle_ads beat -l INFO
 ```
