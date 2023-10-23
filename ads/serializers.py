@@ -5,12 +5,6 @@ from .models import Banner, Device, Imput, Video
 from helpers.validators import age_validator
 
 
-class NameField(serializers.RelatedField):
-
-    def to_representation(self, value):
-        return f"{value.name}"
-
-
 class DeviceSerializer(serializers.ModelSerializer):
     platforms = fields.MultipleChoiceField(choices=Device.Platforms.choices)
 

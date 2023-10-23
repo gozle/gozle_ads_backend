@@ -7,8 +7,6 @@ from django.utils import timezone
 from django_celery_beat.models import ClockedSchedule, PeriodicTask
 from rest_framework.response import Response
 
-from ads.models import Banner
-
 HIDE_TASK_NAMES = {
     "banner": "ads.tasks.hide_banner",
     "imput": "ads.tasks.hide_imput",
