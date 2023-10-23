@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: Gozle ADS
-  version: 0.3.1
+  version: 0.3.2
   description: Gozle ADS API
 paths:
   /api/v1/banner/:
@@ -845,8 +845,7 @@ components:
           type: string
         view_count:
           type: integer
-          maximum: 2147483647
-          minimum: 0
+          readOnly: true
         image:
           type: string
           format: uri
@@ -867,6 +866,7 @@ components:
       - image
       - link
       - text
+      - view_count
     Device:
       type: object
       properties:
@@ -910,8 +910,7 @@ components:
           type: string
         view_count:
           type: integer
-          maximum: 2147483647
-          minimum: 0
+          readOnly: true
         image:
           type: string
           format: uri
@@ -930,6 +929,7 @@ components:
       - id
       - image
       - link
+      - view_count
     PatchedBanner:
       type: object
       properties:
@@ -961,8 +961,7 @@ components:
           type: string
         view_count:
           type: integer
-          maximum: 2147483647
-          minimum: 0
+          readOnly: true
         image:
           type: string
           format: uri
@@ -1014,8 +1013,7 @@ components:
           type: string
         view_count:
           type: integer
-          maximum: 2147483647
-          minimum: 0
+          readOnly: true
         image:
           type: string
           format: uri
@@ -1063,8 +1061,7 @@ components:
           type: string
         view_count:
           type: integer
-          maximum: 2147483647
-          minimum: 0
+          readOnly: true
         image:
           type: string
           format: uri
@@ -1132,8 +1129,7 @@ components:
           type: string
         view_count:
           type: integer
-          maximum: 2147483647
-          minimum: 0
+          readOnly: true
         image:
           type: string
           format: uri
@@ -1155,6 +1151,7 @@ components:
       - link
       - text
       - video
+      - view_count
   securitySchemes:
     basicAuth:
       type: http
