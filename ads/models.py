@@ -47,7 +47,7 @@ class AdvertisementModelMixin(models.Model):
     age_to = models.PositiveSmallIntegerField(
         blank=True, null=True, validators=[MaxValueValidator(80)])
     devices = models.ManyToManyField(Device, verbose_name="platforms",)
-    duration = models.DurationField()
+    duration = models.PositiveIntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=30, choices=Statuses.choices, default=Statuses.ACTIVE)
