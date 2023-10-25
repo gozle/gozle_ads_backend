@@ -87,6 +87,7 @@ class Video(AdvertisementModelMixin):
     video = models.FileField(upload_to='video/',
                              validators=[FileExtensionValidator(
                                  allowed_extensions=['MOV', 'avi', 'mp4', 'webm', 'mkv'])])
+    skip_duration = models.PositiveSmallIntegerField(null=True, blank=True)
 
     def __str__(self):
         return f"{self.id}. {self.text}"

@@ -50,4 +50,4 @@ class VideoSerializer(serializers.ModelSerializer):
         model = Video
         fields = ["id", "text", "description", "link",
                   "video", "age_from", "age_to", "status",
-                  "duration", "view_count", "image", "devices", "uuid"]
+                  "duration", "view_count", "image", "devices", "uuid", "skip_duration"]
