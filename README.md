@@ -1,5 +1,13 @@
 # Gozle ADS
 
+## How to run
+
+```bash
+docker-compose up
+```
+
+---
+
 **Make sure that you have python setup that can be referenced with command python to easily follow the tutorial. If your python is referenced with python, then replace all pythons with python**
 
 ## Install Docker
