@@ -11,7 +11,7 @@ from .serializers import (
     VideoSerializer,
 )
 from .models import Banner, Device, Imput, Video
-from helpers.views import (
+from helpers.views_utils import (
     ads_data,
     create_clock_schedule,
     create_status_hide_task,

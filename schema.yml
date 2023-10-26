@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: Gozle ADS
-  version: 0.3.2
+  version: 0.3.3
   description: Gozle ADS API
 paths:
   /api/v1/banner/:
@@ -842,7 +842,9 @@ components:
         status:
           $ref: '#/components/schemas/StatusEnum'
         duration:
-          type: string
+          type: integer
+          maximum: 2147483647
+          minimum: 0
         view_count:
           type: integer
           readOnly: true
@@ -907,7 +909,9 @@ components:
         status:
           $ref: '#/components/schemas/StatusEnum'
         duration:
-          type: string
+          type: integer
+          maximum: 2147483647
+          minimum: 0
         view_count:
           type: integer
           readOnly: true
@@ -958,7 +962,9 @@ components:
         status:
           $ref: '#/components/schemas/StatusEnum'
         duration:
-          type: string
+          type: integer
+          maximum: 2147483647
+          minimum: 0
         view_count:
           type: integer
           readOnly: true
@@ -1010,7 +1016,9 @@ components:
         status:
           $ref: '#/components/schemas/StatusEnum'
         duration:
-          type: string
+          type: integer
+          maximum: 2147483647
+          minimum: 0
         view_count:
           type: integer
           readOnly: true
@@ -1058,7 +1066,9 @@ components:
         status:
           $ref: '#/components/schemas/StatusEnum'
         duration:
-          type: string
+          type: integer
+          maximum: 2147483647
+          minimum: 0
         view_count:
           type: integer
           readOnly: true
@@ -1074,6 +1084,11 @@ components:
         uuid:
           type: string
           format: uuid
+        skip_duration:
+          type: integer
+          maximum: 32767
+          minimum: 0
+          nullable: true
     PlatformsEnum:
       enum:
       - app
@@ -1126,7 +1141,9 @@ components:
         status:
           $ref: '#/components/schemas/StatusEnum'
         duration:
-          type: string
+          type: integer
+          maximum: 2147483647
+          minimum: 0
         view_count:
           type: integer
           readOnly: true
@@ -1142,6 +1159,11 @@ components:
         uuid:
           type: string
           format: uuid
+        skip_duration:
+          type: integer
+          maximum: 32767
+          minimum: 0
+          nullable: true
       required:
       - description
       - devices
