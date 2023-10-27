@@ -1,6 +1,10 @@
-import uuid
+from uuid import uuid4
 
-from django.core.validators import FileExtensionValidator, MaxValueValidator
+from django.core.validators import (
+    FileExtensionValidator,
+    MaxValueValidator,
+    MinValueValidator
+)
 from django.db import models
 from django.utils.translation import gettext as _
 
@@ -10,15 +14,15 @@ from .fields import WEBPField
 
 
 def banner_folder(instance, filename):
-    return 'banner/{}.webp'.format(uuid.uuid4().hex)
+    return 'banner/{}.webp'.format(uuid4().hex)
 
 
 def video_folder(instance, filename):
-    return 'video/{}.webp'.format(uuid.uuid4().hex)
+    return 'video/{}.webp'.format(uuid4().hex)
 
 
 def imput_folder(instance, filename):
-    return 'imput/{}.webp'.format(uuid.uuid4().hex)
+    return 'imput/{}.webp'.format(uuid4().hex)
 
 
 class Device(models.Model):
@@ -46,19 +50,28 @@ class AdvertisementModelMixin(models.Model):
         blank=True, null=True, validators=[MaxValueValidator(80)])
     age_to = models.PositiveSmallIntegerField(
         blank=True, null=True, validators=[MaxValueValidator(80)])
-    devices = models.ManyToManyField(Device, verbose_name="platforms",)
+    devices = models.ManyToManyField(Device, verbose_name="advertisement")
     duration = models.PositiveIntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    status = models.CharField(max_length=30, choices=Statuses.choices, default=Statuses.ACTIVE)
-    uuid = models.UUIDField(default=uuid.uuid4)
+    status = models.CharField(
+        max_length=30, choices=Statuses.choices, default=Statuses.ACTIVE)
+    uuid = models.UUIDField(default=uuid4)
 
-    def count_increase(self):
+    def view_count_increase(self):
         self.view_count += 1
         self.save()
-    
+
+    def set_as_active(self):
+        self.status = self.Statuses.ACTIVE
+        self.save()
+
     def set_as_hidden(self):
         self.status = self.Statuses.HIDDEN
+        self.save()
+    
+    def set_as_deleted(self):
+        self.status = self.Statuses.DELETED
         self.save()
 
     class Meta:
@@ -87,7 +100,10 @@ class Video(AdvertisementModelMixin):
     video = models.FileField(upload_to='video/',
                              validators=[FileExtensionValidator(
                                  allowed_extensions=['MOV', 'avi', 'mp4', 'webm', 'mkv'])])
-    skip_duration = models.PositiveSmallIntegerField(null=True, blank=True)
+    skip_duration = models.PositiveSmallIntegerField(null=True,
+                                                     blank=True,
+                                                     validators=[MinValueValidator(3),
+                                                                 MaxValueValidator(15)])
 
     def __str__(self):
         return f"{self.id}. {self.text}"

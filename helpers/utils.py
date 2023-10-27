@@ -21,7 +21,7 @@ def ads_data(model, serializer_class):
                     .order_by("view_count")
                     .first())
         serializer = serializer_class(queryset)
-        queryset.count_increase()
+        queryset.view_count_increase()
         return Response(serializer.data)
 
     return Response(status=204)

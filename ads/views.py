@@ -1,6 +1,3 @@
-from uuid import uuid4
-
-from rest_framework.response import Response
 from rest_framework.decorators import APIView
 from rest_framework.viewsets import ModelViewSet
 
@@ -11,7 +8,7 @@ from .serializers import (
     VideoSerializer,
 )
 from .models import Banner, Device, Imput, Video
-from helpers.views_utils import (
+from helpers.utils import (
     ads_data,
     create_clock_schedule,
     create_status_hide_task,
@@ -43,7 +40,7 @@ class BannerViewSet(ModelViewSet):
 
 
 class BannerAdsAPIView(APIView):
-    """Banner getter by less view count"""
+    """Banner getter by less view count (temporary)"""
 
     def get_serializer(self, *args, **kwargs):
         return BannerSerializer(*args, **kwargs)
@@ -71,7 +68,7 @@ class ImputViewSet(ModelViewSet):
 
 
 class ImputAdsAPIView(APIView):
-    """Imput getter by less view count"""
+    """Imput getter by less view count (temporary)"""
 
     def get_serializer(self, *args, **kwargs):
         return ImputSerializer(*args, **kwargs)
@@ -99,7 +96,7 @@ class VideoViewSet(ModelViewSet):
 
 
 class VideoAdsAPIView(APIView):
-    """Video getter by less view count"""
+    """Video getter by less view count (temporary)"""
 
     def get_serializer(self, *args, **kwargs):
         return VideoSerializer(*args, **kwargs)

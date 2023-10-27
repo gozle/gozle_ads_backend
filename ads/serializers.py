@@ -13,12 +13,15 @@ class DeviceSerializer(serializers.ModelSerializer):
         fields = ["id", "name", "platforms"]
 
 
-class BannerSerializer(serializers.ModelSerializer):
+class AdvertisementCommonFieldsSerializer(serializers.ModelSerializer):
     image = Base64ImageField()
     view_count = serializers.IntegerField(read_only=True)
 
     def validate(self, data):
         return age_validator(data)
+
+
+class BannerSerializer(AdvertisementCommonFieldsSerializer):
 
     class Meta:
         model = Banner
@@ -26,12 +29,7 @@ class BannerSerializer(serializers.ModelSerializer):
                   "status", "duration", "view_count", "image", "devices", "uuid"]
 
 
-class ImputSerializer(serializers.ModelSerializer):
-    image = Base64ImageField()
-    view_count = serializers.IntegerField(read_only=True)
-
-    def validate(self, data):
-        return age_validator(data)
+class ImputSerializer(AdvertisementCommonFieldsSerializer):
 
     class Meta:
         model = Imput
@@ -39,12 +37,7 @@ class ImputSerializer(serializers.ModelSerializer):
                   "duration", "view_count", "image", "devices", "uuid"]
 
 
-class VideoSerializer(serializers.ModelSerializer):
-    image = Base64ImageField()
-    view_count = serializers.IntegerField(read_only=True)
-
-    def validate(self, data):
-        return age_validator(data)
+class VideoSerializer(AdvertisementCommonFieldsSerializer):
 
     class Meta:
         model = Video

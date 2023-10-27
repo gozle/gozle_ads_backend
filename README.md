@@ -111,22 +111,22 @@ poetry add package_name
 poetry remove package_name
 ```
 
+## Migrate
+
+```
+python manage.py migrate
+```
+
 ## Run Celery
 
 ```
 celery -A gozle_ads worker -l info
 ```
- 
+
 ## Run Celery Beat
 
 ```
 celery -A gozle_ads beat -l INFO
-```
-
-## Migrate
-
-```
-python manage.py migrate
 ```
 
 ## Create superuser
