@@ -7,6 +7,8 @@ from django.utils import timezone
 from django_celery_beat.models import ClockedSchedule, PeriodicTask
 from rest_framework.response import Response
 
+from ads.models import AdvertisementModelMixin
+
 HIDE_TASK_NAMES = {
     "banner": "ads.tasks.hide_banner",
     "imput": "ads.tasks.hide_imput",
@@ -15,9 +17,9 @@ HIDE_TASK_NAMES = {
 
 
 def ads_data(model, serializer_class):
-    queryset_count = model.objects.filter(status="active").count()
+    queryset_count = model.objects.active_advertisements().count()
     if queryset_count != 0:
-        queryset = (model.objects.filter(status="active")
+        queryset = (model.objects.active_advertisements()
                     .order_by("view_count")
                     .first())
         serializer = serializer_class(queryset)

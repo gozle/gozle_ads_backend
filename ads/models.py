@@ -37,12 +37,19 @@ class Device(models.Model):
         return f"{self.name}"
 
 
+class AdvertisementQueryset(models.QuerySet):
+    def active_advertisements(self) -> models.QuerySet:
+        return self.filter(status=AdvertisementModelMixin.Statuses.ACTIVE)
+
+
 class AdvertisementModelMixin(models.Model):
     class Statuses(models.TextChoices):
         ACTIVE = "active", _("Active")
         HIDDEN = "hidden", _("Hidden")
         DELETED = "deleted", _("Deleted")
         TEST = "test", _("Test")
+
+    objects = AdvertisementQueryset.as_manager()
 
     link = models.URLField()
     view_count = models.PositiveIntegerField(default=0)
