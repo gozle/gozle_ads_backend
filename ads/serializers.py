@@ -1,7 +1,12 @@
 from drf_extra_fields.fields import Base64ImageField
 from rest_framework import fields, serializers
 
-from .models import Banner, Device, Imput, Video
+from .models import (
+    Banner,
+    Device,
+    Imput,
+    Video
+)
 from helpers.validators import age_validator
 
 
@@ -25,22 +30,57 @@ class BannerSerializer(AdvertisementCommonFieldsSerializer):
 
     class Meta:
         model = Banner
-        fields = ["id", "text", "description", "link", "age_from", "age_to",
-                  "status", "duration", "view_count", "image", "devices", "uuid"]
+        fields = [
+            "id",
+            "text",
+            "description",
+            "link",
+            "age_from",
+            "age_to",
+            "status",
+            "duration",
+            "view_count",
+            "image",
+            "devices",
+            "uuid"
+        ]
 
 
 class ImputSerializer(AdvertisementCommonFieldsSerializer):
 
     class Meta:
         model = Imput
-        fields = ["id", "link", "age_from", "age_to", "status",
-                  "duration", "view_count", "image", "devices", "uuid"]
+        fields = [
+            "id",
+            "link",
+            "age_from",
+            "age_to",
+            "status",
+            "duration",
+            "view_count",
+            "image",
+            "devices",
+            "uuid"
+        ]
 
 
 class VideoSerializer(AdvertisementCommonFieldsSerializer):
 
     class Meta:
         model = Video
-        fields = ["id", "text", "description", "link",
-                  "video", "age_from", "age_to", "status",
-                  "duration", "view_count", "image", "devices", "uuid", "skip_duration"]
+        fields = [
+            "id",
+            "text",
+            "description",
+            "link",
+            "video",
+            "age_from",
+            "age_to",
+            "status",
+            "duration",
+            "view_count",
+            "image",
+            "devices",
+            "uuid",
+            "skip_duration"
+        ]

@@ -31,7 +31,10 @@ class Device(models.Model):
         WEB = "web", _("Web")
 
     name = models.CharField(max_length=50)
-    platforms = MultiSelectField(choices=Platforms.choices, max_length=10)
+    platforms = MultiSelectField(
+        max_length=10,
+        choices=Platforms.choices
+    )
 
     def __str__(self):
         return f"{self.name}"
@@ -39,7 +42,9 @@ class Device(models.Model):
 
 class AdvertisementQueryset(models.QuerySet):
     def active_advertisements(self) -> models.QuerySet:
-        return self.filter(status=AdvertisementModelMixin.Statuses.ACTIVE)
+        return self.filter(
+            status=AdvertisementModelMixin.Statuses.ACTIVE
+        )
 
 
 class AdvertisementModelMixin(models.Model):
@@ -54,15 +59,31 @@ class AdvertisementModelMixin(models.Model):
     link = models.URLField()
     view_count = models.PositiveIntegerField(default=0)
     age_from = models.PositiveSmallIntegerField(
-        blank=True, null=True, validators=[MaxValueValidator(80)])
+        blank=True,
+        null=True,
+        validators=[
+            MaxValueValidator(80)
+        ]
+    )
     age_to = models.PositiveSmallIntegerField(
-        blank=True, null=True, validators=[MaxValueValidator(80)])
-    devices = models.ManyToManyField(Device, verbose_name="advertisement")
+        blank=True,
+        null=True,
+        validators=[
+            MaxValueValidator(80)
+        ]
+    )
+    devices = models.ManyToManyField(
+        Device,
+        verbose_name="advertisement"
+    )
     duration = models.PositiveIntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     status = models.CharField(
-        max_length=30, choices=Statuses.choices, default=Statuses.ACTIVE)
+        max_length=30,
+        choices=Statuses.choices,
+        default=Statuses.ACTIVE
+    )
     uuid = models.UUIDField(default=uuid4)
 
     def view_count_increase(self):
@@ -76,7 +97,7 @@ class AdvertisementModelMixin(models.Model):
     def set_as_hidden(self):
         self.status = self.Statuses.HIDDEN
         self.save()
-    
+
     def set_as_deleted(self):
         self.status = self.Statuses.DELETED
         self.save()
@@ -104,13 +125,26 @@ class Video(AdvertisementModelMixin):
         verbose_name='Image',
         upload_to=video_folder,
     )
-    video = models.FileField(upload_to='video/',
-                             validators=[FileExtensionValidator(
-                                 allowed_extensions=['MOV', 'avi', 'mp4', 'webm', 'mkv'])])
-    skip_duration = models.PositiveSmallIntegerField(null=True,
-                                                     blank=True,
-                                                     validators=[MinValueValidator(3),
-                                                                 MaxValueValidator(15)])
+    video = models.FileField(
+        upload_to='video/',
+        validators=[FileExtensionValidator(
+            allowed_extensions=[
+                'MOV',
+                'avi',
+                'mp4',
+                'webm',
+                'mkv'
+            ])
+        ]
+    )
+    skip_duration = models.PositiveSmallIntegerField(
+        null=True,
+        blank=True,
+        validators=[
+            MinValueValidator(3),
+            MaxValueValidator(15)
+        ]
+    )
 
     def __str__(self):
         return f"{self.id}. {self.text}"

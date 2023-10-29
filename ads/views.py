@@ -7,7 +7,12 @@ from .serializers import (
     ImputSerializer,
     VideoSerializer,
 )
-from .models import Banner, Device, Imput, Video
+from .models import (
+    Banner,
+    Device,
+    Imput,
+    Video
+)
 from helpers.utils import (
     ads_data,
     create_clock_schedule,

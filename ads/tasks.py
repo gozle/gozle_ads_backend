@@ -1,6 +1,10 @@
 from celery import shared_task
 
-from ads.models import Banner, Imput, Video
+from ads.models import (
+    Banner,
+    Imput,
+    Video
+)
 
 
 @shared_task
