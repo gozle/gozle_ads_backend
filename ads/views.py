@@ -25,7 +25,7 @@ class DeviceViewSet(ModelViewSet):
 class BannerViewSet(TaskCreatorMixin, ModelViewSet):
     serializer_class = BannerSerializer
     queryset = Banner.objects.all().prefetch_related("devices")
-    adv_type = "banner"
+    ads_type = "banner"
 
 
 class BannerAdsAPIView(APIView):
@@ -41,7 +41,7 @@ class BannerAdsAPIView(APIView):
 class ImputViewSet(TaskCreatorMixin, ModelViewSet):
     serializer_class = ImputSerializer
     queryset = Imput.objects.all().prefetch_related("devices")
-    adv_type = "imput"
+    ads_type = "imput"
 
 
 class ImputAdsAPIView(APIView):
@@ -57,7 +57,7 @@ class ImputAdsAPIView(APIView):
 class VideoViewSet(TaskCreatorMixin, ModelViewSet):
     serializer_class = VideoSerializer
     queryset = Video.objects.all().prefetch_related("devices")
-    adv_type = "video"
+    ads_type = "video"
 
 
 class VideoAdsAPIView(APIView):

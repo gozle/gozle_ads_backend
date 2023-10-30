@@ -16,6 +16,6 @@ class TaskCreatorMixin:
         task = create_status_hide_task(
             schedule=schedule,
             uuid=uuid,
-            task_name=HIDE_TASK_NAMES[f"{self.adv_type}"]
+            task_name=HIDE_TASK_NAMES[self.ads_type]
         )
         return response
