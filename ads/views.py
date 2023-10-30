@@ -21,14 +21,7 @@ from helpers.utils import (
 )
 
 
-class DeviceViewSet(ModelViewSet):
-    queryset = Device.objects.all()
-    serializer_class = DeviceSerializer
-
-
-class BannerViewSet(ModelViewSet):
-    serializer_class = BannerSerializer
-    queryset = Banner.objects.all().prefetch_related("devices")
+class TaskCreatorMixin:
 
     def create(self, request, *args, **kwargs):
         response = super().create(request, *args, **kwargs)
@@ -39,9 +32,20 @@ class BannerViewSet(ModelViewSet):
         task = create_status_hide_task(
             schedule=schedule,
             uuid=uuid,
-            task_name=HIDE_TASK_NAMES["banner"]
+            task_name=self.adv_type["banner"]
         )
         return response
+
+
+class DeviceViewSet(ModelViewSet):
+    queryset = Device.objects.all()
+    serializer_class = DeviceSerializer
+
+
+class BannerViewSet(TaskCreatorMixin, ModelViewSet):
+    serializer_class = BannerSerializer
+    queryset = Banner.objects.all().prefetch_related("devices")
+    adv_type = "banner"
 
 
 class BannerAdsAPIView(APIView):
@@ -54,22 +58,10 @@ class BannerAdsAPIView(APIView):
         return ads_data(Banner, BannerSerializer)
 
 
-class ImputViewSet(ModelViewSet):
+class ImputViewSet(TaskCreatorMixin, ModelViewSet):
     serializer_class = ImputSerializer
     queryset = Imput.objects.all().prefetch_related("devices")
-
-    def create(self, request, *args, **kwargs):
-        response = super().create(request, *args, **kwargs)
-        duration = response.data["duration"]
-        uuid = response.data["uuid"]
-        # Creating Celery task which hide object's status to hidden
-        schedule = create_clock_schedule(duration=duration)
-        task = create_status_hide_task(
-            schedule=schedule,
-            uuid=uuid,
-            task_name=HIDE_TASK_NAMES["imput"]
-        )
-        return response
+    adv_type = "imput"
 
 
 class ImputAdsAPIView(APIView):
@@ -82,22 +74,10 @@ class ImputAdsAPIView(APIView):
         return ads_data(Imput, ImputSerializer)
 
 
-class VideoViewSet(ModelViewSet):
+class VideoViewSet(TaskCreatorMixin, ModelViewSet):
     serializer_class = VideoSerializer
     queryset = Video.objects.all().prefetch_related("devices")
-
-    def create(self, request, *args, **kwargs):
-        response = super().create(request, *args, **kwargs)
-        duration = response.data["duration"]
-        uuid = response.data["uuid"]
-        # Creating Celery task which hide object's status to hidden
-        schedule = create_clock_schedule(duration=duration)
-        task = create_status_hide_task(
-            schedule=schedule,
-            uuid=uuid,
-            task_name=HIDE_TASK_NAMES["video"]
-        )
-        return response
+    adv_type = "video"
 
 
 class VideoAdsAPIView(APIView):
