@@ -7,9 +7,7 @@ from django.utils import timezone
 from django_celery_beat.models import ClockedSchedule, PeriodicTask
 from rest_framework.response import Response
 
-from ads.models import AdvertisementModelMixin
-
-HIDE_TASK_NAMES = {
+ADS_HIDE_TASK_NAMES = {
     "banner": "ads.tasks.hide_banner",
     "imput": "ads.tasks.hide_imput",
     "video": "ads.tasks.hide_video",

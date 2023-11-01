@@ -1,7 +1,7 @@
 from helpers.utils import (
     create_clock_schedule,
     create_status_hide_task,
-    HIDE_TASK_NAMES
+    ADS_HIDE_TASK_NAMES
 )
 
 
@@ -16,6 +16,6 @@ class TaskCreatorMixin:
         task = create_status_hide_task(
             schedule=schedule,
             uuid=uuid,
-            task_name=HIDE_TASK_NAMES[self.ads_type]
+            task_name=ADS_HIDE_TASK_NAMES[self.ads_type]
         )
         return response
