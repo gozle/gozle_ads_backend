@@ -128,7 +128,6 @@ class AdvertisementModelMixin(models.Model):
 
     def view_count_increase(self):
         self.view_count += 1
-        print("INCREASED")
         self.save()
 
     def set_as_active(self):
