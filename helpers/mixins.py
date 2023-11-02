@@ -1,4 +1,4 @@
-from helpers.utils import (
+from helpers.celery_beat_scheduler import (
     create_clock_schedule,
     create_status_hide_task,
     ADS_HIDE_TASK_NAMES

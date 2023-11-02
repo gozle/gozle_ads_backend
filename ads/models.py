@@ -60,6 +60,13 @@ class AdvertisementQueryset(models.QuerySet):
             status=AdvertisementModelMixin.Statuses.ACTIVE
         )
 
+    def five_low_score_ads(self) -> models.QuerySet:
+        if self.all().count() < 5:
+            return self.all()
+        return (
+            self.all()
+            .order_by("score")[:5]
+        )
 
 class AdvertisementModelMixin(models.Model):
     class Statuses(models.TextChoices):
@@ -121,6 +128,7 @@ class AdvertisementModelMixin(models.Model):
 
     def view_count_increase(self):
         self.view_count += 1
+        print("INCREASED")
         self.save()
 
     def set_as_active(self):
@@ -160,6 +168,9 @@ class Banner(AdvertisementModelMixin):
     def __str__(self):
         return f"{self.id}. {self.text}"
 
+    class Meta:
+        verbose_name = "banner"
+
 
 class Video(AdvertisementModelMixin):
     text = models.CharField(max_length=255)
@@ -192,6 +203,9 @@ class Video(AdvertisementModelMixin):
     def __str__(self):
         return f"{self.id}. {self.text}"
 
+    class Meta:
+        verbose_name = "video"
+
 
 class Imput(AdvertisementModelMixin):
     image = WEBPField(
@@ -201,3 +215,6 @@ class Imput(AdvertisementModelMixin):
 
     def __str__(self):
         return f"{self.link}"
+
+    class Meta:
+        verbose_name = "imput"

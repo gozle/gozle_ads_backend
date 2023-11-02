@@ -20,14 +20,14 @@ app.conf.beat_schedule = {
     # Every hour
     "banner_ranker": {
         "task": "core.tasks.update_banner_score",
-        "schedule": crontab(hour="*/1", minute="2"),
+        "schedule": crontab(hour="*/1", minute="1"),
     },
     "video_ranker": {
         "task": "core.tasks.update_video_score",
-        "schedule": crontab(hour="*/1", minute="3"),
+        "schedule": crontab(hour="*/1", minute="2"),
     },
     "imput_ranker": {
         "task": "core.tasks.update_imput_score",
-        "schedule": crontab(hour="*/1", minute="4"),
+        "schedule": crontab(hour="*/1", minute="3"),
     },
 }

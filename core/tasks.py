@@ -6,6 +6,7 @@ from ads.models import (
     Imput,
     Video
 )
+from helpers.cache import ads_caching
 
 
 @shared_task
@@ -16,6 +17,7 @@ def update_banner_score():
         banner.score = score
 
     Banner.objects.bulk_update(banners, ["score"])
+    ads_caching(Banner)
     return "Banner score successfully updated"
 
 
@@ -27,6 +29,7 @@ def update_imput_score():
         imput.score = score
 
     Imput.objects.bulk_update(imputs, ["score"])
+    ads_caching(Imput)
     return "Imput score successfully updated"
 
 
@@ -38,4 +41,5 @@ def update_video_score():
         video.score = score
 
     Video.objects.bulk_update(videos, ["score"])
+    ads_caching(Video)
     return "Video score successfully updated"
