@@ -6,11 +6,13 @@ from django.core.validators import (
     MinValueValidator
 )
 from django.db import models
-from django.utils.translation import gettext as _
+from django.utils import timezone
+from django.utils.translation import gettext_lazy as _
 
 from multiselectfield import MultiSelectField
 
 from .fields import WEBPField
+from .ranker import Ranker
 
 
 def banner_folder(instance, filename):
@@ -40,12 +42,31 @@ class Device(models.Model):
         return f"{self.name}"
 
 
+class AdsRanker:
+    def __init__(self, queryset):
+        self.queryset = queryset
+
+    def get_score(self):
+        return Ranker.get_score(
+            current_time=timezone.now(),
+            published_date=self.queryset.published_at,
+            view_count=self.queryset.view_count,
+        )
+
+
 class AdvertisementQueryset(models.QuerySet):
     def active_advertisements(self) -> models.QuerySet:
         return self.filter(
             status=AdvertisementModelMixin.Statuses.ACTIVE
         )
 
+    def five_low_score_ads(self) -> models.QuerySet:
+        if self.all().count() < 5:
+            return self.all()
+        return (
+            self.all()
+            .order_by("score")[:5]
+        )
 
 class AdvertisementModelMixin(models.Model):
     class Statuses(models.TextChoices):
@@ -79,12 +100,31 @@ class AdvertisementModelMixin(models.Model):
     duration = models.PositiveIntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    published_at = models.DateTimeField(blank=True, null=True)
+    deleted_at = models.DateTimeField(blank=True, null=True)
     status = models.CharField(
         max_length=30,
         choices=Statuses.choices,
         default=Statuses.ACTIVE
     )
     uuid = models.UUIDField(default=uuid4)
+    score = models.IntegerField(default=0)
+
+    @property
+    def is_active(self):
+        return self.status == self.Statuses.ACTIVE
+
+    @property
+    def is_deleted(self):
+        return self.status == self.Statuses.DELETED
+
+    @property
+    def is_for_test(self):
+        return self.status == self.Statuses.TEST
+
+    @property
+    def is_hidden(self):
+        return self.status == self.Statuses.HIDDEN
 
     def view_count_increase(self):
         self.view_count += 1
@@ -100,7 +140,17 @@ class AdvertisementModelMixin(models.Model):
 
     def set_as_deleted(self):
         self.status = self.Statuses.DELETED
+        self.deleted_at = timezone.now()
         self.save()
+
+    def save(self, *args, **kwargs) -> None:
+        if not self.published_at and not self.is_hidden:
+            self.published_at = timezone.now()
+
+        if not self.deleted_at and self.is_deleted:
+            self.deleted_at = timezone.now()
+
+        return super().save(*args, **kwargs)
 
     class Meta:
         abstract = True
@@ -116,6 +166,9 @@ class Banner(AdvertisementModelMixin):
 
     def __str__(self):
         return f"{self.id}. {self.text}"
+
+    class Meta:
+        verbose_name = "banner"
 
 
 class Video(AdvertisementModelMixin):
@@ -149,6 +202,9 @@ class Video(AdvertisementModelMixin):
     def __str__(self):
         return f"{self.id}. {self.text}"
 
+    class Meta:
+        verbose_name = "video"
+
 
 class Imput(AdvertisementModelMixin):
     image = WEBPField(
@@ -158,3 +214,6 @@ class Imput(AdvertisementModelMixin):
 
     def __str__(self):
         return f"{self.link}"
+
+    class Meta:
+        verbose_name = "imput"
