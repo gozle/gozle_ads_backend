@@ -10,7 +10,20 @@ https://docs.djangoproject.com/en/4.1/howto/deployment/asgi/
 import os
 
 from django.core.asgi import get_asgi_application
+from django.urls import re_path
+
+from channels.routing import ProtocolTypeRouter, URLRouter
+
+from ads.consumers import BannerConsumer
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'gozle_ads.settings')
 
-application = get_asgi_application()
+ws_patterns = [
+    re_path(r"ws/banner/", BannerConsumer.as_asgi())
+]
+
+
+application = ProtocolTypeRouter({
+        "http": get_asgi_application(),
+        "websocket": URLRouter(ws_patterns),
+})
