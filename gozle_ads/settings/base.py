@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'django_celery_beat',
     # my apps
     "ads",
+    "authentication",
 ]
 
 MIDDLEWARE = [
@@ -81,9 +82,6 @@ TEMPLATES = [
     },
 ]
 
-REST_FRAMEWORK = {
-    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
-}
 
 WSGI_APPLICATION = 'gozle_ads.wsgi.application'
 
@@ -101,6 +99,10 @@ DATABASES = {
         'PORT': os.getenv("POSTGRES_PORT", "5432"),
     }
 }
+
+# Auth User model
+
+AUTH_USER_MODEL = 'authentication.User'
 
 
 # Password validation
@@ -153,6 +155,13 @@ USE_I18N = True
 USE_TZ = True
 
 
+# Rest Framework Settings
+
+REST_FRAMEWORK = {
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
+
+
 # CELERY SETTINGS
 CELERY_BROKER_URL = BROKER_URL
 CELERY_ACCEPT_CONTENT = ['application/json']
@@ -179,4 +188,4 @@ MEDIA_URL = 'media/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Max size of uploaded file
-DATA_UPLOAD_MAX_MEMORY_SIZE = 5242880 # 5 MB
+DATA_UPLOAD_MAX_MEMORY_SIZE = 5242880  # 5 MB
