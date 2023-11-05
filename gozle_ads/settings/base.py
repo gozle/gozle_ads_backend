@@ -85,7 +85,7 @@ TEMPLATES = [
 ]
 
 
-WSGI_APPLICATION = 'gozle_ads.wsgi.application'
+# WSGI_APPLICATION = 'gozle_ads.wsgi.application'
 ASGI_APPLICATION = 'gozle_ads.asgi.application'
 
 

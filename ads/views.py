@@ -1,4 +1,5 @@
 from rest_framework.decorators import APIView
+from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
 from .serializers import (
@@ -35,7 +36,10 @@ class BannerAdsAPIView(APIView):
         return BannerSerializer(*args, **kwargs)
 
     def get(self, request):
-        return ads_data(Banner, BannerSerializer)
+        data = ads_data(Banner, BannerSerializer)
+        if data:
+            return Response(data, 200)
+        return Response({"message": "There is no banner ads"})
 
 
 class ImputViewSet(TaskCreatorMixin, ModelViewSet):
@@ -51,7 +55,10 @@ class ImputAdsAPIView(APIView):
         return ImputSerializer(*args, **kwargs)
 
     def get(self, request):
-        return ads_data(Imput, ImputSerializer)
+        data = ads_data(Imput, ImputSerializer)
+        if data:
+            return Response(data, 200)
+        return Response({"message": "There is no imput ads"})
 
 
 class VideoViewSet(TaskCreatorMixin, ModelViewSet):
@@ -67,4 +74,7 @@ class VideoAdsAPIView(APIView):
         return VideoSerializer(*args, **kwargs)
 
     def get(self, request):
-        return ads_data(Video, VideoSerializer)
+        data = ads_data(Video, VideoSerializer)
+        if data:
+            return Response(data, 200)
+        return Response({"message": "There is no video ads"})

@@ -26,6 +26,4 @@ def ads_data(model, serializer_class):
 
         serializer = serializer_class(queryset)
         queryset.view_count_increase()
-        return Response(serializer.data)
-
-    return Response({"message": "No ads found."}, status=204)
+        return serializer.data
