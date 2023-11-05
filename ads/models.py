@@ -1,14 +1,10 @@
 from uuid import uuid4
 
-from django.core.validators import (
-    FileExtensionValidator,
-    MaxValueValidator,
-    MinValueValidator
-)
+from django.core.validators import (FileExtensionValidator, MaxValueValidator,
+                                    MinValueValidator)
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
-
 from multiselectfield import MultiSelectField
 
 from .fields import WEBPField

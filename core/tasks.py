@@ -1,11 +1,6 @@
 from celery import shared_task
 
-from ads.models import (
-    AdsRanker,
-    Banner,
-    Imput,
-    Video
-)
+from ads.models import AdsRanker, Banner, Imput, Video
 from helpers.cache import ads_caching
 
 

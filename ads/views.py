@@ -2,20 +2,12 @@ from rest_framework.decorators import APIView
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
-from .serializers import (
-    BannerSerializer,
-    DeviceSerializer,
-    ImputSerializer,
-    VideoSerializer,
-)
-from .models import (
-    Banner,
-    Device,
-    Imput,
-    Video
-)
 from helpers.mixins import TaskCreatorMixin
 from helpers.utils import ads_data
+
+from .models import Banner, Device, Imput, Video
+from .serializers import (BannerSerializer, DeviceSerializer, ImputSerializer,
+                          VideoSerializer)
 
 
 class DeviceViewSet(ModelViewSet):

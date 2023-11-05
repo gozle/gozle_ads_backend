@@ -1,13 +1,9 @@
 from drf_extra_fields.fields import Base64ImageField
 from rest_framework import fields, serializers
 
-from .models import (
-    Banner,
-    Device,
-    Imput,
-    Video
-)
 from helpers.validators import age_validator
+
+from .models import Banner, Device, Imput, Video
 
 
 class DeviceSerializer(serializers.ModelSerializer):

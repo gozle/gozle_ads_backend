@@ -1,9 +1,8 @@
 import json
 from datetime import timedelta
-from uuid import uuid4, UUID
+from uuid import UUID, uuid4
 
 from django.utils import timezone
-
 from django_celery_beat.models import ClockedSchedule, PeriodicTask
 
 ADS_HIDE_TASK_NAMES = {
