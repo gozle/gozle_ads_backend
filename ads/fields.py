@@ -1,9 +1,9 @@
 import io
 
-from PIL import Image
 from django.core.files.base import ContentFile
 from django.db import models
 from django.db.models.fields.files import ImageFieldFile
+from PIL import Image
 
 
 class WEBPFieldFile(ImageFieldFile):

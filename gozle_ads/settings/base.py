@@ -29,6 +29,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY", "secret_key")
 # Application definition
 
 INSTALLED_APPS = [
+    'daphne',
     # admin interface
     'jet',
     # django apps
@@ -46,6 +47,7 @@ INSTALLED_APPS = [
     'multiselectfield',
     'django_celery_results',
     'django_celery_beat',
+    'channels',
     # my apps
     "ads",
     "authentication",
@@ -83,7 +85,18 @@ TEMPLATES = [
 ]
 
 
-WSGI_APPLICATION = 'gozle_ads.wsgi.application'
+# WSGI_APPLICATION = 'gozle_ads.wsgi.application'
+ASGI_APPLICATION = 'gozle_ads.asgi.application'
+
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [("localhost", 6379)],
+        },
+    },
+}
 
 
 # Database

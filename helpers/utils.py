@@ -1,9 +1,19 @@
 import random
 
 from django.core.cache import cache
-
 from rest_framework.response import Response
 
+from .cache import ads_caching
+
+
+def get_queryset_by_cache(model, model_name, obj):
+    try:
+        queryset = model.objects.get(id=obj.id)
+        return queryset
+    except model.DoesNotExist:
+        ads_caching(model)
+        ads_list = cache.get(model_name)
+        return random.choice(ads_list)
 
 def ads_data(model, serializer_class):
     # gets model's verbose name
@@ -22,10 +32,8 @@ def ads_data(model, serializer_class):
         else:
             ads_list = cache.get(model_name)
             obj = random.choice(ads_list)
-            queryset = model.objects.get(id=obj.id)
+            queryset = get_queryset_by_cache(model, model_name, obj)
 
         serializer = serializer_class(queryset)
         queryset.view_count_increase()
-        return Response(serializer.data)
-
-    return Response({"message": "No ads found."}, status=204)
+        return serializer.data

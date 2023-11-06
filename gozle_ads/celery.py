@@ -1,6 +1,7 @@
 """Celery tasks."""
 
 from __future__ import absolute_import, unicode_literals
+
 import os
 
 from celery import Celery
@@ -17,6 +18,11 @@ app.autodiscover_tasks()
 app.conf.timezone = TIME_ZONE
 
 app.conf.beat_schedule = {
+    # Every 3 minutes
+    "banner_changer_socket": {
+        "task": "ads.tasks.banner_socket",
+        "schedule": crontab(minute="*/3"),
+    },
     # Every hour
     "banner_ranker": {
         "task": "core.tasks.update_banner_score",
