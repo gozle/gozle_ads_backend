@@ -159,6 +159,11 @@ class Banner(AdvertisementModelMixin):
         verbose_name='Image',
         upload_to=banner_folder,
     )
+    cycle_duration = models.PositiveIntegerField(
+        validators=[
+            MinValueValidator(60)
+        ]
+    )
 
     def __str__(self):
         return f"{self.id}. {self.text}"

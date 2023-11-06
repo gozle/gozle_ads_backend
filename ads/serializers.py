@@ -38,7 +38,8 @@ class BannerSerializer(AdvertisementCommonFieldsSerializer):
             "view_count",
             "image",
             "devices",
-            "uuid"
+            "uuid",
+            "cycle_duration"
         ]
 
 
