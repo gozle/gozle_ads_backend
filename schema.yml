@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: Gozle ADS
-  version: 0.4.0
+  version: 0.4.1
   description: Gozle ADS API
 paths:
   /api/v1/banner/:
@@ -829,12 +829,12 @@ components:
           type: string
           format: uri
           maxLength: 200
-        age_from:
+        min_age:
           type: integer
           maximum: 80
           minimum: 0
           nullable: true
-        age_to:
+        max_age:
           type: integer
           maximum: 80
           minimum: 0
@@ -860,6 +860,10 @@ components:
         uuid:
           type: string
           format: uuid
+        cycle_duration:
+          type: integer
+          maximum: 2147483647
+          minimum: 60
       required:
       - description
       - devices
@@ -896,12 +900,12 @@ components:
           type: string
           format: uri
           maxLength: 200
-        age_from:
+        min_age:
           type: integer
           maximum: 80
           minimum: 0
           nullable: true
-        age_to:
+        max_age:
           type: integer
           maximum: 80
           minimum: 0
@@ -949,12 +953,12 @@ components:
           type: string
           format: uri
           maxLength: 200
-        age_from:
+        min_age:
           type: integer
           maximum: 80
           minimum: 0
           nullable: true
-        age_to:
+        max_age:
           type: integer
           maximum: 80
           minimum: 0
@@ -980,6 +984,10 @@ components:
         uuid:
           type: string
           format: uuid
+        cycle_duration:
+          type: integer
+          maximum: 2147483647
+          minimum: 60
     PatchedDevice:
       type: object
       properties:
@@ -1003,12 +1011,12 @@ components:
           type: string
           format: uri
           maxLength: 200
-        age_from:
+        min_age:
           type: integer
           maximum: 80
           minimum: 0
           nullable: true
-        age_to:
+        max_age:
           type: integer
           maximum: 80
           minimum: 0
@@ -1053,12 +1061,12 @@ components:
           type: string
           format: uri
           pattern: (?:mov|avi|mp4|webm|mkv)$
-        age_from:
+        min_age:
           type: integer
           maximum: 80
           minimum: 0
           nullable: true
-        age_to:
+        max_age:
           type: integer
           maximum: 80
           minimum: 0
@@ -1128,12 +1136,12 @@ components:
           type: string
           format: uri
           pattern: (?:mov|avi|mp4|webm|mkv)$
-        age_from:
+        min_age:
           type: integer
           maximum: 80
           minimum: 0
           nullable: true
-        age_to:
+        max_age:
           type: integer
           maximum: 80
           minimum: 0
