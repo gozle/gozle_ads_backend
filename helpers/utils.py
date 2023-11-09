@@ -15,12 +15,13 @@ def get_queryset_by_cache(model, model_name, obj):
         ads_list = cache.get(model_name)
         return random.choice(ads_list)
 
+
 def ads_data(model, serializer_class):
     # gets model's verbose name
     model_name = model._meta.verbose_name.lower()
     # gets model's active object's count
     queryset_count = model.objects.active_advertisements().count()
-    
+
     if queryset_count != 0:
         if model_name not in cache:
             queryset = (

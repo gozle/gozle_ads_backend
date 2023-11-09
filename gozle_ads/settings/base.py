@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'django_celery_results',
     'django_celery_beat',
     'channels',
+    'oauth2_provider',
     # my apps
     "ads",
     "authentication",
@@ -63,7 +64,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     # 3rd party
-    'django_otp.middleware.OTPMiddleware'
+    'django_otp.middleware.OTPMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'gozle_ads.urls'

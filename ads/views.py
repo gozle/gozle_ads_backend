@@ -31,7 +31,7 @@ class BannerAdsAPIView(APIView):
         data = ads_data(Banner, BannerSerializer)
         if data:
             return Response(data, 200)
-        return Response({"message": "There is no banner ads"})
+        return Response({"message": "There is no banner ads"}, status=204)
 
 
 class ImputViewSet(TaskCreatorMixin, ModelViewSet):
@@ -50,7 +50,7 @@ class ImputAdsAPIView(APIView):
         data = ads_data(Imput, ImputSerializer)
         if data:
             return Response(data, 200)
-        return Response({"message": "There is no imput ads"})
+        return Response({"message": "There is no imput ads"}, status=204)
 
 
 class VideoViewSet(TaskCreatorMixin, ModelViewSet):
@@ -69,4 +69,4 @@ class VideoAdsAPIView(APIView):
         data = ads_data(Video, VideoSerializer)
         if data:
             return Response(data, 200)
-        return Response({"message": "There is no video ads"})
+        return Response({"message": "There is no video ads"}, status=204)

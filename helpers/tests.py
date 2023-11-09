@@ -5,13 +5,13 @@ def banner_model(
     text: str = "Gozle Portal",
     description: str = "Market where you can buy computer games and apps",
     link: str = "https://store.gozle.com.tm/",
-    age_from: int = 12,
-    age_to: int = 18,
+    min_age: int = 12,
+    max_age: int = 18,
     duration: int = 100,
     **kwargs
 ):
     banner = Banner(
-        text=text, description=description, link=link, age_from=age_from, age_to=age_to, duration=duration
+        text=text, description=description, link=link, min_age=min_age, max_age=max_age, duration=duration
     )
 
     return banner
@@ -21,12 +21,12 @@ def create_banner(
     text: str = "Gozle Portal",
     description: str = "Market where you can buy computer games and apps",
     link: str = "https://store.gozle.com.tm/",
-    age_from: int = 12,
+    min_age: int = 12,
     duration: int = 100,
     **kwargs
 ):
     banner = Banner.objects.create(
-        text=text, description=description, link=link, age_from=age_from, duration=duration
+        text=text, description=description, link=link, min_age=min_age, duration=duration
     )
 
     return banner
