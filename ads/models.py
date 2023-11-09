@@ -75,14 +75,14 @@ class AdvertisementModelMixin(models.Model):
 
     link = models.URLField()
     view_count = models.PositiveIntegerField(default=0)
-    age_from = models.PositiveSmallIntegerField(
+    min_age = models.PositiveSmallIntegerField(
         blank=True,
         null=True,
         validators=[
             MaxValueValidator(80)
         ]
     )
-    age_to = models.PositiveSmallIntegerField(
+    max_age = models.PositiveSmallIntegerField(
         blank=True,
         null=True,
         validators=[
@@ -162,7 +162,8 @@ class Banner(AdvertisementModelMixin):
     cycle_duration = models.PositiveIntegerField(
         validators=[
             MinValueValidator(60)
-        ]
+        ],
+        default=180
     )
 
     def __str__(self):
