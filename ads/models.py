@@ -10,6 +10,8 @@ from multiselectfield import MultiSelectField
 from .fields import WEBPField
 from .ranker import Ranker
 
+from locations.models import Province
+
 
 def banner_folder(instance, filename):
     return 'banner/{}.webp'.format(uuid4().hex)
@@ -56,13 +58,6 @@ class AdvertisementQueryset(models.QuerySet):
             status=AdvertisementModelMixin.Statuses.ACTIVE
         )
 
-    def five_low_score_ads(self) -> models.QuerySet:
-        if self.all().count() < 5:
-            return self.all()
-        return (
-            self.all()
-            .order_by("score")[:5]
-        )
 
 class AdvertisementModelMixin(models.Model):
     class Statuses(models.TextChoices):
@@ -105,6 +100,7 @@ class AdvertisementModelMixin(models.Model):
     )
     uuid = models.UUIDField(default=uuid4)
     score = models.IntegerField(default=0)
+    provinces = models.ManyToManyField(Province)
 
     @property
     def is_active(self):

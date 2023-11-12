@@ -1,6 +1,8 @@
-from helpers.celery_beat_scheduler import (ADS_HIDE_TASK_NAMES,
-                                           create_clock_schedule,
-                                           create_status_hide_task)
+from helpers.celery_beat_scheduler import (
+    ADS_HIDE_TASK_NAMES,
+    create_clock_schedule,
+    create_status_hide_task
+)
 
 
 class TaskCreatorMixin:
