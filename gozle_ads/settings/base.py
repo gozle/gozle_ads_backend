@@ -48,10 +48,12 @@ INSTALLED_APPS = [
     'django_celery_results',
     'django_celery_beat',
     'channels',
+    'django_filters',
     'oauth2_provider',
     # my apps
-    "ads",
-    "authentication",
+    'ads',
+    'authentication',
+    'locations',
 ]
 
 MIDDLEWARE = [

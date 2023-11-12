@@ -39,7 +39,10 @@ class BannerSerializer(AdvertisementCommonFieldsSerializer):
             "image",
             "devices",
             "uuid",
-            "cycle_duration"
+            "cycle_duration",
+            "min_age",
+            "max_age",
+            "provinces",
         ]
 
 
@@ -57,7 +60,8 @@ class ImputSerializer(AdvertisementCommonFieldsSerializer):
             "view_count",
             "image",
             "devices",
-            "uuid"
+            "uuid",
+            "provinces",
         ]
 
 
@@ -79,5 +83,6 @@ class VideoSerializer(AdvertisementCommonFieldsSerializer):
             "image",
             "devices",
             "uuid",
-            "skip_duration"
+            "skip_duration",
+            "provinces",
         ]

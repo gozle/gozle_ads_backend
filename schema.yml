@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: Gozle ADS
-  version: 0.4.0
+  version: 0.4.1
   description: Gozle ADS API
 paths:
   /api/v1/banner/:
@@ -160,7 +160,7 @@ paths:
   /api/v1/banner/ads/:
     get:
       operationId: banner_ads_retrieve
-      description: Banner getter by less view count (temporary)
+      description: Banner getter by less view count
       tags:
       - banner
       security:
@@ -483,7 +483,7 @@ paths:
   /api/v1/imput/ads/:
     get:
       operationId: imput_ads_retrieve
-      description: Imput getter by less view count (temporary)
+      description: Imput getter by less view count
       tags:
       - imput
       security:
@@ -798,7 +798,7 @@ paths:
   /api/v1/video/ads/:
     get:
       operationId: video_ads_retrieve
-      description: Video getter by less view count (temporary)
+      description: Video getter by less view count
       tags:
       - video
       security:
@@ -829,12 +829,12 @@ components:
           type: string
           format: uri
           maxLength: 200
-        age_from:
+        min_age:
           type: integer
           maximum: 80
           minimum: 0
           nullable: true
-        age_to:
+        max_age:
           type: integer
           maximum: 80
           minimum: 0
@@ -860,6 +860,14 @@ components:
         uuid:
           type: string
           format: uuid
+        cycle_duration:
+          type: integer
+          maximum: 2147483647
+          minimum: 60
+        provinces:
+          type: array
+          items:
+            type: integer
       required:
       - description
       - devices
@@ -867,6 +875,7 @@ components:
       - id
       - image
       - link
+      - provinces
       - text
       - view_count
     Device:
@@ -896,12 +905,12 @@ components:
           type: string
           format: uri
           maxLength: 200
-        age_from:
+        min_age:
           type: integer
           maximum: 80
           minimum: 0
           nullable: true
-        age_to:
+        max_age:
           type: integer
           maximum: 80
           minimum: 0
@@ -927,12 +936,17 @@ components:
         uuid:
           type: string
           format: uuid
+        provinces:
+          type: array
+          items:
+            type: integer
       required:
       - devices
       - duration
       - id
       - image
       - link
+      - provinces
       - view_count
     PatchedBanner:
       type: object
@@ -949,12 +963,12 @@ components:
           type: string
           format: uri
           maxLength: 200
-        age_from:
+        min_age:
           type: integer
           maximum: 80
           minimum: 0
           nullable: true
-        age_to:
+        max_age:
           type: integer
           maximum: 80
           minimum: 0
@@ -980,6 +994,14 @@ components:
         uuid:
           type: string
           format: uuid
+        cycle_duration:
+          type: integer
+          maximum: 2147483647
+          minimum: 60
+        provinces:
+          type: array
+          items:
+            type: integer
     PatchedDevice:
       type: object
       properties:
@@ -1003,12 +1025,12 @@ components:
           type: string
           format: uri
           maxLength: 200
-        age_from:
+        min_age:
           type: integer
           maximum: 80
           minimum: 0
           nullable: true
-        age_to:
+        max_age:
           type: integer
           maximum: 80
           minimum: 0
@@ -1034,6 +1056,10 @@ components:
         uuid:
           type: string
           format: uuid
+        provinces:
+          type: array
+          items:
+            type: integer
     PatchedVideo:
       type: object
       properties:
@@ -1053,12 +1079,12 @@ components:
           type: string
           format: uri
           pattern: (?:mov|avi|mp4|webm|mkv)$
-        age_from:
+        min_age:
           type: integer
           maximum: 80
           minimum: 0
           nullable: true
-        age_to:
+        max_age:
           type: integer
           maximum: 80
           minimum: 0
@@ -1089,6 +1115,10 @@ components:
           maximum: 15
           minimum: 3
           nullable: true
+        provinces:
+          type: array
+          items:
+            type: integer
     PlatformsEnum:
       enum:
       - app
@@ -1128,12 +1158,12 @@ components:
           type: string
           format: uri
           pattern: (?:mov|avi|mp4|webm|mkv)$
-        age_from:
+        min_age:
           type: integer
           maximum: 80
           minimum: 0
           nullable: true
-        age_to:
+        max_age:
           type: integer
           maximum: 80
           minimum: 0
@@ -1164,6 +1194,10 @@ components:
           maximum: 15
           minimum: 3
           nullable: true
+        provinces:
+          type: array
+          items:
+            type: integer
       required:
       - description
       - devices
@@ -1171,6 +1205,7 @@ components:
       - id
       - image
       - link
+      - provinces
       - text
       - video
       - view_count
