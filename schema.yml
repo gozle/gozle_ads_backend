@@ -160,7 +160,7 @@ paths:
   /api/v1/banner/ads/:
     get:
       operationId: banner_ads_retrieve
-      description: Banner getter by less view count (temporary)
+      description: Banner getter by less view count
       tags:
       - banner
       security:
@@ -483,7 +483,7 @@ paths:
   /api/v1/imput/ads/:
     get:
       operationId: imput_ads_retrieve
-      description: Imput getter by less view count (temporary)
+      description: Imput getter by less view count
       tags:
       - imput
       security:
@@ -798,7 +798,7 @@ paths:
   /api/v1/video/ads/:
     get:
       operationId: video_ads_retrieve
-      description: Video getter by less view count (temporary)
+      description: Video getter by less view count
       tags:
       - video
       security:
@@ -864,6 +864,10 @@ components:
           type: integer
           maximum: 2147483647
           minimum: 60
+        provinces:
+          type: array
+          items:
+            type: integer
       required:
       - description
       - devices
@@ -871,6 +875,7 @@ components:
       - id
       - image
       - link
+      - provinces
       - text
       - view_count
     Device:
@@ -931,12 +936,17 @@ components:
         uuid:
           type: string
           format: uuid
+        provinces:
+          type: array
+          items:
+            type: integer
       required:
       - devices
       - duration
       - id
       - image
       - link
+      - provinces
       - view_count
     PatchedBanner:
       type: object
@@ -988,6 +998,10 @@ components:
           type: integer
           maximum: 2147483647
           minimum: 60
+        provinces:
+          type: array
+          items:
+            type: integer
     PatchedDevice:
       type: object
       properties:
@@ -1042,6 +1056,10 @@ components:
         uuid:
           type: string
           format: uuid
+        provinces:
+          type: array
+          items:
+            type: integer
     PatchedVideo:
       type: object
       properties:
@@ -1097,6 +1115,10 @@ components:
           maximum: 15
           minimum: 3
           nullable: true
+        provinces:
+          type: array
+          items:
+            type: integer
     PlatformsEnum:
       enum:
       - app
@@ -1172,6 +1194,10 @@ components:
           maximum: 15
           minimum: 3
           nullable: true
+        provinces:
+          type: array
+          items:
+            type: integer
       required:
       - description
       - devices
@@ -1179,6 +1205,7 @@ components:
       - id
       - image
       - link
+      - provinces
       - text
       - video
       - view_count
