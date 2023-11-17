@@ -93,12 +93,13 @@ TEMPLATES = [
 ASGI_APPLICATION = 'gozle_ads.asgi.application'
 
 
+# Channel Layers for Websocket
+
 CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels_redis.core.RedisChannelLayer",
         "CONFIG": {
             "hosts": [("localhost", 6379)],
-            'prefix': 'gozle_ads:',
         },
     },
 }
@@ -148,19 +149,6 @@ SPECTACULAR_SETTINGS = {
 }
 
 BROKER_URL = os.getenv("BROKER_URL", "redis://127.0.0.1:6379/1")
-
-# REDIS CACHE
-CACHES = {
-    "default": {
-        "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": BROKER_URL,
-        "OPTIONS": {
-            "CLIENT_CLASS": "django_redis.client.DefaultClient",
-            "KEY_PREFIX": "gozle_ads:"
-        },
-    }
-}
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
