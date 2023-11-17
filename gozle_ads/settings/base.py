@@ -23,7 +23,7 @@ PROJECT_VERSION = '0.4.1'
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get("SECRET_KEY", "secret_key")
+SECRET_KEY = os.getenv("SECRET_KEY", "secret_key")
 
 
 # Application definition
@@ -155,6 +155,7 @@ CACHES = {
         "LOCATION": BROKER_URL,
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
+            "KEY_PREFIX": "gozle_ads:"
         },
     }
 }
@@ -206,3 +207,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Max size of uploaded file
 DATA_UPLOAD_MAX_MEMORY_SIZE = 5242880  # 5 MB
+
+# Session to cache
+SESSION_ENGINE = "django.contrib.sessions.backends.cache"
+SESSION_CACHE_ALIAS = "default"
