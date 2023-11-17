@@ -18,10 +18,10 @@ app.autodiscover_tasks()
 app.conf.timezone = TIME_ZONE
 
 app.conf.beat_schedule = {
-    # Every 3 minutes
+    # Every 5 minutes
     "banner_changer_socket": {
         "task": "ads.tasks.banner_socket",
-        "schedule": crontab(minute="*/3"),
+        "schedule": crontab(minute="*/5"),
     },
     # Every hour
     "banner_ranker": {
