@@ -20,11 +20,12 @@ class BannerViewsTestCase(test.APITestCase):
         banner_1 = create_banner()
         banner_2 = create_banner()
         response = self.client.get(self.url)
+        response_data = dict(response.data)['results']
         serializer_data = BannerSerializer(
             [banner_1, banner_2], many=True).data
 
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.data, serializer_data)
+        self.assertEqual(response_data, serializer_data)
 
     def test_banner_wrong_from_age(self):
         self.data["age_from"] = 18
@@ -60,11 +61,12 @@ class ImputViewsTestCase(test.APITestCase):
         imput_1 = create_imput()
         imput_2 = create_imput()
         response = self.client.get(self.url)
+        response_data = dict(response.data)['results']
         serializer_data = ImputSerializer(
             [imput_1, imput_2], many=True).data
 
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.data, serializer_data)
+        self.assertEqual(response_data, serializer_data)
 
     def test_imput_wrong_from_age(self):
         self.data["age_from"] = 18
