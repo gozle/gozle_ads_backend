@@ -5,3 +5,4 @@ media/
 scripts/
 dump.rdb
 venv/
+.env
