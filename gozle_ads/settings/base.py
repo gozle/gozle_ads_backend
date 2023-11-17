@@ -23,7 +23,7 @@ PROJECT_VERSION = '0.4.1'
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get("SECRET_KEY", "secret_key")
+SECRET_KEY = os.getenv("SECRET_KEY", "secret_key")
 
 
 # Application definition
@@ -93,6 +93,8 @@ TEMPLATES = [
 ASGI_APPLICATION = 'gozle_ads.asgi.application'
 
 
+# Channel Layers for Websocket
+
 CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels_redis.core.RedisChannelLayer",
@@ -148,18 +150,6 @@ SPECTACULAR_SETTINGS = {
 
 BROKER_URL = os.getenv("BROKER_URL", "redis://127.0.0.1:6379/1")
 
-# REDIS CACHE
-CACHES = {
-    "default": {
-        "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": BROKER_URL,
-        "OPTIONS": {
-            "CLIENT_CLASS": "django_redis.client.DefaultClient",
-        },
-    }
-}
-
-
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
@@ -206,3 +196,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Max size of uploaded file
 DATA_UPLOAD_MAX_MEMORY_SIZE = 5242880  # 5 MB
+
+# Session to cache
+SESSION_ENGINE = "django.contrib.sessions.backends.cache"
+SESSION_CACHE_ALIAS = "default"

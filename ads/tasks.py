@@ -28,7 +28,8 @@ def hide_video(uuid):
 @shared_task
 def banner_socket():
     channel_layer = get_channel_layer()
-    data = ads_data(Banner, BannerSerializer)
+    qs_count = Banner.objects.count()
+    data = ads_data(Banner.objects, qs_count, BannerSerializer)
     if data:
         async_to_sync(channel_layer.group_send)(
             "banner_changer_group",

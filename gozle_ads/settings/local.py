@@ -7,6 +7,19 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
+# REDIS CACHE
+
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": BROKER_URL,
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+            "KEY_PREFIX": "gozle_ads:"
+        },
+    }
+}
+
 
 CORS_ORIGIN_ALLOW_ALL = True
 
