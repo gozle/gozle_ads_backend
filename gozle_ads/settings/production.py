@@ -3,7 +3,7 @@ import os
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["ads.gozle.com.tm"]
+ALLOWED_HOSTS = ["ads-api.gozle.com.tm"]
 
 
 
