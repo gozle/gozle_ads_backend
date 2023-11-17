@@ -3,8 +3,9 @@ import os
 from .base import *
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
+CSRF_TRUSTED_ORIGINS = ["https://ads-api.gozle.com.tm"]
 ALLOWED_HOSTS = ["ads-api.gozle.com.tm"]
 
 
@@ -33,7 +34,7 @@ CELERY_BROKER_URL = f"redis://{REDIS_USERNAME}:{REDIS_PASSWORD}@{REDIS_HOST}:{RE
 
 
 # Security
-SECURE_SSL_REDIRECT = True
+SECURE_SSL_REDIRECT = False
 SESSION_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
 SECURE_BROWSER_XSS_FILTER = True
