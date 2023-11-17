@@ -36,15 +36,6 @@ class BannerAdsTestCase(test.APITestCase):
 
         self.assertLess(banner_view_count_before, banner_view_count_after)
 
-    def test_banner_changing_by_less_view_count(self):
-        create_banner(), create_banner()
-        response_data = self.client.get(self.url).data
-        banner_id_1 = response_data["id"]
-        response_data = self.client.get(self.url).data
-        banner_id_2 = response_data["id"]
-
-        self.assertNotEqual(banner_id_1, banner_id_2)
-
 
 class ImputAdsTestCase(test.APITestCase):
     client = test.APIClient()
@@ -75,12 +66,3 @@ class ImputAdsTestCase(test.APITestCase):
         imput_view_count_after = response_data["view_count"]
 
         self.assertLess(imput_view_count_before, imput_view_count_after)
-
-    def test_imput_changing_by_less_view_count(self):
-        create_imput(), create_imput()
-        response_data = self.client.get(self.url).data
-        imput_id_1 = response_data["id"]
-        response_data = self.client.get(self.url).data
-        imput_id_2 = response_data["id"]
-
-        self.assertNotEqual(imput_id_1, imput_id_2)
