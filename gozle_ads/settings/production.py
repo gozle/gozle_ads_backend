@@ -6,8 +6,7 @@ from .base import *
 DEBUG = True
 
 CSRF_TRUSTED_ORIGINS = ["https://ads-api.gozle.com.tm"]
-ALLOWED_HOSTS = ["ads-api.gozle.com.tm"]
-
+ALLOWED_HOSTS = ["ads-api.gozle.com.tm", "127.0.0.1", "172.16.1.224"]
 
 # Cache
 
@@ -20,11 +19,12 @@ REDIS_KEY_PREFIX = os.getenv("REDIS_KEY_PREFIX")
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": f"redis://{REDIS_USERNAME}:{REDIS_PASSWORD}@{REDIS_HOST}:{REDIS_PORT}/",
-        "OPTIONS": {
-            "CLIENT_CLASS": "django_redis.client.DefaultClient",
-            "KEY_PREFIX": f"{REDIS_KEY_PREFIX}"
-        },
+        "LOCATION": f"redis://{REDIS_HOST}:{REDIS_PORT}/",
+#        "LOCATION": f"redis://{REDIS_USERNAME}:{REDIS_PASSWORD}@{REDIS_HOST}:{REDIS_PORT}/",
+#        "OPTIONS": {
+#            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+#            "KEY_PREFIX": f"{REDIS_KEY_PREFIX}"
+#        },
     }
 }
 
