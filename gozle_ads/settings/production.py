@@ -6,7 +6,6 @@ DEBUG = False
 ALLOWED_HOSTS = ["ads-api.gozle.com.tm"]
 
 
-
 # Cache
 
 REDIS_USERNAME = os.getenv("REDIS_USERNAME")
@@ -26,13 +25,12 @@ CACHES = {
     }
 }
 
-# Celery
 
+# Celery
 CELERY_BROKER_URL = f"redis://{REDIS_USERNAME}:{REDIS_PASSWORD}@{REDIS_HOST}:{REDIS_PORT}/"
 
 
 # Security
-
 SECURE_SSL_REDIRECT = True
 SESSION_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
