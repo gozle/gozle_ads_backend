@@ -10,6 +10,8 @@ def ads_data(queryset: QuerySet, qs_count: int, serializer_class):
         queryset = random.choice(qs_list)
     elif qs_count < 5 and qs_count != 1:
         queryset = queryset.order_by("?").first()
+    else:
+        queryset = queryset.first()
 
     serializer = serializer_class(queryset)
     queryset.view_count_increase()
