@@ -17,7 +17,7 @@ class DeviceViewSet(ModelViewSet):
     serializer_class = DeviceSerializer
 
 
-class BannerViewSet(TaskCreatorMixin, ModelViewSet):
+class BannerViewSet(ModelViewSet):
     queryset = (Banner.objects.all()
                 .prefetch_related("devices")
                 .prefetch_related("provinces"))
@@ -45,7 +45,7 @@ class BannerAdsAPIView(APIView):
         return Response({"message": "There is no banner ads"}, status=204)
 
 
-class ImputViewSet(TaskCreatorMixin, ModelViewSet):
+class ImputViewSet(ModelViewSet):
     queryset = (Imput.objects.all()
                 .prefetch_related("devices")
                 .prefetch_related("provinces"))
@@ -72,7 +72,7 @@ class ImputAdsAPIView(APIView):
         return Response({"message": "There is no imput ads"}, status=204)
 
 
-class VideoViewSet(TaskCreatorMixin, ModelViewSet):
+class VideoViewSet(ModelViewSet):
     queryset = (Video.objects.all()
                 .prefetch_related("devices")
                 .prefetch_related("provinces"))

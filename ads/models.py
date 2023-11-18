@@ -10,6 +10,7 @@ from multiselectfield import MultiSelectField
 from .fields import WEBPField
 from .ranker import Ranker
 
+from helpers.mixins import TaskCreatorMixin
 from locations.models import Province
 
 
@@ -59,7 +60,7 @@ class AdvertisementQueryset(models.QuerySet):
         )
 
 
-class AdvertisementModelMixin(models.Model):
+class AdvertisementModelMixin(TaskCreatorMixin, models.Model):
     class Statuses(models.TextChoices):
         ACTIVE = "active", _("Active")
         HIDDEN = "hidden", _("Hidden")
@@ -86,7 +87,6 @@ class AdvertisementModelMixin(models.Model):
     )
     devices = models.ManyToManyField(
         Device,
-        verbose_name="advertisement"
     )
     duration = models.PositiveIntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
@@ -98,7 +98,7 @@ class AdvertisementModelMixin(models.Model):
         choices=Statuses.choices,
         default=Statuses.ACTIVE
     )
-    uuid = models.UUIDField(default=uuid4)
+    uuid = models.UUIDField(default=uuid4, unique=True)
     score = models.IntegerField(default=0)
     provinces = models.ManyToManyField(Province)
 
@@ -193,7 +193,7 @@ class Video(AdvertisementModelMixin):
         blank=True,
         validators=[
             MinValueValidator(3),
-            MaxValueValidator(15)
+            MaxValueValidator(20)
         ]
     )
 
