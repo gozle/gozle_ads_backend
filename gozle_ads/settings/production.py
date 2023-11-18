@@ -2,7 +2,7 @@ import os
 from .base import *
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 CSRF_TRUSTED_ORIGINS = ["https://ads-api.gozle.com.tm", "http://172.16.1.224:7577"]
 ALLOWED_HOSTS = ["ads-api.gozle.com.tm", "127.0.0.1", "172.16.1.224"]
