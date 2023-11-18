@@ -21,8 +21,8 @@ from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 
 from gozle_ads import settings
 
-if settings.DEBUG is False:
-    admin.site.__class__ = OTPAdminSite
+#if settings.DEBUG is False:
+#    admin.site.__class__ = OTPAdminSite
 
 urlpatterns = [
     path('jet/', include('jet.urls', 'jet')),
