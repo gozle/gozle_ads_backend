@@ -86,7 +86,7 @@ class AdvertisementModelMixin(models.Model):
     )
     devices = models.ManyToManyField(
         Device,
-        verbose_name="advertisement"
+        related_name="advertisement"
     )
     duration = models.PositiveIntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
