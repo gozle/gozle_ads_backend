@@ -18,7 +18,6 @@ REDIS_KEY_PREFIX = os.getenv("REDIS_KEY_PREFIX")
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
-#        "LOCATION": f"redis://{REDIS_HOST}:{REDIS_PORT}/",
         "LOCATION": f"redis://{REDIS_USERNAME}:{REDIS_PASSWORD}@{REDIS_HOST}:{REDIS_PORT}/",
         "KEY_PREFIX": f"{REDIS_KEY_PREFIX}",
         'OPTIONS': {
@@ -34,7 +33,6 @@ CELERY_BROKER_URL = f"redis://127.0.0.1:6379/"
 
 # Security
 SECURE_SSL_REDIRECT = False
-SESSION_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
 SECURE_BROWSER_XSS_FILTER = True
 SECURE_HSTS_SECONDS = 31536000
