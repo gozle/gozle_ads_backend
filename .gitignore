@@ -2,6 +2,7 @@
 db.sqlite3
 .DS_Store
 media/
+static/
 scripts/
 dump.rdb
 venv/

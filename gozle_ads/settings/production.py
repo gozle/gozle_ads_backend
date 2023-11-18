@@ -21,16 +21,17 @@ CACHES = {
         "BACKEND": "django_redis.cache.RedisCache",
         "LOCATION": f"redis://{REDIS_HOST}:{REDIS_PORT}/",
 #        "LOCATION": f"redis://{REDIS_USERNAME}:{REDIS_PASSWORD}@{REDIS_HOST}:{REDIS_PORT}/",
-#        "OPTIONS": {
-#            "CLIENT_CLASS": "django_redis.client.DefaultClient",
-#            "KEY_PREFIX": f"{REDIS_KEY_PREFIX}"
-#        },
+#        "KEY_PREFIX": f"{REDIS_KEY_PREFIX}",
+#        'OPTIONS': {
+#            'REDIS_CLIENT_CLASS': 'rediscluster.RedisCluster',
+#            'CONNECTION_POOL_CLASS': 'rediscluster.connection.ClusterConnectionPool',
+#        }
     }
 }
 
 
 # Celery
-CELERY_BROKER_URL = f"redis://{REDIS_USERNAME}:{REDIS_PASSWORD}@{REDIS_HOST}:{REDIS_PORT}/"
+CELERY_BROKER_URL = f"redis://127.0.0.1:6379/"
 
 
 # Security
