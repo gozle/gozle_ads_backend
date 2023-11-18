@@ -8,7 +8,6 @@ CSRF_TRUSTED_ORIGINS = ["https://ads-api.gozle.com.tm", "http://172.16.1.224:757
 ALLOWED_HOSTS = ["ads-api.gozle.com.tm", "127.0.0.1", "172.16.1.224"]
 
 # Cache
-
 REDIS_USERNAME = os.getenv("REDIS_USERNAME")
 REDIS_PASSWORD = os.getenv("REDIS_PASSWORD")
 REDIS_HOST = os.getenv("REDIS_HOST")
