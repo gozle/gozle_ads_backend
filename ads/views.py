@@ -2,7 +2,6 @@ from rest_framework.decorators import APIView
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
-from helpers.mixins import TaskCreatorMixin
 from helpers.utils import ads_data
 
 from .filters import BannerFilterSet, ImputFilterSet, VideoFilterSet
