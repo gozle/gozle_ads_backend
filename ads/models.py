@@ -1,5 +1,8 @@
+import os
 from uuid import uuid4
 
+from django.core.files.uploadedfile import TemporaryUploadedFile
+from django.core.files.storage import default_storage
 from django.core.validators import (FileExtensionValidator, MaxValueValidator,
                                     MinValueValidator)
 from django.db import models
@@ -10,7 +13,9 @@ from multiselectfield import MultiSelectField
 from .fields import WEBPField
 from .ranker import Ranker
 
+from helpers.converters import convert_to_m3u8
 from helpers.mixins import TaskCreatorMixin
+from helpers.utils import move_ts_file
 from locations.models import Province
 
 
@@ -19,7 +24,7 @@ def banner_folder(instance, filename):
 
 
 def video_folder(instance, filename):
-    return 'video/{}.webp'.format(uuid4().hex)
+    return 'video/images/{}.webp'.format(uuid4().hex)
 
 
 def imput_folder(instance, filename):
@@ -177,14 +182,15 @@ class Video(AdvertisementModelMixin):
         upload_to=video_folder,
     )
     video = models.FileField(
-        upload_to='video/',
+        upload_to='video/videos/',
         validators=[FileExtensionValidator(
             allowed_extensions=[
                 'MOV',
                 'avi',
                 'mp4',
                 'webm',
-                'mkv'
+                'mkv',
+                'm'
             ])
         ]
     )
@@ -196,6 +202,40 @@ class Video(AdvertisementModelMixin):
             MaxValueValidator(20)
         ]
     )
+
+    def save(self, *args, **kwargs) -> None:
+        _id = self.id
+        super().save(*args, **kwargs)
+
+        if not _id:
+            video_path, output_path = convert_to_m3u8(self.video)
+
+            with open(output_path, 'rb') as source_file:
+                data = source_file.read()
+
+            # Create a temporary file and write data to it
+            temp_file = TemporaryUploadedFile(
+                name=output_path,
+                size=os.path.getsize(output_path),
+                content_type="video/x-mpegURL",
+                charset="utf-8"
+            )
+            temp_file.write(data)
+            temp_file.seek(0)  # Set the pointer to the beginning of the file
+
+            # Saves new converted file
+            self.video = temp_file
+            self.save()
+
+            # Closes temporary file
+            temp_file.close()
+
+            # Moves ts file with m3u8 file
+            move_ts_file(self.video.name)
+
+            # Deletes a temporary file
+            default_storage.delete(video_path)
+            default_storage.delete(output_path)
 
     def __str__(self):
         return f"{self.id}. {self.text}"
