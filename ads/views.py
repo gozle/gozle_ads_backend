@@ -21,6 +21,7 @@ class BannerViewSet(ModelViewSet):
                 .prefetch_related("devices")
                 .prefetch_related("provinces"))
     serializer_class = BannerSerializer
+    filterset_class = BannerFilterSet
     pagination_class = AdsPagination
     ads_type = "banner"
 
@@ -49,6 +50,7 @@ class ImputViewSet(ModelViewSet):
                 .prefetch_related("devices")
                 .prefetch_related("provinces"))
     serializer_class = ImputSerializer
+    filterset_class = ImputFilterSet
     pagination_class = AdsPagination
     ads_type = "imput"
 
@@ -76,6 +78,7 @@ class VideoViewSet(ModelViewSet):
                 .prefetch_related("devices")
                 .prefetch_related("provinces"))
     serializer_class = VideoSerializer
+    filterset_class = VideoFilterSet
     pagination_class = AdsPagination
     ads_type = "video"
 
