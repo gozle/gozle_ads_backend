@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: Gozle ADS
-  version: 1.0.0
+  version: 1.0.1
   description: Gozle ADS API
 paths:
   /api/v1/banner/:
@@ -888,8 +888,6 @@ components:
           type: array
           items:
             type: integer
-            title: Advertisement
-          title: Advertisement
         uuid:
           type: string
           format: uuid
@@ -964,8 +962,6 @@ components:
           type: array
           items:
             type: integer
-            title: Advertisement
-          title: Advertisement
         uuid:
           type: string
           format: uuid
@@ -1082,8 +1078,6 @@ components:
           type: array
           items:
             type: integer
-            title: Advertisement
-          title: Advertisement
         uuid:
           type: string
           format: uuid
@@ -1144,8 +1138,6 @@ components:
           type: array
           items:
             type: integer
-            title: Advertisement
-          title: Advertisement
         uuid:
           type: string
           format: uuid
@@ -1198,14 +1190,12 @@ components:
           type: array
           items:
             type: integer
-            title: Advertisement
-          title: Advertisement
         uuid:
           type: string
           format: uuid
         skip_duration:
           type: integer
-          maximum: 15
+          maximum: 20
           minimum: 3
           nullable: true
         provinces:
@@ -1277,14 +1267,12 @@ components:
           type: array
           items:
             type: integer
-            title: Advertisement
-          title: Advertisement
         uuid:
           type: string
           format: uuid
         skip_duration:
           type: integer
-          maximum: 15
+          maximum: 20
           minimum: 3
           nullable: true
         provinces:
