@@ -1,25 +1,55 @@
-import subprocess
+import os
 from uuid import uuid4
 
-from django.core.files.storage import default_storage
+from ffmpeg_streaming import input as get_video
+from ffmpeg_streaming import Formats, Bitrate, Representation, Size
+from django.db.models.fields.files import FieldFile
 from django.conf import settings
+from django.core.files.base import ContentFile
 
-def convert_to_m3u8(video_file):
-    # Video files save root
-    saved_video_file_root = f"{settings.MEDIA_ROOT}/temp-files"
 
-    # Changing video
-    video_path = f"{saved_video_file_root}/{video_file.name}"
+def convert_to_m3u8(video_file: FieldFile):
+    video = get_video(video_file.path)
+    output_name = uuid4().hex
+    output_path = f'{settings.MEDIA_ROOT}/video/videos/{output_name}/{output_name}.m3u8'
 
-    default_storage.save(video_path, video_file)
+    _240p = Representation(
+        Size(426, 240),
+        Bitrate(150 * 1024, 94 * 1024)
+    )
+    _360p = Representation(
+        Size(640, 360),
+        Bitrate(276 * 1024, 128 * 1024)
+    )
+    _480p = Representation(
+        Size(854, 480),
+        Bitrate(750 * 1024, 192 * 1024)
+    )
+    _720p = Representation(
+        Size(1280, 720),
+        Bitrate(2048 * 1024, 320 * 1024)
+    )
+    _1080p = Representation(
+        Size(1920, 1080),
+        Bitrate(4096 * 1024, 320 * 1024)
+    )
 
-    # Команда ffmpeg для конвертации в M3U8
-    output_path = f"{settings.MEDIA_ROOT}/{uuid4().hex}.m3u8"
-    print(output_path)
+    hls = video.hls(Formats.h264())
+    hls.representations(_240p, _360p, _480p, _720p, _1080p)
+    hls.output(output_path)
+    with open(output_path, 'rb') as file:
+        # Считываем содержимое файла
+        file_content = file.read()
 
-    command = f'ffmpeg -i {video_path} -hls_time 10 {output_path}'
+        # Создаем объект ContentFile из содержимого файла
+        content_file = ContentFile(file_content)
 
-    # Запускаем команду ffmpeg через subprocess
-    subprocess.run(command, shell=True)
+        os.remove(output_path)
+        os.remove(video_file.path)
 
-    return video_path, output_path
+        # Сохраняем содержимое файла в поле FileField вашей модели
+        video_file.save(
+            f'{output_name}/{output_name}.m3u8',
+            content_file, 
+            save=True
+        )
