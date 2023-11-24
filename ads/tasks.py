@@ -29,14 +29,15 @@ def hide_video(uuid):
 def banner_socket():
     channel_layer = get_channel_layer()
     qs_count = Banner.objects.count()
-    data = ads_data(Banner.objects, qs_count, BannerSerializer)
-    if data:
-        async_to_sync(channel_layer.group_send)(
-            "banner_changer_group",
-            {
-                "type": "banner_ads_socket",
-                "value": data
-            }
-        )
-        return "Banner succesfully sent to the websocket"
+    if qs_count != 0:
+        data = ads_data(Banner.objects.all(), qs_count, BannerSerializer)
+        if data:
+            async_to_sync(channel_layer.group_send)(
+                "banner_changer_group",
+                {
+                    "type": "banner_ads_socket",
+                    "value": data
+                }
+            )
+            return "Banner succesfully sent to the websocket"
     return "No banner found"
