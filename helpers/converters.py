@@ -38,16 +38,16 @@ def convert_to_m3u8(video_file: FieldFile):
     hls.representations(_240p, _360p, _480p, _720p, _1080p)
     hls.output(output_path)
     with open(output_path, 'rb') as file:
-        # Считываем содержимое файла
+        # Reads content of file
         file_content = file.read()
 
-        # Создаем объект ContentFile из содержимого файла
+        # Creating object of ContentFile from file's content
         content_file = ContentFile(file_content)
 
         os.remove(output_path)
         os.remove(video_file.path)
 
-        # Сохраняем содержимое файла в поле FileField вашей модели
+        # Save the contents of the file in the FileField of your model
         video_file.save(
             f'{output_name}/{output_name}.m3u8',
             content_file, 
