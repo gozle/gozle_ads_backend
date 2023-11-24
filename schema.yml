@@ -1,13 +1,21 @@
 openapi: 3.0.3
 info:
   title: Gozle ADS
-  version: 1.0.1
+  version: 1.0.2
   description: Gozle ADS API
 paths:
   /api/v1/banner/:
     get:
       operationId: banner_list
       parameters:
+      - in: query
+        name: devices
+        schema:
+          type: array
+          items:
+            type: integer
+        explode: true
+        style: form
       - name: page
         required: false
         in: query
@@ -20,6 +28,19 @@ paths:
         description: Number of results to return per page.
         schema:
           type: integer
+      - in: query
+        name: provinces
+        schema:
+          type: array
+          items:
+            type: integer
+        explode: true
+        style: form
+      - in: query
+        name: user_age
+        schema:
+          type: number
+        description: User age
       tags:
       - banner
       security:
@@ -172,6 +193,26 @@ paths:
     get:
       operationId: banner_ads_retrieve
       description: Banner getter by less view count
+      parameters:
+      - in: query
+        name: devices
+        schema:
+          type: array
+          items:
+            type: integer
+        description: Device ID
+      - in: query
+        name: provinces
+        schema:
+          type: array
+          items:
+            type: integer
+        description: Province ID
+      - in: query
+        name: user_age
+        schema:
+          type: integer
+        description: User age
       tags:
       - banner
       security:
@@ -179,11 +220,11 @@ paths:
       - basicAuth: []
       - {}
       responses:
-        '200':
+        '204':
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Banner'
+                description: There is no banner ads
           description: ''
   /api/v1/devices/:
     get:
@@ -342,6 +383,14 @@ paths:
     get:
       operationId: imput_list
       parameters:
+      - in: query
+        name: devices
+        schema:
+          type: array
+          items:
+            type: integer
+        explode: true
+        style: form
       - name: page
         required: false
         in: query
@@ -354,6 +403,19 @@ paths:
         description: Number of results to return per page.
         schema:
           type: integer
+      - in: query
+        name: provinces
+        schema:
+          type: array
+          items:
+            type: integer
+        explode: true
+        style: form
+      - in: query
+        name: user_age
+        schema:
+          type: number
+        description: User age
       tags:
       - imput
       security:
@@ -506,6 +568,26 @@ paths:
     get:
       operationId: imput_ads_retrieve
       description: Imput getter by less view count
+      parameters:
+      - in: query
+        name: devices
+        schema:
+          type: array
+          items:
+            type: integer
+        description: Device ID
+      - in: query
+        name: provinces
+        schema:
+          type: array
+          items:
+            type: integer
+        description: Province ID
+      - in: query
+        name: user_age
+        schema:
+          type: integer
+        description: User age
       tags:
       - imput
       security:
@@ -513,11 +595,11 @@ paths:
       - basicAuth: []
       - {}
       responses:
-        '200':
+        '204':
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Imput'
+                description: There is no imput ads
           description: ''
   /api/v1/schema/:
     get:
@@ -668,6 +750,14 @@ paths:
     get:
       operationId: video_list
       parameters:
+      - in: query
+        name: devices
+        schema:
+          type: array
+          items:
+            type: integer
+        explode: true
+        style: form
       - name: page
         required: false
         in: query
@@ -680,6 +770,19 @@ paths:
         description: Number of results to return per page.
         schema:
           type: integer
+      - in: query
+        name: provinces
+        schema:
+          type: array
+          items:
+            type: integer
+        explode: true
+        style: form
+      - in: query
+        name: user_age
+        schema:
+          type: number
+        description: User age
       tags:
       - video
       security:
@@ -832,6 +935,26 @@ paths:
     get:
       operationId: video_ads_retrieve
       description: Video getter by less view count
+      parameters:
+      - in: query
+        name: devices
+        schema:
+          type: array
+          items:
+            type: integer
+        description: Device ID
+      - in: query
+        name: provinces
+        schema:
+          type: array
+          items:
+            type: integer
+        description: Province ID
+      - in: query
+        name: user_age
+        schema:
+          type: integer
+        description: User age
       tags:
       - video
       security:
@@ -839,11 +962,11 @@ paths:
       - basicAuth: []
       - {}
       responses:
-        '200':
+        '204':
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Video'
+                description: There is no video ads
           description: ''
 components:
   schemas:

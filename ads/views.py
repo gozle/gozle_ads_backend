@@ -1,3 +1,4 @@
+from drf_spectacular.utils import OpenApiParameter, extend_schema
 from rest_framework.decorators import APIView
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
@@ -35,6 +36,34 @@ class BannerAdsAPIView(APIView):
     def get_serializer(self, *args, **kwargs):
         return BannerSerializer(*args, **kwargs)
 
+    # Decorator of DRF Spectacular
+    @extend_schema(
+        parameters=[
+            OpenApiParameter(
+                name='user_age',
+                type=int,
+                location=OpenApiParameter.QUERY,
+                description='User age'
+            ),
+
+            OpenApiParameter(
+                name='devices',
+                type={'type': 'array', 'items': {'type': 'integer'}},
+                location=OpenApiParameter.QUERY,
+                description='Device ID'
+            ),
+
+            OpenApiParameter(
+                name='provinces',
+                type={'type': 'array', 'items': {'type': 'integer'}},
+                location=OpenApiParameter.QUERY,
+                description='Province ID'
+            ),
+        ],
+        responses={
+            204: {'description': 'There is no banner ads'}
+        }
+    )
     def get(self, request):
         qs = BannerFilterSet(request.GET, self.queryset).qs
         qs_count = qs.count()
@@ -64,6 +93,34 @@ class ImputAdsAPIView(APIView):
     def get_serializer(self, *args, **kwargs):
         return ImputSerializer(*args, **kwargs)
 
+    # Decorator of DRF Spectacular
+    @extend_schema(
+        parameters=[
+            OpenApiParameter(
+                name='user_age',
+                type=int,
+                location=OpenApiParameter.QUERY,
+                description='User age'
+            ),
+
+            OpenApiParameter(
+                name='devices',
+                type={'type': 'array', 'items': {'type': 'integer'}},
+                location=OpenApiParameter.QUERY,
+                description='Device ID'
+            ),
+
+            OpenApiParameter(
+                name='provinces',
+                type={'type': 'array', 'items': {'type': 'integer'}},
+                location=OpenApiParameter.QUERY,
+                description='Province ID'
+            ),
+        ],
+        responses={
+            204: {'description': 'There is no imput ads'}
+        }
+    )
     def get(self, request):
         qs = ImputFilterSet(request.GET, self.queryset).qs
         qs_count = qs.count()
@@ -92,6 +149,34 @@ class VideoAdsAPIView(APIView):
     def get_serializer(self, *args, **kwargs):
         return VideoSerializer(*args, **kwargs)
 
+    # Decorator of DRF Spectacular
+    @extend_schema(
+        parameters=[
+            OpenApiParameter(
+                name='user_age',
+                type=int,
+                location=OpenApiParameter.QUERY,
+                description='User age'
+            ),
+
+            OpenApiParameter(
+                name='devices',
+                type={'type': 'array', 'items': {'type': 'integer'}},
+                location=OpenApiParameter.QUERY,
+                description='Device ID'
+            ),
+
+            OpenApiParameter(
+                name='provinces',
+                type={'type': 'array', 'items': {'type': 'integer'}},
+                location=OpenApiParameter.QUERY,
+                description='Province ID'
+            ),
+        ],
+        responses={
+            204: {'description': 'There is no video ads'}
+        }
+    )
     def get(self, request):
         qs = VideoFilterSet(request.GET, self.queryset).qs
         qs_count = qs.count()
