@@ -60,9 +60,6 @@ class BannerAdsAPIView(APIView):
                 description='Province ID'
             ),
         ],
-        responses={
-            204: {'description': 'There is no banner ads'}
-        }
     )
     def get(self, request):
         qs = BannerFilterSet(request.GET, self.queryset).qs
@@ -117,9 +114,6 @@ class ImputAdsAPIView(APIView):
                 description='Province ID'
             ),
         ],
-        responses={
-            204: {'description': 'There is no imput ads'}
-        }
     )
     def get(self, request):
         qs = ImputFilterSet(request.GET, self.queryset).qs
@@ -173,9 +167,6 @@ class VideoAdsAPIView(APIView):
                 description='Province ID'
             ),
         ],
-        responses={
-            204: {'description': 'There is no video ads'}
-        }
     )
     def get(self, request):
         qs = VideoFilterSet(request.GET, self.queryset).qs

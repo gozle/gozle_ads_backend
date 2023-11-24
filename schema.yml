@@ -220,11 +220,11 @@ paths:
       - basicAuth: []
       - {}
       responses:
-        '204':
+        '200':
           content:
             application/json:
               schema:
-                description: There is no banner ads
+                $ref: '#/components/schemas/Banner'
           description: ''
   /api/v1/devices/:
     get:
@@ -595,11 +595,11 @@ paths:
       - basicAuth: []
       - {}
       responses:
-        '204':
+        '200':
           content:
             application/json:
               schema:
-                description: There is no imput ads
+                $ref: '#/components/schemas/Imput'
           description: ''
   /api/v1/schema/:
     get:
@@ -962,11 +962,11 @@ paths:
       - basicAuth: []
       - {}
       responses:
-        '204':
+        '200':
           content:
             application/json:
               schema:
-                description: There is no video ads
+                $ref: '#/components/schemas/Video'
           description: ''
 components:
   schemas:
