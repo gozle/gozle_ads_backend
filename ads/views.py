@@ -20,7 +20,8 @@ class DeviceViewSet(ModelViewSet):
 class BannerViewSet(ModelViewSet):
     queryset = (Banner.objects.all()
                 .prefetch_related("devices")
-                .prefetch_related("provinces"))
+                .prefetch_related("provinces")
+                .prefetch_related("cities"))
     serializer_class = BannerSerializer
     filterset_class = BannerFilterSet
     pagination_class = AdsPagination
@@ -31,7 +32,8 @@ class BannerAdsAPIView(APIView):
     """Banner getter by less view count"""
     queryset = (Banner.objects.active_advertisements()
                 .prefetch_related("devices")
-                .prefetch_related("provinces"))
+                .prefetch_related("provinces")
+                .prefetch_related("cities"))
 
     def get_serializer(self, *args, **kwargs):
         return BannerSerializer(*args, **kwargs)
@@ -74,7 +76,8 @@ class BannerAdsAPIView(APIView):
 class ImputViewSet(ModelViewSet):
     queryset = (Imput.objects.all()
                 .prefetch_related("devices")
-                .prefetch_related("provinces"))
+                .prefetch_related("provinces")
+                .prefetch_related("cities"))
     serializer_class = ImputSerializer
     filterset_class = ImputFilterSet
     pagination_class = AdsPagination
@@ -85,7 +88,8 @@ class ImputAdsAPIView(APIView):
     """Imput getter by less view count"""
     queryset = (Imput.objects.active_advertisements()
                 .prefetch_related("devices")
-                .prefetch_related("provinces"))
+                .prefetch_related("provinces")
+                .prefetch_related("cities"))
 
     def get_serializer(self, *args, **kwargs):
         return ImputSerializer(*args, **kwargs)
@@ -127,7 +131,8 @@ class ImputAdsAPIView(APIView):
 class VideoViewSet(ModelViewSet):
     queryset = (Video.objects.all()
                 .prefetch_related("devices")
-                .prefetch_related("provinces"))
+                .prefetch_related("provinces")
+                .prefetch_related("cities"))
     serializer_class = VideoSerializer
     filterset_class = VideoFilterSet
     pagination_class = AdsPagination
@@ -138,7 +143,8 @@ class VideoAdsAPIView(APIView):
     """Video getter by less view count"""
     queryset = (Video.objects.active_advertisements()
                 .prefetch_related("devices")
-                .prefetch_related("provinces"))
+                .prefetch_related("provinces")
+                .prefetch_related("cities"))
 
     def get_serializer(self, *args, **kwargs):
         return VideoSerializer(*args, **kwargs)

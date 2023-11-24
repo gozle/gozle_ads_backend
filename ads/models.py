@@ -14,7 +14,7 @@ from .ranker import Ranker
 from helpers.converters import convert_to_m3u8
 from helpers.mixins import TaskCreatorMixin
 from helpers.utils import move_ts_file
-from locations.models import Province
+from locations.models import City, Province
 
 
 def banner_folder(instance, filename):
@@ -104,6 +104,7 @@ class AdvertisementModelMixin(TaskCreatorMixin, models.Model):
     uuid = models.UUIDField(default=uuid4, unique=True)
     score = models.IntegerField(default=0)
     provinces = models.ManyToManyField(Province)
+    cities = models.ManyToManyField(City)
 
     @property
     def is_active(self):
@@ -188,6 +189,7 @@ class Video(AdvertisementModelMixin):
                 'mp4',
                 'webm',
                 'mkv',
+                'm3u8'
             ])
         ]
     )

@@ -18,3 +18,10 @@ class City(models.Model):
         on_delete=models.CASCADE,
         related_name="cities"
     )
+
+    def __str__(self):
+        return f"{self.code_name} | {self.name}"
+    
+
+    class Meta:
+        verbose_name_plural = "cities"

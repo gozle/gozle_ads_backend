@@ -2,11 +2,16 @@ from django.db.models import Q
 from django_filters import FilterSet, NumberFilter, ModelMultipleChoiceFilter
 
 from ads.models import Device
-from locations.models import Province
+from locations.models import City, Province
 
 
 class AdvertisementFilterSetMixin(FilterSet):
     user_age = NumberFilter(label="User age", field_name='user_age', method='filter_user_age')
+    cities = ModelMultipleChoiceFilter(
+        field_name='cities',
+        to_field_name='id',
+        queryset=City.objects.all(),
+    )
     provinces = ModelMultipleChoiceFilter(
         field_name='provinces',
         to_field_name='id',

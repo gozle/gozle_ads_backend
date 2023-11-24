@@ -43,6 +43,7 @@ class BannerSerializer(AdvertisementCommonFieldsSerializer):
             "min_age",
             "max_age",
             "provinces",
+            "cities"
         ]
 
 
@@ -62,6 +63,7 @@ class ImputSerializer(AdvertisementCommonFieldsSerializer):
             "devices",
             "uuid",
             "provinces",
+            "cities"
         ]
 
 
@@ -85,4 +87,5 @@ class VideoSerializer(AdvertisementCommonFieldsSerializer):
             "uuid",
             "skip_duration",
             "provinces",
+            "cities"
         ]
