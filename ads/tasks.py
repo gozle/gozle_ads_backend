@@ -8,35 +8,46 @@ from helpers.utils import ads_data
 
 
 @shared_task
-def hide_banner(uuid):
+def set_status_banner(uuid, status):
     queryset = Banner.objects.get(uuid=uuid)
-    queryset.set_as_hidden()
+    if status.lower() == "active":
+        queryset.set_as_active()
+    else:
+        queryset.set_as_hidden()
 
 
 @shared_task
-def hide_imput(uuid):
+def set_status_imput(uuid, status):
     queryset = Imput.objects.get(uuid=uuid)
-    queryset.set_as_hidden()
+    if status.lower() == "active":
+        queryset.set_as_active()
+    else:
+        queryset.set_as_hidden()
+    print("TASK CREATED")
 
 
 @shared_task
-def hide_video(uuid):
+def set_status_video(uuid, status: str):
     queryset = Video.objects.get(uuid=uuid)
-    queryset.set_as_hidden()
+    if status.lower() == "active":
+        queryset.set_as_active()
+    else:
+        queryset.set_as_hidden()
 
 
 @shared_task
 def banner_socket():
     channel_layer = get_channel_layer()
     qs_count = Banner.objects.count()
-    data = ads_data(Banner.objects, qs_count, BannerSerializer)
-    if data:
-        async_to_sync(channel_layer.group_send)(
-            "banner_changer_group",
-            {
-                "type": "banner_ads_socket",
-                "value": data
-            }
-        )
-        return "Banner succesfully sent to the websocket"
+    if qs_count != 0:
+        data = ads_data(Banner.objects.all(), qs_count, BannerSerializer)
+        if data:
+            async_to_sync(channel_layer.group_send)(
+                "banner_changer_group",
+                {
+                    "type": "banner_ads_socket",
+                    "value": data
+                }
+            )
+            return "Banner succesfully sent to the websocket"
     return "No banner found"

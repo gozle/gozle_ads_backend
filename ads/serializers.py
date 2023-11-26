@@ -34,7 +34,6 @@ class BannerSerializer(AdvertisementCommonFieldsSerializer):
             "min_age",
             "max_age",
             "status",
-            "duration",
             "view_count",
             "image",
             "devices",
@@ -43,6 +42,9 @@ class BannerSerializer(AdvertisementCommonFieldsSerializer):
             "min_age",
             "max_age",
             "provinces",
+            "cities",
+            "starts_at",
+            "ends_at"
         ]
 
 
@@ -56,16 +58,20 @@ class ImputSerializer(AdvertisementCommonFieldsSerializer):
             "min_age",
             "max_age",
             "status",
-            "duration",
             "view_count",
             "image",
             "devices",
             "uuid",
             "provinces",
+            "cities",
+            "starts_at",
+            "ends_at"
         ]
 
 
 class VideoSerializer(AdvertisementCommonFieldsSerializer):
+    starts_at = serializers.DateTimeField(allow_null=False)
+    ends_at = serializers.DateTimeField(allow_null=False)
 
     class Meta:
         model = Video
@@ -78,11 +84,13 @@ class VideoSerializer(AdvertisementCommonFieldsSerializer):
             "min_age",
             "max_age",
             "status",
-            "duration",
             "view_count",
             "image",
             "devices",
             "uuid",
             "skip_duration",
             "provinces",
+            "cities",
+            "starts_at",
+            "ends_at"
         ]

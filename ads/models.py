@@ -10,8 +10,9 @@ from multiselectfield import MultiSelectField
 from .fields import WEBPField
 from .ranker import Ranker
 
+from helpers.converters import convert_to_m3u8
 from helpers.mixins import TaskCreatorMixin
-from locations.models import Province
+from locations.models import City, Province
 
 
 def banner_folder(instance, filename):
@@ -19,7 +20,7 @@ def banner_folder(instance, filename):
 
 
 def video_folder(instance, filename):
-    return 'video/{}.webp'.format(uuid4().hex)
+    return 'video/images/{}.webp'.format(uuid4().hex)
 
 
 def imput_folder(instance, filename):
@@ -88,19 +89,21 @@ class AdvertisementModelMixin(TaskCreatorMixin, models.Model):
     devices = models.ManyToManyField(
         Device,
     )
-    duration = models.PositiveIntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     published_at = models.DateTimeField(blank=True, null=True)
     deleted_at = models.DateTimeField(blank=True, null=True)
+    starts_at = models.DateTimeField()
+    ends_at = models.DateTimeField()
     status = models.CharField(
         max_length=30,
         choices=Statuses.choices,
-        default=Statuses.ACTIVE
+        default=Statuses.HIDDEN
     )
     uuid = models.UUIDField(default=uuid4, unique=True)
     score = models.IntegerField(default=0)
     provinces = models.ManyToManyField(Province)
+    cities = models.ManyToManyField(City)
 
     @property
     def is_active(self):
@@ -177,14 +180,15 @@ class Video(AdvertisementModelMixin):
         upload_to=video_folder,
     )
     video = models.FileField(
-        upload_to='video/',
+        upload_to='video/videos/',
         validators=[FileExtensionValidator(
             allowed_extensions=[
                 'MOV',
                 'avi',
                 'mp4',
                 'webm',
-                'mkv'
+                'mkv',
+                'm3u8'
             ])
         ]
     )
@@ -196,6 +200,12 @@ class Video(AdvertisementModelMixin):
             MaxValueValidator(20)
         ]
     )
+
+    def save(self, *args, **kwargs) -> None:
+        created_at = self.created_at
+        super().save(*args, **kwargs)
+        if not created_at:
+            convert_to_m3u8(self.video)
 
     def __str__(self):
         return f"{self.id}. {self.text}"

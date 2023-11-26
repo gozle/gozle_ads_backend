@@ -1,5 +1,10 @@
+from datetime import datetime
+from pytz import timezone
+
 from django.utils.translation import gettext as _
 from rest_framework import serializers
+
+from gozle_ads.settings import TIME_ZONE
 
 
 def age_validator(data):
@@ -18,3 +23,15 @@ def age_validator(data):
             raise serializers.ValidationError(
                 _("Ages mustn't be equal to each other."))
     return data
+
+
+def dates_are_valid(start_data: datetime, end_data: datetime):
+    current_time = datetime.now(timezone(TIME_ZONE))
+
+    if (start_data >= end_data
+            or end_data < current_time
+            or not start_data
+            or not end_data):
+        return False
+
+    return True

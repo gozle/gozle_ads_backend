@@ -16,7 +16,7 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
-PROJECT_VERSION = '1.0.0'
+PROJECT_VERSION = '1.1.0'
 
 
 # Quick-start development settings - unsuitable for production
@@ -155,7 +155,7 @@ BROKER_URL = os.getenv("BROKER_URL", "redis://127.0.0.1:6379/1")
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Ashgabat'
 
 USE_I18N = True
 
@@ -166,6 +166,7 @@ USE_TZ = True
 
 REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
 }
 
 

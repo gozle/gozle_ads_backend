@@ -1,13 +1,29 @@
 openapi: 3.0.3
 info:
   title: Gozle ADS
-  version: 1.0.0
+  version: 1.1.0
   description: Gozle ADS API
 paths:
   /api/v1/banner/:
     get:
       operationId: banner_list
       parameters:
+      - in: query
+        name: cities
+        schema:
+          type: array
+          items:
+            type: integer
+        explode: true
+        style: form
+      - in: query
+        name: devices
+        schema:
+          type: array
+          items:
+            type: integer
+        explode: true
+        style: form
       - name: page
         required: false
         in: query
@@ -20,6 +36,19 @@ paths:
         description: Number of results to return per page.
         schema:
           type: integer
+      - in: query
+        name: provinces
+        schema:
+          type: array
+          items:
+            type: integer
+        explode: true
+        style: form
+      - in: query
+        name: user_age
+        schema:
+          type: number
+        description: User age
       tags:
       - banner
       security:
@@ -172,6 +201,26 @@ paths:
     get:
       operationId: banner_ads_retrieve
       description: Banner getter by less view count
+      parameters:
+      - in: query
+        name: devices
+        schema:
+          type: array
+          items:
+            type: integer
+        description: Device ID
+      - in: query
+        name: provinces
+        schema:
+          type: array
+          items:
+            type: integer
+        description: Province ID
+      - in: query
+        name: user_age
+        schema:
+          type: integer
+        description: User age
       tags:
       - banner
       security:
@@ -342,6 +391,22 @@ paths:
     get:
       operationId: imput_list
       parameters:
+      - in: query
+        name: cities
+        schema:
+          type: array
+          items:
+            type: integer
+        explode: true
+        style: form
+      - in: query
+        name: devices
+        schema:
+          type: array
+          items:
+            type: integer
+        explode: true
+        style: form
       - name: page
         required: false
         in: query
@@ -354,6 +419,19 @@ paths:
         description: Number of results to return per page.
         schema:
           type: integer
+      - in: query
+        name: provinces
+        schema:
+          type: array
+          items:
+            type: integer
+        explode: true
+        style: form
+      - in: query
+        name: user_age
+        schema:
+          type: number
+        description: User age
       tags:
       - imput
       security:
@@ -506,6 +584,26 @@ paths:
     get:
       operationId: imput_ads_retrieve
       description: Imput getter by less view count
+      parameters:
+      - in: query
+        name: devices
+        schema:
+          type: array
+          items:
+            type: integer
+        description: Device ID
+      - in: query
+        name: provinces
+        schema:
+          type: array
+          items:
+            type: integer
+        description: Province ID
+      - in: query
+        name: user_age
+        schema:
+          type: integer
+        description: User age
       tags:
       - imput
       security:
@@ -668,6 +766,22 @@ paths:
     get:
       operationId: video_list
       parameters:
+      - in: query
+        name: cities
+        schema:
+          type: array
+          items:
+            type: integer
+        explode: true
+        style: form
+      - in: query
+        name: devices
+        schema:
+          type: array
+          items:
+            type: integer
+        explode: true
+        style: form
       - name: page
         required: false
         in: query
@@ -680,6 +794,19 @@ paths:
         description: Number of results to return per page.
         schema:
           type: integer
+      - in: query
+        name: provinces
+        schema:
+          type: array
+          items:
+            type: integer
+        explode: true
+        style: form
+      - in: query
+        name: user_age
+        schema:
+          type: number
+        description: User age
       tags:
       - video
       security:
@@ -832,6 +959,26 @@ paths:
     get:
       operationId: video_ads_retrieve
       description: Video getter by less view count
+      parameters:
+      - in: query
+        name: devices
+        schema:
+          type: array
+          items:
+            type: integer
+        description: Device ID
+      - in: query
+        name: provinces
+        schema:
+          type: array
+          items:
+            type: integer
+        description: Province ID
+      - in: query
+        name: user_age
+        schema:
+          type: integer
+        description: User age
       tags:
       - video
       security:
@@ -874,10 +1021,6 @@ components:
           nullable: true
         status:
           $ref: '#/components/schemas/StatusEnum'
-        duration:
-          type: integer
-          maximum: 2147483647
-          minimum: 0
         view_count:
           type: integer
           readOnly: true
@@ -888,8 +1031,6 @@ components:
           type: array
           items:
             type: integer
-            title: Advertisement
-          title: Advertisement
         uuid:
           type: string
           format: uuid
@@ -901,14 +1042,26 @@ components:
           type: array
           items:
             type: integer
+        cities:
+          type: array
+          items:
+            type: integer
+        starts_at:
+          type: string
+          format: date-time
+        ends_at:
+          type: string
+          format: date-time
       required:
+      - cities
       - description
       - devices
-      - duration
+      - ends_at
       - id
       - image
       - link
       - provinces
+      - starts_at
       - text
       - view_count
     Device:
@@ -950,10 +1103,6 @@ components:
           nullable: true
         status:
           $ref: '#/components/schemas/StatusEnum'
-        duration:
-          type: integer
-          maximum: 2147483647
-          minimum: 0
         view_count:
           type: integer
           readOnly: true
@@ -964,8 +1113,6 @@ components:
           type: array
           items:
             type: integer
-            title: Advertisement
-          title: Advertisement
         uuid:
           type: string
           format: uuid
@@ -973,13 +1120,25 @@ components:
           type: array
           items:
             type: integer
+        cities:
+          type: array
+          items:
+            type: integer
+        starts_at:
+          type: string
+          format: date-time
+        ends_at:
+          type: string
+          format: date-time
       required:
+      - cities
       - devices
-      - duration
+      - ends_at
       - id
       - image
       - link
       - provinces
+      - starts_at
       - view_count
     PaginatedBannerList:
       type: object
@@ -1068,10 +1227,6 @@ components:
           nullable: true
         status:
           $ref: '#/components/schemas/StatusEnum'
-        duration:
-          type: integer
-          maximum: 2147483647
-          minimum: 0
         view_count:
           type: integer
           readOnly: true
@@ -1082,8 +1237,6 @@ components:
           type: array
           items:
             type: integer
-            title: Advertisement
-          title: Advertisement
         uuid:
           type: string
           format: uuid
@@ -1095,6 +1248,16 @@ components:
           type: array
           items:
             type: integer
+        cities:
+          type: array
+          items:
+            type: integer
+        starts_at:
+          type: string
+          format: date-time
+        ends_at:
+          type: string
+          format: date-time
     PatchedDevice:
       type: object
       properties:
@@ -1130,10 +1293,6 @@ components:
           nullable: true
         status:
           $ref: '#/components/schemas/StatusEnum'
-        duration:
-          type: integer
-          maximum: 2147483647
-          minimum: 0
         view_count:
           type: integer
           readOnly: true
@@ -1144,8 +1303,6 @@ components:
           type: array
           items:
             type: integer
-            title: Advertisement
-          title: Advertisement
         uuid:
           type: string
           format: uuid
@@ -1153,6 +1310,16 @@ components:
           type: array
           items:
             type: integer
+        cities:
+          type: array
+          items:
+            type: integer
+        starts_at:
+          type: string
+          format: date-time
+        ends_at:
+          type: string
+          format: date-time
     PatchedVideo:
       type: object
       properties:
@@ -1171,7 +1338,7 @@ components:
         video:
           type: string
           format: uri
-          pattern: (?:mov|avi|mp4|webm|mkv)$
+          pattern: (?:mov|avi|mp4|webm|mkv|m3u8)$
         min_age:
           type: integer
           maximum: 80
@@ -1184,10 +1351,6 @@ components:
           nullable: true
         status:
           $ref: '#/components/schemas/StatusEnum'
-        duration:
-          type: integer
-          maximum: 2147483647
-          minimum: 0
         view_count:
           type: integer
           readOnly: true
@@ -1198,20 +1361,28 @@ components:
           type: array
           items:
             type: integer
-            title: Advertisement
-          title: Advertisement
         uuid:
           type: string
           format: uuid
         skip_duration:
           type: integer
-          maximum: 15
+          maximum: 20
           minimum: 3
           nullable: true
         provinces:
           type: array
           items:
             type: integer
+        cities:
+          type: array
+          items:
+            type: integer
+        starts_at:
+          type: string
+          format: date-time
+        ends_at:
+          type: string
+          format: date-time
     PlatformsEnum:
       enum:
       - app
@@ -1250,7 +1421,7 @@ components:
         video:
           type: string
           format: uri
-          pattern: (?:mov|avi|mp4|webm|mkv)$
+          pattern: (?:mov|avi|mp4|webm|mkv|m3u8)$
         min_age:
           type: integer
           maximum: 80
@@ -1263,10 +1434,6 @@ components:
           nullable: true
         status:
           $ref: '#/components/schemas/StatusEnum'
-        duration:
-          type: integer
-          maximum: 2147483647
-          minimum: 0
         view_count:
           type: integer
           readOnly: true
@@ -1277,28 +1444,38 @@ components:
           type: array
           items:
             type: integer
-            title: Advertisement
-          title: Advertisement
         uuid:
           type: string
           format: uuid
         skip_duration:
           type: integer
-          maximum: 15
+          maximum: 20
           minimum: 3
           nullable: true
         provinces:
           type: array
           items:
             type: integer
+        cities:
+          type: array
+          items:
+            type: integer
+        starts_at:
+          type: string
+          format: date-time
+        ends_at:
+          type: string
+          format: date-time
       required:
+      - cities
       - description
       - devices
-      - duration
+      - ends_at
       - id
       - image
       - link
       - provinces
+      - starts_at
       - text
       - video
       - view_count

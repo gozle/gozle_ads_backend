@@ -1,21 +1,37 @@
-from helpers.celery_beat_scheduler import (
-    ADS_HIDE_TASK_NAMES,
-    create_clock_schedule,
-    create_status_hide_task
-)
+from django.core.exceptions import ValidationError
+
+from .celery_beat_scheduler import create_set_status_task
+from .validators import dates_are_valid
 
 
 class TaskCreatorMixin:
 
     def save(self, *args, **kwargs):
-        if self.is_active:
-            duration = self.duration
+        _id = self.id
+        if not _id:
+            starts_at = self.starts_at
+            ends_at = self.ends_at
             uuid = self.uuid
-            # Creating Celery task which hide object's status to hidden
-            schedule = create_clock_schedule(duration=duration)
-            task = create_status_hide_task(
-                schedule=schedule,
-                uuid=uuid,
-                task_name=ADS_HIDE_TASK_NAMES[self._meta.verbose_name.lower()]
-            )
+            ads_type = self._meta.verbose_name.lower()
+            if dates_are_valid(start_data=starts_at, end_data=ends_at):
+
+                # Creating Celery task which sets object's status to active
+                create_set_status_task(
+                    ads_type=ads_type,
+                    date=starts_at,
+                    status="active",
+                    uuid=uuid,
+                )
+                # Creating Celery task which sets object's status to hidden
+                create_set_status_task(
+                    ads_type=ads_type,
+                    date=ends_at,
+                    status="hidden",
+                    uuid=uuid,
+                )
+
+                return super().save(*args, **kwargs)
+
+            raise ValidationError("Start or End dates are not valid!")
+
         return super().save(*args, **kwargs)

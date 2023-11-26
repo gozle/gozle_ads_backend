@@ -1302,6 +1302,17 @@ files = [
 cli = ["click (>=5.0)"]
 
 [[package]]
+name = "python-ffmpeg-video-streaming"
+version = "0.1.15"
+description = "Package media content for online streaming(DASH and HLS) using ffmpeg"
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "python-ffmpeg-video-streaming-0.1.15.tar.gz", hash = "sha256:505690effd7e37154e39be11e035c47cee11b39e81a7bf16ae57c79b1a0c9520"},
+    {file = "python_ffmpeg_video_streaming-0.1.15-py3-none-any.whl", hash = "sha256:67492c9f5552032a832696a5e14193dd5bb30be5826ed0acc5c7548b8b306a37"},
+]
+
+[[package]]
 name = "pytz"
 version = "2023.3.post1"
 description = "World timezone definitions, modern and historical"
@@ -1901,4 +1912,4 @@ testing = ["coverage (>=5.0.3)", "zope.event", "zope.testing"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "1e990ae48cbd583244e90a62e83e03a5a844441229608d5c137e126e57bea76c"
+content-hash = "b243e9acb4fe13af22b61e0f6c21005f53c97b9440547325ac0ed38cbd608ad2"
