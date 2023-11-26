@@ -155,7 +155,7 @@ BROKER_URL = os.getenv("BROKER_URL", "redis://127.0.0.1:6379/1")
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Ashgabat'
 
 USE_I18N = True
 

@@ -1,4 +1,3 @@
-import os
 from uuid import uuid4
 
 from django.core.validators import (FileExtensionValidator, MaxValueValidator,
@@ -13,7 +12,6 @@ from .ranker import Ranker
 
 from helpers.converters import convert_to_m3u8
 from helpers.mixins import TaskCreatorMixin
-from helpers.utils import move_ts_file
 from locations.models import City, Province
 
 
@@ -91,15 +89,16 @@ class AdvertisementModelMixin(TaskCreatorMixin, models.Model):
     devices = models.ManyToManyField(
         Device,
     )
-    duration = models.PositiveIntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     published_at = models.DateTimeField(blank=True, null=True)
     deleted_at = models.DateTimeField(blank=True, null=True)
+    starts_at = models.DateTimeField()
+    ends_at = models.DateTimeField()
     status = models.CharField(
         max_length=30,
         choices=Statuses.choices,
-        default=Statuses.ACTIVE
+        default=Statuses.HIDDEN
     )
     uuid = models.UUIDField(default=uuid4, unique=True)
     score = models.IntegerField(default=0)

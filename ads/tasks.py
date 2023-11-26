@@ -8,21 +8,31 @@ from helpers.utils import ads_data
 
 
 @shared_task
-def hide_banner(uuid):
+def set_status_banner(uuid, status):
     queryset = Banner.objects.get(uuid=uuid)
-    queryset.set_as_hidden()
+    if status.lower() == "active":
+        queryset.set_as_active()
+    else:
+        queryset.set_as_hidden()
 
 
 @shared_task
-def hide_imput(uuid):
+def set_status_imput(uuid, status):
     queryset = Imput.objects.get(uuid=uuid)
-    queryset.set_as_hidden()
+    if status.lower() == "active":
+        queryset.set_as_active()
+    else:
+        queryset.set_as_hidden()
+    print("TASK CREATED")
 
 
 @shared_task
-def hide_video(uuid):
+def set_status_video(uuid, status: str):
     queryset = Video.objects.get(uuid=uuid)
-    queryset.set_as_hidden()
+    if status.lower() == "active":
+        queryset.set_as_active()
+    else:
+        queryset.set_as_hidden()
 
 
 @shared_task
