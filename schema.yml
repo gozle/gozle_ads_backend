@@ -1,13 +1,21 @@
 openapi: 3.0.3
 info:
   title: Gozle ADS
-  version: 1.0.2
+  version: 1.1.0
   description: Gozle ADS API
 paths:
   /api/v1/banner/:
     get:
       operationId: banner_list
       parameters:
+      - in: query
+        name: cities
+        schema:
+          type: array
+          items:
+            type: integer
+        explode: true
+        style: form
       - in: query
         name: devices
         schema:
@@ -384,6 +392,14 @@ paths:
       operationId: imput_list
       parameters:
       - in: query
+        name: cities
+        schema:
+          type: array
+          items:
+            type: integer
+        explode: true
+        style: form
+      - in: query
         name: devices
         schema:
           type: array
@@ -751,6 +767,14 @@ paths:
       operationId: video_list
       parameters:
       - in: query
+        name: cities
+        schema:
+          type: array
+          items:
+            type: integer
+        explode: true
+        style: form
+      - in: query
         name: devices
         schema:
           type: array
@@ -997,10 +1021,6 @@ components:
           nullable: true
         status:
           $ref: '#/components/schemas/StatusEnum'
-        duration:
-          type: integer
-          maximum: 2147483647
-          minimum: 0
         view_count:
           type: integer
           readOnly: true
@@ -1022,14 +1042,26 @@ components:
           type: array
           items:
             type: integer
+        cities:
+          type: array
+          items:
+            type: integer
+        starts_at:
+          type: string
+          format: date-time
+        ends_at:
+          type: string
+          format: date-time
       required:
+      - cities
       - description
       - devices
-      - duration
+      - ends_at
       - id
       - image
       - link
       - provinces
+      - starts_at
       - text
       - view_count
     Device:
@@ -1071,10 +1103,6 @@ components:
           nullable: true
         status:
           $ref: '#/components/schemas/StatusEnum'
-        duration:
-          type: integer
-          maximum: 2147483647
-          minimum: 0
         view_count:
           type: integer
           readOnly: true
@@ -1092,13 +1120,25 @@ components:
           type: array
           items:
             type: integer
+        cities:
+          type: array
+          items:
+            type: integer
+        starts_at:
+          type: string
+          format: date-time
+        ends_at:
+          type: string
+          format: date-time
       required:
+      - cities
       - devices
-      - duration
+      - ends_at
       - id
       - image
       - link
       - provinces
+      - starts_at
       - view_count
     PaginatedBannerList:
       type: object
@@ -1187,10 +1227,6 @@ components:
           nullable: true
         status:
           $ref: '#/components/schemas/StatusEnum'
-        duration:
-          type: integer
-          maximum: 2147483647
-          minimum: 0
         view_count:
           type: integer
           readOnly: true
@@ -1212,6 +1248,16 @@ components:
           type: array
           items:
             type: integer
+        cities:
+          type: array
+          items:
+            type: integer
+        starts_at:
+          type: string
+          format: date-time
+        ends_at:
+          type: string
+          format: date-time
     PatchedDevice:
       type: object
       properties:
@@ -1247,10 +1293,6 @@ components:
           nullable: true
         status:
           $ref: '#/components/schemas/StatusEnum'
-        duration:
-          type: integer
-          maximum: 2147483647
-          minimum: 0
         view_count:
           type: integer
           readOnly: true
@@ -1268,6 +1310,16 @@ components:
           type: array
           items:
             type: integer
+        cities:
+          type: array
+          items:
+            type: integer
+        starts_at:
+          type: string
+          format: date-time
+        ends_at:
+          type: string
+          format: date-time
     PatchedVideo:
       type: object
       properties:
@@ -1286,7 +1338,7 @@ components:
         video:
           type: string
           format: uri
-          pattern: (?:mov|avi|mp4|webm|mkv)$
+          pattern: (?:mov|avi|mp4|webm|mkv|m3u8)$
         min_age:
           type: integer
           maximum: 80
@@ -1299,10 +1351,6 @@ components:
           nullable: true
         status:
           $ref: '#/components/schemas/StatusEnum'
-        duration:
-          type: integer
-          maximum: 2147483647
-          minimum: 0
         view_count:
           type: integer
           readOnly: true
@@ -1325,6 +1373,16 @@ components:
           type: array
           items:
             type: integer
+        cities:
+          type: array
+          items:
+            type: integer
+        starts_at:
+          type: string
+          format: date-time
+        ends_at:
+          type: string
+          format: date-time
     PlatformsEnum:
       enum:
       - app
@@ -1363,7 +1421,7 @@ components:
         video:
           type: string
           format: uri
-          pattern: (?:mov|avi|mp4|webm|mkv)$
+          pattern: (?:mov|avi|mp4|webm|mkv|m3u8)$
         min_age:
           type: integer
           maximum: 80
@@ -1376,10 +1434,6 @@ components:
           nullable: true
         status:
           $ref: '#/components/schemas/StatusEnum'
-        duration:
-          type: integer
-          maximum: 2147483647
-          minimum: 0
         view_count:
           type: integer
           readOnly: true
@@ -1402,14 +1456,26 @@ components:
           type: array
           items:
             type: integer
+        cities:
+          type: array
+          items:
+            type: integer
+        starts_at:
+          type: string
+          format: date-time
+        ends_at:
+          type: string
+          format: date-time
       required:
+      - cities
       - description
       - devices
-      - duration
+      - ends_at
       - id
       - image
       - link
       - provinces
+      - starts_at
       - text
       - video
       - view_count
