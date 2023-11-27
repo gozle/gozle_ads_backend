@@ -15,13 +15,15 @@ class TaskCreatorMixin:
             ads_type = self._meta.verbose_name.lower()
             if dates_are_valid(start_data=starts_at, end_data=ends_at):
 
-                # Creating Celery task which sets object's status to active
-                create_set_status_task(
-                    ads_type=ads_type,
-                    date=starts_at,
-                    status="active",
-                    uuid=uuid,
-                )
+                if self.status.lower() != "active":
+                    # Creating Celery task which sets object's status to active
+                    create_set_status_task(
+                        ads_type=ads_type,
+                        date=starts_at,
+                        status="active",
+                        uuid=uuid,
+                    )
+
                 # Creating Celery task which sets object's status to hidden
                 create_set_status_task(
                     ads_type=ads_type,
