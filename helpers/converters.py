@@ -19,10 +19,6 @@ def convert_to_m3u8(uuid):
     output_name = uuid4().hex
     output_path = f'{settings.MEDIA_ROOT}/video/videos/{output_name}/{output_name}.m3u8'
 
-    _240p = Representation(
-        Size(426, 240),
-        Bitrate(150 * 1024, 94 * 1024)
-    )
     _360p = Representation(
         Size(640, 360),
         Bitrate(276 * 1024, 128 * 1024)
@@ -35,13 +31,9 @@ def convert_to_m3u8(uuid):
         Size(1280, 720),
         Bitrate(2048 * 1024, 320 * 1024)
     )
-    _1080p = Representation(
-        Size(1920, 1080),
-        Bitrate(4096 * 1024, 320 * 1024)
-    )
 
     hls = video_file.hls(Formats.h264())
-    hls.representations(_240p, _360p, _480p, _720p, _1080p)
+    hls.representations(_360p, _480p, _720p)
     hls.output(output_path)
     with open(output_path, 'rb') as file:
         # Reads content of file
