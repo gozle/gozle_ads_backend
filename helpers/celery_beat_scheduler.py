@@ -1,5 +1,5 @@
 import json
-from datetime import datetime, timezone, timedelta
+from datetime import datetime, timedelta
 from uuid import UUID, uuid4
 
 from django.utils import timezone
