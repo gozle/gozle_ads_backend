@@ -1,15 +1,21 @@
 import os
 from uuid import uuid4
 
+from celery import shared_task
 from ffmpeg_streaming import input as get_video
 from ffmpeg_streaming import Formats, Bitrate, Representation, Size
 from django.db.models.fields.files import FieldFile
 from django.conf import settings
 from django.core.files.base import ContentFile
 
+from ads.models import Video
 
-def convert_to_m3u8(video_file: FieldFile):
-    video = get_video(video_file.path)
+
+@shared_task
+def convert_to_m3u8(uuid):
+    qs = Video.objects.get(uuid=uuid)
+    video = qs.video
+    video_file = get_video(video.path)
     output_name = uuid4().hex
     output_path = f'{settings.MEDIA_ROOT}/video/videos/{output_name}/{output_name}.m3u8'
 
@@ -34,7 +40,7 @@ def convert_to_m3u8(video_file: FieldFile):
         Bitrate(4096 * 1024, 320 * 1024)
     )
 
-    hls = video.hls(Formats.h264())
+    hls = video_file.hls(Formats.h264())
     hls.representations(_240p, _360p, _480p, _720p, _1080p)
     hls.output(output_path)
     with open(output_path, 'rb') as file:
@@ -45,10 +51,10 @@ def convert_to_m3u8(video_file: FieldFile):
         content_file = ContentFile(file_content)
 
         os.remove(output_path)
-        os.remove(video_file.path)
+        os.remove(video.path)
 
         # Save the contents of the file in the FileField of your model
-        video_file.save(
+        video.save(
             f'{output_name}/{output_name}.m3u8',
             content_file, 
             save=True

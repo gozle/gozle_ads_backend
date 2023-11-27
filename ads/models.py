@@ -10,7 +10,6 @@ from multiselectfield import MultiSelectField
 from .fields import WEBPField
 from .ranker import Ranker
 
-from helpers.converters import convert_to_m3u8
 from helpers.mixins import TaskCreatorMixin
 from locations.models import City, Province
 
@@ -203,9 +202,9 @@ class Video(AdvertisementModelMixin):
 
     def save(self, *args, **kwargs) -> None:
         created_at = self.created_at
-        super().save(*args, **kwargs)
-        if not created_at:
-            convert_to_m3u8(self.video)
+        return super().save(*args, **kwargs)
+        # if not created_at:
+        #     convert_to_m3u8(self.video)
 
     def __str__(self):
         return f"{self.id}. {self.text}"
