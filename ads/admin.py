@@ -8,7 +8,7 @@ from .models import Banner, Device, Imput, Video
 class AdsAdmin(admin.ModelAdmin):
     def save_model(self, request, obj, form, change) -> None:
         starts_at = obj.starts_at
-        now = timezone.now() + timedelta(seconds=5)
+        now = timezone.now() + timedelta(seconds=20)
         if now >= starts_at:
             obj.set_as_active()
 
