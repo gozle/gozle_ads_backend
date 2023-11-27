@@ -16,7 +16,7 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
-PROJECT_VERSION = '1.1.0'
+PROJECT_VERSION = '1.1.1'
 
 
 # Quick-start development settings - unsuitable for production

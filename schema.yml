@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: Gozle ADS
-  version: 1.1.0
+  version: 1.1.1
   description: Gozle ADS API
 paths:
   /api/v1/banner/:
