@@ -7,7 +7,7 @@ class CitySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = City
-        fields = "__all__"
+        exclude = ["province"]
 
 
 class ProvinceSerializer(serializers.ModelSerializer):
