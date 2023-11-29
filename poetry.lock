@@ -1607,6 +1607,16 @@ files = [
 ]
 
 [[package]]
+name = "slugify"
+version = "0.0.1"
+description = "A generic slugifier."
+optional = false
+python-versions = "*"
+files = [
+    {file = "slugify-0.0.1.tar.gz", hash = "sha256:c5703cc11c1a6947536f3ce8bb306766b8bb5a84a53717f5a703ce0f18235e4c"},
+]
+
+[[package]]
 name = "sqlparse"
 version = "0.4.4"
 description = "A non-validating SQL parser."
@@ -1912,4 +1922,4 @@ testing = ["coverage (>=5.0.3)", "zope.event", "zope.testing"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "b243e9acb4fe13af22b61e0f6c21005f53c97b9440547325ac0ed38cbd608ad2"
+content-hash = "48dd55eb9c50bae4ee6ef7408dea7069484b90302f09863b930b2bd78a6634bb"
