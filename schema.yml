@@ -234,6 +234,158 @@ paths:
               schema:
                 $ref: '#/components/schemas/Banner'
           description: ''
+  /api/v1/cities/:
+    get:
+      operationId: cities_list
+      parameters:
+      - in: query
+        name: province
+        schema:
+          type: string
+      tags:
+      - cities
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/City'
+          description: ''
+    post:
+      operationId: cities_create
+      tags:
+      - cities
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/City'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/City'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/City'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/City'
+          description: ''
+  /api/v1/cities/{id}/:
+    get:
+      operationId: cities_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this city.
+        required: true
+      tags:
+      - cities
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/City'
+          description: ''
+    put:
+      operationId: cities_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this city.
+        required: true
+      tags:
+      - cities
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/City'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/City'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/City'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/City'
+          description: ''
+    patch:
+      operationId: cities_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this city.
+        required: true
+      tags:
+      - cities
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedCity'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedCity'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedCity'
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/City'
+          description: ''
+    delete:
+      operationId: cities_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this city.
+        required: true
+      tags:
+      - cities
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '204':
+          description: No response body
   /api/v1/devices/:
     get:
       operationId: devices_list
@@ -617,6 +769,153 @@ paths:
               schema:
                 $ref: '#/components/schemas/Imput'
           description: ''
+  /api/v1/provinces/:
+    get:
+      operationId: provinces_list
+      tags:
+      - provinces
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Province'
+          description: ''
+    post:
+      operationId: provinces_create
+      tags:
+      - provinces
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Province'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Province'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Province'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Province'
+          description: ''
+  /api/v1/provinces/{id}/:
+    get:
+      operationId: provinces_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this province.
+        required: true
+      tags:
+      - provinces
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Province'
+          description: ''
+    put:
+      operationId: provinces_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this province.
+        required: true
+      tags:
+      - provinces
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Province'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Province'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Province'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Province'
+          description: ''
+    patch:
+      operationId: provinces_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this province.
+        required: true
+      tags:
+      - provinces
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedProvince'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedProvince'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedProvince'
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Province'
+          description: ''
+    delete:
+      operationId: provinces_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this province.
+        required: true
+      tags:
+      - provinces
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '204':
+          description: No response body
   /api/v1/schema/:
     get:
       operationId: schema_retrieve
@@ -1064,6 +1363,26 @@ components:
       - starts_at
       - text
       - view_count
+    City:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 15
+        slug:
+          type: string
+          nullable: true
+          maxLength: 50
+          pattern: ^[-a-zA-Z0-9_]+$
+        province:
+          type: integer
+      required:
+      - id
+      - name
+      - province
     Device:
       type: object
       properties:
@@ -1258,6 +1577,22 @@ components:
         ends_at:
           type: string
           format: date-time
+    PatchedCity:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 15
+        slug:
+          type: string
+          nullable: true
+          maxLength: 50
+          pattern: ^[-a-zA-Z0-9_]+$
+        province:
+          type: integer
     PatchedDevice:
       type: object
       properties:
@@ -1320,6 +1655,18 @@ components:
         ends_at:
           type: string
           format: date-time
+    PatchedProvince:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 10
+        code_name:
+          type: string
+          maxLength: 3
     PatchedVideo:
       type: object
       properties:
@@ -1391,6 +1738,22 @@ components:
       description: |-
         * `app` - App
         * `web` - Web
+    Province:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 10
+        code_name:
+          type: string
+          maxLength: 3
+      required:
+      - code_name
+      - id
+      - name
     StatusEnum:
       enum:
       - active
