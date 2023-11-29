@@ -9,30 +9,30 @@ from helpers.utils import ads_data
 
 @shared_task
 def set_status_banner(uuid, status):
-    queryset = Banner.objects.get(uuid=uuid)
+    qs = Banner.objects.get(uuid=uuid)
     if status.lower() == "active":
-        queryset.set_as_active()
+        qs.set_as_active()
     else:
-        queryset.set_as_hidden()
+        qs.set_as_hidden()
 
 
 @shared_task
 def set_status_imput(uuid, status):
-    queryset = Imput.objects.get(uuid=uuid)
+    qs = Imput.objects.get(uuid=uuid)
     if status.lower() == "active":
-        queryset.set_as_active()
+        qs.set_as_active()
     else:
-        queryset.set_as_hidden()
+        qs.set_as_hidden()
     print("TASK CREATED")
 
 
 @shared_task
 def set_status_video(uuid, status: str):
-    queryset = Video.objects.get(uuid=uuid)
+    qs = Video.objects.get(uuid=uuid)
     if status.lower() == "active":
-        queryset.set_as_active()
+        qs.set_as_active()
     else:
-        queryset.set_as_hidden()
+        qs.set_as_hidden()
 
 
 @shared_task
