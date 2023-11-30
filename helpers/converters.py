@@ -4,16 +4,15 @@ from uuid import uuid4
 from celery import shared_task
 from ffmpeg_streaming import input as get_video
 from ffmpeg_streaming import Formats, Bitrate, Representation, Size
-from django.db.models.fields.files import FieldFile
 from django.conf import settings
 from django.core.files.base import ContentFile
 
-from ads.models import Video
+from helpers.utils import get_video_qs
 
 
 @shared_task
 def convert_to_m3u8(uuid):
-    qs = Video.objects.get(uuid=uuid)
+    qs = get_video_qs(uuid)
     video = qs.video
     video_file = get_video(video.path)
     output_name = uuid4().hex
