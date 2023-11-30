@@ -1319,7 +1319,7 @@ components:
           minimum: 0
           nullable: true
         status:
-          $ref: '#/components/schemas/StatusEnum'
+          $ref: '#/components/schemas/Status360Enum'
         view_count:
           type: integer
           readOnly: true
@@ -1418,7 +1418,7 @@ components:
           minimum: 0
           nullable: true
         status:
-          $ref: '#/components/schemas/StatusEnum'
+          $ref: '#/components/schemas/Status360Enum'
         view_count:
           type: integer
           readOnly: true
@@ -1542,7 +1542,7 @@ components:
           minimum: 0
           nullable: true
         status:
-          $ref: '#/components/schemas/StatusEnum'
+          $ref: '#/components/schemas/Status360Enum'
         view_count:
           type: integer
           readOnly: true
@@ -1622,7 +1622,7 @@ components:
           minimum: 0
           nullable: true
         status:
-          $ref: '#/components/schemas/StatusEnum'
+          $ref: '#/components/schemas/Status360Enum'
         view_count:
           type: integer
           readOnly: true
@@ -1694,7 +1694,7 @@ components:
           minimum: 0
           nullable: true
         status:
-          $ref: '#/components/schemas/StatusEnum'
+          $ref: '#/components/schemas/VideoStatusEnum'
         view_count:
           type: integer
           readOnly: true
@@ -1752,7 +1752,7 @@ components:
       required:
       - id
       - name
-    StatusEnum:
+    Status360Enum:
       enum:
       - active
       - hidden
@@ -1794,7 +1794,7 @@ components:
           minimum: 0
           nullable: true
         status:
-          $ref: '#/components/schemas/StatusEnum'
+          $ref: '#/components/schemas/VideoStatusEnum'
         view_count:
           type: integer
           readOnly: true
@@ -1840,6 +1840,22 @@ components:
       - text
       - video
       - view_count
+    VideoStatusEnum:
+      enum:
+      - active
+      - hidden
+      - converting
+      - completed
+      - deleted
+      - test
+      type: string
+      description: |-
+        * `active` - Active
+        * `hidden` - Hidden
+        * `converting` - Converting
+        * `completed` - Completed
+        * `deleted` - Deleted
+        * `test` - Test
   securitySchemes:
     basicAuth:
       type: http
