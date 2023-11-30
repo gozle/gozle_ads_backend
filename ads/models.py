@@ -172,6 +172,19 @@ class Banner(AdvertisementModelMixin):
 
 
 class Video(AdvertisementModelMixin):
+    class Statuses(models.TextChoices):
+        ACTIVE = "active", _("Active")
+        HIDDEN = "hidden", _("Hidden")
+        CONVERTING = "converting", _("Converting")
+        COMPLETED = "completed", _("Completed")
+        DELETED = "deleted", _("Deleted")
+        TEST = "test", _("Test")
+
+    status = models.CharField(
+        max_length=30,
+        choices=Statuses.choices,
+        default=Statuses.CONVERTING
+    )
     text = models.CharField(max_length=255)
     description = models.TextField()
     image = WEBPField(
@@ -200,11 +213,28 @@ class Video(AdvertisementModelMixin):
         ]
     )
 
+    @property
+    def is_converting(self):
+        return self.status == self.Statuses.CONVERTING
+
+    @property
+    def is_completed(self):
+        return self.status == self.Statuses.COMPLETED
+
+    def set_as_converting(self):
+        self.status = self.Statuses.CONVERTING
+        self.save()
+
+    def set_as_completed(self):
+        self.status = self.Statuses.COMPLETED
+        self.save()
+
     def save(self, *args, **kwargs) -> None:
-        created_at = self.created_at
+        _id = self.id
+        if not _id:
+            self.status = self.Statuses.CONVERTING
+
         return super().save(*args, **kwargs)
-        # if not created_at:
-        #     convert_to_m3u8(self.video)
 
     def __str__(self):
         return f"{self.id}. {self.text}"
