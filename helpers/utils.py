@@ -35,5 +35,5 @@ def get_video_qs(uuid):
         try:
             return Video.objects.get(uuid=uuid)
         except Video.DoesNotExist:
-            time.sleep(1)
+            time.sleep(2)
             continue
