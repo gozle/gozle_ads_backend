@@ -39,7 +39,7 @@ class Schedule:
 class Task:
 
     @staticmethod
-    def create_status_hide_task(schedule, uuid: UUID, task_name: str, status: str):
+    def create_set_status_task(schedule, uuid: UUID, task_name: str, status: str):
         periodic_task = PeriodicTask.objects.create(
             clocked=schedule,
             name=f"{uuid4()}",
@@ -65,7 +65,7 @@ def create_set_status_task(
 
     # Creating set status task
     schedule = Schedule.create_clock_schedule(seconds=seconds)
-    task = Task.create_status_hide_task(
+    task = Task.create_set_status_task(
         schedule=schedule,
         uuid=uuid,
         status=status,

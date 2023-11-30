@@ -1,38 +1,52 @@
 from asgiref.sync import async_to_sync
+import time
+
 from celery import shared_task
 from channels.layers import get_channel_layer
+from django.utils import timezone
 
 from ads.models import Banner, Imput, Video
 from ads.serializers import BannerSerializer
-from helpers.utils import ads_data
+from helpers.celery_beat_scheduler import Schedule, Task, ADS_SET_STATUS_TASK_NAMES
+from helpers.utils import ads_data, get_video_qs
 
 
 @shared_task
 def set_status_banner(uuid, status):
-    queryset = Banner.objects.get(uuid=uuid)
+    qs = Banner.objects.get(uuid=uuid)
     if status.lower() == "active":
-        queryset.set_as_active()
+        qs.set_as_active()
     else:
-        queryset.set_as_hidden()
+        qs.set_as_hidden()
 
 
 @shared_task
 def set_status_imput(uuid, status):
-    queryset = Imput.objects.get(uuid=uuid)
+    qs = Imput.objects.get(uuid=uuid)
     if status.lower() == "active":
-        queryset.set_as_active()
+        qs.set_as_active()
     else:
-        queryset.set_as_hidden()
-    print("TASK CREATED")
+        qs.set_as_hidden()
 
 
 @shared_task
 def set_status_video(uuid, status: str):
-    queryset = Video.objects.get(uuid=uuid)
-    if status.lower() == "active":
-        queryset.set_as_active()
+    qs = get_video_qs(uuid)
+    now = timezone.now()
+    if qs.is_converting and now < qs.ends_at:
+        seconds = 60 * 1  # 1 minute
+        schedule = Schedule.create_clock_schedule(seconds=seconds)
+        task = Task.create_set_status_task(
+            schedule=schedule,
+            status="active",
+            task_name=ADS_SET_STATUS_TASK_NAMES["video"],
+            uuid=qs.uuid
+        )
     else:
-        queryset.set_as_hidden()
+        if status.lower() == "active" and now < qs.ends_at:
+            qs.set_as_active()
+        else:
+            qs.set_as_hidden()
 
 
 @shared_task

@@ -35,6 +35,9 @@ def convert_to_m3u8(uuid):
     hls = video_file.hls(Formats.h264())
     hls.representations(_360p, _480p, _720p)
     hls.output(output_path)
+
+    qs.set_as_completed()
+
     with open(output_path, 'rb') as file:
         # Reads content of file
         file_content = file.read()
@@ -42,12 +45,12 @@ def convert_to_m3u8(uuid):
         # Creating object of ContentFile from file's content
         content_file = ContentFile(file_content)
 
-        os.remove(output_path)
-        os.remove(video.path)
-
         # Save the contents of the file in the FileField of your model
         video.save(
             f'{output_name}/{output_name}.m3u8',
-            content_file, 
+            content_file,
             save=True
         )
+
+        os.remove(output_path)
+        os.remove(video.path)

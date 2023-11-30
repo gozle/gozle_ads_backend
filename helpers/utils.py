@@ -1,8 +1,11 @@
 import random
 import shutil
+import time
 
 from django.conf import settings
 from django.db.models import QuerySet
+
+from ads.models import Video
 
 
 def ads_data(queryset: QuerySet, qs_count: int, serializer_class):
@@ -25,3 +28,12 @@ def move_ts_file(video_file_name):
     ts_file_path = f"{settings.MEDIA_ROOT}/{ts_file_name}"
     ts_file_move_path = f"{settings.MEDIA_ROOT}/video/videos/"
     shutil.move(ts_file_path, ts_file_move_path)
+
+
+def get_video_qs(uuid):
+    while True:
+        try:
+            return Video.objects.get(uuid=uuid)
+        except Video.DoesNotExist:
+            time.sleep(1)
+            continue
