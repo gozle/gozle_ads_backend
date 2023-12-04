@@ -30,9 +30,13 @@ def convert_to_m3u8(uuid):
         Size(1280, 720),
         Bitrate(2048 * 1024, 320 * 1024)
     )
+    _1080p = Representation(
+        Size(1920, 1080),
+        Bitrate(4096 * 1024, 320 * 1024)
+    )
 
-    hls = video_file.hls(Formats.h264())
-    hls.representations(_360p, _480p, _720p)
+    hls = video_file.hls(Formats.h264(), hls_time=10)
+    hls.representations(_360p, _480p, _720p, _1080p)
     hls.output(output_path)
 
     qs.set_as_completed()
