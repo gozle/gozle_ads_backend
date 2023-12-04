@@ -42,10 +42,10 @@ class BannerAdsAPIView(APIView):
     @extend_schema(
         parameters=[
             OpenApiParameter(
-                name='user_age',
+                name='birth_year',
                 type=int,
                 location=OpenApiParameter.QUERY,
-                description='User age'
+                description='User birth year'
             ),
 
             OpenApiParameter(
@@ -98,10 +98,10 @@ class ImputAdsAPIView(APIView):
     @extend_schema(
         parameters=[
             OpenApiParameter(
-                name='user_age',
+                name='birth_year',
                 type=int,
                 location=OpenApiParameter.QUERY,
-                description='User age'
+                description='User birth year'
             ),
 
             OpenApiParameter(
@@ -153,10 +153,10 @@ class VideoAdsAPIView(APIView):
     @extend_schema(
         parameters=[
             OpenApiParameter(
-                name='user_age',
+                name='birth_year',
                 type=int,
                 location=OpenApiParameter.QUERY,
-                description='User age'
+                description='User birth year'
             ),
 
             OpenApiParameter(
