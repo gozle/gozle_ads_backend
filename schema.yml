@@ -1,13 +1,18 @@
 openapi: 3.0.3
 info:
   title: Gozle ADS
-  version: 1.1.2
+  version: 1.1.3
   description: Gozle ADS API
 paths:
   /api/v1/banner/:
     get:
       operationId: banner_list
       parameters:
+      - in: query
+        name: birth_year
+        schema:
+          type: number
+        description: User birth year
       - in: query
         name: cities
         schema:
@@ -44,11 +49,6 @@ paths:
             type: integer
         explode: true
         style: form
-      - in: query
-        name: user_age
-        schema:
-          type: number
-        description: User age
       tags:
       - banner
       security:
@@ -203,6 +203,11 @@ paths:
       description: Banner getter by less view count
       parameters:
       - in: query
+        name: birth_year
+        schema:
+          type: integer
+        description: User birth year
+      - in: query
         name: devices
         schema:
           type: array
@@ -216,11 +221,6 @@ paths:
           items:
             type: integer
         description: Province ID
-      - in: query
-        name: user_age
-        schema:
-          type: integer
-        description: User age
       tags:
       - banner
       security:
@@ -544,6 +544,11 @@ paths:
       operationId: imput_list
       parameters:
       - in: query
+        name: birth_year
+        schema:
+          type: number
+        description: User birth year
+      - in: query
         name: cities
         schema:
           type: array
@@ -579,11 +584,6 @@ paths:
             type: integer
         explode: true
         style: form
-      - in: query
-        name: user_age
-        schema:
-          type: number
-        description: User age
       tags:
       - imput
       security:
@@ -738,6 +738,11 @@ paths:
       description: Imput getter by less view count
       parameters:
       - in: query
+        name: birth_year
+        schema:
+          type: integer
+        description: User birth year
+      - in: query
         name: devices
         schema:
           type: array
@@ -751,11 +756,6 @@ paths:
           items:
             type: integer
         description: Province ID
-      - in: query
-        name: user_age
-        schema:
-          type: integer
-        description: User age
       tags:
       - imput
       security:
@@ -1066,6 +1066,11 @@ paths:
       operationId: video_list
       parameters:
       - in: query
+        name: birth_year
+        schema:
+          type: number
+        description: User birth year
+      - in: query
         name: cities
         schema:
           type: array
@@ -1101,11 +1106,6 @@ paths:
             type: integer
         explode: true
         style: form
-      - in: query
-        name: user_age
-        schema:
-          type: number
-        description: User age
       tags:
       - video
       security:
@@ -1260,6 +1260,11 @@ paths:
       description: Video getter by less view count
       parameters:
       - in: query
+        name: birth_year
+        schema:
+          type: integer
+        description: User birth year
+      - in: query
         name: devices
         schema:
           type: array
@@ -1273,11 +1278,6 @@ paths:
           items:
             type: integer
         description: Province ID
-      - in: query
-        name: user_age
-        schema:
-          type: integer
-        description: User age
       tags:
       - video
       security:
