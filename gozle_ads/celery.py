@@ -30,10 +30,10 @@ app.conf.beat_schedule = {
     },
     "video_ranker": {
         "task": "core.tasks.update_video_score",
-        "schedule": crontab(hour="*/1", minute="2"),
+        "schedule": crontab(hour="*/1", minute="1"),
     },
     "imput_ranker": {
         "task": "core.tasks.update_imput_score",
-        "schedule": crontab(hour="*/1", minute="3"),
+        "schedule": crontab(hour="*/1", minute="1"),
     },
 }
