@@ -1,6 +1,7 @@
 from django.db.models import Q
-from django_filters import ChoiceFilter, FilterSet, NumberFilter, ModelMultipleChoiceFilter
 from django.utils import timezone
+from django_filters import (ChoiceFilter, FilterSet, ModelMultipleChoiceFilter,
+                            NumberFilter)
 
 from ads.models import AdvertisementModelMixin, Device
 from locations.models import City, Province

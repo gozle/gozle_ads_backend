@@ -1,13 +1,12 @@
 from asgiref.sync import async_to_sync
-import time
-
 from celery import shared_task
 from channels.layers import get_channel_layer
 from django.utils import timezone
 
-from ads.models import Banner, Imput, Video
+from ads.models import Banner, Imput
 from ads.serializers import BannerSerializer
-from helpers.celery_beat_scheduler import Schedule, Task, ADS_SET_STATUS_TASK_NAMES
+from helpers.celery_beat_scheduler import (ADS_SET_STATUS_TASK_NAMES, Schedule,
+                                           Task)
 from helpers.utils import ads_data, get_video_qs
 
 

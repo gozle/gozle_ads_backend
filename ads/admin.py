@@ -1,12 +1,15 @@
-from django.contrib import admin
-from django.utils import timezone
-from django.core.exceptions import ValidationError
 from datetime import timedelta
 
-from .models import Banner, Device, Imput, Video
-from helpers.celery_beat_scheduler import ADS_SET_STATUS_TASK_NAMES, Task, Schedule
+from django.contrib import admin
+from django.core.exceptions import ValidationError
+from django.utils import timezone
+
+from helpers.celery_beat_scheduler import (ADS_SET_STATUS_TASK_NAMES, Schedule,
+                                           Task)
 from helpers.converters import convert_to_m3u8
 from helpers.validators import dates_are_valid
+
+from .models import Banner, Device, Imput, Video
 
 
 class AdsAdmin(admin.ModelAdmin):

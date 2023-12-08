@@ -7,11 +7,11 @@ from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from multiselectfield import MultiSelectField
 
-from .fields import WEBPField
-from .ranker import Ranker
-
 from helpers.mixins import TaskCreatorMixin
 from locations.models import City, Province
+
+from .fields import WEBPField
+from .ranker import Ranker
 
 
 def banner_folder(instance, filename):
