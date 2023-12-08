@@ -44,7 +44,8 @@ class BannerSerializer(AdvertisementCommonFieldsSerializer):
             "provinces",
             "cities",
             "starts_at",
-            "ends_at"
+            "ends_at",
+            "language"
         ]
 
 
@@ -65,7 +66,8 @@ class ImputSerializer(AdvertisementCommonFieldsSerializer):
             "provinces",
             "cities",
             "starts_at",
-            "ends_at"
+            "ends_at",
+            "language"
         ]
 
 
@@ -92,5 +94,6 @@ class VideoSerializer(AdvertisementCommonFieldsSerializer):
             "provinces",
             "cities",
             "starts_at",
-            "ends_at"
+            "ends_at",
+            "language"
         ]
