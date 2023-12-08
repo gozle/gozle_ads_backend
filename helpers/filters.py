@@ -7,7 +7,11 @@ from locations.models import City, Province
 
 
 class AdvertisementFilterSetMixin(FilterSet):
-    birth_year = NumberFilter(label="User birth year", field_name='birth_year', method='filter_birth_year')
+    birth_year = NumberFilter(
+        label="User birth year",
+        field_name='birth_year',
+        method='filter_birth_year'
+    )
     cities = ModelMultipleChoiceFilter(
         field_name='cities',
         to_field_name='id',
