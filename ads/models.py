@@ -61,6 +61,12 @@ class AdvertisementQueryset(models.QuerySet):
 
 
 class AdvertisementModelMixin(TaskCreatorMixin, models.Model):
+    class Languages(models.TextChoices):
+        TURKMEN = "tm", _("Turkmen")
+        RUSSIAN = "ru", _("Russian")
+        ENGLISH = "en", _("English")
+        TURKISH = "tr", _("Turkish")
+
     class Statuses(models.TextChoices):
         ACTIVE = "active", _("Active")
         HIDDEN = "hidden", _("Hidden")
@@ -103,6 +109,11 @@ class AdvertisementModelMixin(TaskCreatorMixin, models.Model):
     score = models.IntegerField(default=0)
     provinces = models.ManyToManyField(Province)
     cities = models.ManyToManyField(City)
+    language = models.CharField(
+        max_length=15,
+        choices=Languages.choices,
+        default=Languages.TURKMEN
+    )
 
     @property
     def is_active(self):
@@ -119,6 +130,22 @@ class AdvertisementModelMixin(TaskCreatorMixin, models.Model):
     @property
     def is_hidden(self):
         return self.status == self.Statuses.HIDDEN
+    
+    @property
+    def is_turkmen(self):
+        return self.status == self.Languages.TURKMEN
+    
+    @property
+    def is_russian(self):
+        return self.status == self.Languages.RUSSIAN
+    
+    @property
+    def is_english(self):
+        return self.status == self.Languages.ENGLISH
+    
+    @property
+    def is_turkish(self):
+        return self.status == self.Languages.TURKISH
 
     def view_count_increase(self):
         self.view_count += 1

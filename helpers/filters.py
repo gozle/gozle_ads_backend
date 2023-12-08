@@ -1,13 +1,22 @@
 from django.db.models import Q
-from django_filters import FilterSet, NumberFilter, ModelMultipleChoiceFilter
+from django_filters import ChoiceFilter, FilterSet, NumberFilter, ModelMultipleChoiceFilter
 from django.utils import timezone
 
-from ads.models import Device
+from ads.models import AdvertisementModelMixin, Device
 from locations.models import City, Province
 
 
 class AdvertisementFilterSetMixin(FilterSet):
-    birth_year = NumberFilter(label="User birth year", field_name='birth_year', method='filter_birth_year')
+    language = ChoiceFilter(
+        field_name='language',
+        lookup_expr='exact',
+        choices=AdvertisementModelMixin.Languages.choices
+    )
+    birth_year = NumberFilter(
+        label="User birth year",
+        field_name='birth_year',
+        method='filter_birth_year'
+    )
     cities = ModelMultipleChoiceFilter(
         field_name='cities',
         to_field_name='id',
