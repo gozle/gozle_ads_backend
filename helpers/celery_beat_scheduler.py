@@ -3,8 +3,8 @@ from datetime import datetime, timedelta
 from uuid import UUID, uuid4
 
 from django.utils import timezone
-from django_celery_beat.models import CrontabSchedule, ClockedSchedule, PeriodicTask
-
+from django_celery_beat.models import (ClockedSchedule, CrontabSchedule,
+                                       PeriodicTask)
 
 ADS_SET_STATUS_TASK_NAMES = {
     "banner": "ads.tasks.set_status_banner",

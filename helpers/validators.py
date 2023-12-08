@@ -1,7 +1,7 @@
 from datetime import datetime
-from pytz import timezone
 
 from django.utils.translation import gettext as _
+from pytz import timezone
 from rest_framework import serializers
 
 from gozle_ads.settings import TIME_ZONE

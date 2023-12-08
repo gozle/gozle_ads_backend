@@ -2,10 +2,10 @@ import os
 from uuid import uuid4
 
 from celery import shared_task
-from ffmpeg_streaming import input as get_video
-from ffmpeg_streaming import Formats, Bitrate, Representation, Size
 from django.conf import settings
 from django.core.files.base import ContentFile
+from ffmpeg_streaming import Bitrate, Formats, Representation, Size
+from ffmpeg_streaming import input as get_video
 
 from helpers.utils import get_video_qs
 
