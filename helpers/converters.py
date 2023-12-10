@@ -42,26 +42,29 @@ def convert_to_m3u8(uuid):
     hls.representations(_360p, _480p, _720p, _1080p)
     hls.output(output_path)
 
+    times = 0
+
     try:
         qs.set_as_completed()
-
-        with open(output_path, 'rb') as file:
-            # Reads content of file
-            file_content = file.read()
-
-            # Creating object of ContentFile from file's content
-            content_file = ContentFile(file_content)
-
-            # os.remove(output_path)
-            os.remove(video.path)
-
-            # Save the contents of the file in the FileField of your model
-            video.save(
-                f'{output_name}/{output_name}.m3u8',
-                content_file,
-                save=True
-            )
-
+        time += 1
     except InterfaceError as ee:
-        logging.warning(ee)    # make sure that you log these events
+        logging.warning(ee)
         connection.close()
+        qs.set_as_completed()
+
+    with open(output_path, 'rb') as file:
+        # Reads content of file
+        file_content = file.read()
+
+        # Creating object of ContentFile from file's content
+        content_file = ContentFile(file_content)
+
+        # os.remove(output_path)
+        os.remove(video.path)
+
+        # Save the contents of the file in the FileField of your model
+        video.save(
+            f'{output_name}/{output_name}.m3u8',
+            content_file,
+            save=True
+        )
