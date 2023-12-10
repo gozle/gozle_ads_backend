@@ -1,11 +1,14 @@
+import logging
 import os
 from uuid import uuid4
 
 from celery import shared_task
+from django.db import connection
 from django.conf import settings
 from django.core.files.base import ContentFile
 from ffmpeg_streaming import Bitrate, Formats, Representation, Size
 from ffmpeg_streaming import input as get_video
+from psycopg2 import InterfaceError
 
 from helpers.utils import get_video_qs
 
@@ -39,21 +42,26 @@ def convert_to_m3u8(uuid):
     hls.representations(_360p, _480p, _720p, _1080p)
     hls.output(output_path)
 
-    qs.set_as_completed()
+    try:
+        qs.set_as_completed()
 
-    with open(output_path, 'rb') as file:
-        # Reads content of file
-        file_content = file.read()
+        with open(output_path, 'rb') as file:
+            # Reads content of file
+            file_content = file.read()
 
-        # Creating object of ContentFile from file's content
-        content_file = ContentFile(file_content)
+            # Creating object of ContentFile from file's content
+            content_file = ContentFile(file_content)
 
-        # os.remove(output_path)
-        os.remove(video.path)
+            # os.remove(output_path)
+            os.remove(video.path)
 
-        # Save the contents of the file in the FileField of your model
-        video.save(
-            f'{output_name}/{output_name}.m3u8',
-            content_file,
-            save=True
-        )
+            # Save the contents of the file in the FileField of your model
+            video.save(
+                f'{output_name}/{output_name}.m3u8',
+                content_file,
+                save=True
+            )
+
+    except InterfaceError as ee:
+        logging.warning(ee)    # make sure that you log these events
+        connection.close()
