@@ -8,7 +8,6 @@ from django.conf import settings
 from django.core.files.base import ContentFile
 from ffmpeg_streaming import Bitrate, Formats, Representation, Size
 from ffmpeg_streaming import input as get_video
-from psycopg2 import InterfaceError
 
 from helpers.utils import get_video_qs
 
@@ -42,15 +41,8 @@ def convert_to_m3u8(uuid):
     hls.representations(_360p, _480p, _720p, _1080p)
     hls.output(output_path)
 
-    times = 0
-
-    try:
-        qs.set_as_completed()
-        time += 1
-    except InterfaceError as ee:
-        logging.warning(ee)
-        connection.close()
-        qs.set_as_completed()
+    connection.connect()
+    qs.set_as_completed()
 
     with open(output_path, 'rb') as file:
         # Reads content of file
