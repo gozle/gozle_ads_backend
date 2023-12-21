@@ -67,7 +67,7 @@ class BannerAdsAPIView(APIView):
         qs = BannerFilterSet(request.GET, self.queryset).qs
         qs_count = qs.count()
         if qs_count != 0:
-            data = ads_data(qs, qs_count, BannerSerializer)
+            data = ads_data(request, qs, qs_count, BannerSerializer)
             return Response(data)
 
         return Response({"message": "There is no banner ads"}, status=204)
@@ -123,7 +123,7 @@ class ImputAdsAPIView(APIView):
         qs = ImputFilterSet(request.GET, self.queryset).qs
         qs_count = qs.count()
         if qs_count != 0:
-            data = ads_data(qs, qs_count, ImputSerializer)
+            data = ads_data(request, qs, qs_count, ImputSerializer)
             return Response(data)
         return Response({"message": "There is no imput ads"}, status=204)
 
@@ -178,6 +178,6 @@ class VideoAdsAPIView(APIView):
         qs = VideoFilterSet(request.GET, self.queryset).qs
         qs_count = qs.count()
         if qs_count != 0:
-            data = ads_data(qs, qs_count, VideoSerializer)
+            data = ads_data(request, qs, qs_count, VideoSerializer)
             return Response(data)
         return Response({"message": "There is no video ads"}, status=204)
