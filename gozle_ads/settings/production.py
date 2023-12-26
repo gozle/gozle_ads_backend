@@ -18,11 +18,15 @@ REDIS_KEY_PREFIX = os.getenv("REDIS_KEY_PREFIX")
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": f"redis://{REDIS_USERNAME}:{REDIS_PASSWORD}@{REDIS_HOST}:{REDIS_PORT}/",
-        "KEY_PREFIX": f"{REDIS_KEY_PREFIX}",
-        'OPTIONS': {
-            'CLIENT_CLASS': 'helpers.custom_redis_cluster.CustomRedisCluster',
+        "LOCATION": "redis://127.0.0.1:6379/",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
         }
+#        "LOCATION": f"redis://{REDIS_USERNAME}:{REDIS_PASSWORD}@{REDIS_HOST}:{REDIS_PORT}/",
+#        "KEY_PREFIX": f"{REDIS_KEY_PREFIX}",
+#        'OPTIONS': {
+#            'CLIENT_CLASS': 'helpers.custom_redis_cluster.CustomRedisCluster',
+#        }
     }
 }
 
