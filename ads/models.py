@@ -186,7 +186,7 @@ class Banner(AdvertisementModelMixin):
     )
     cycle_duration = models.PositiveIntegerField(
         validators=[
-            MinValueValidator(60)
+            MinValueValidator(1)
         ],
         default=180
     )
