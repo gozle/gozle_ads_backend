@@ -51,12 +51,12 @@ def convert_to_m3u8(uuid):
         # Creating object of ContentFile from file's content
         content_file = ContentFile(file_content)
 
-        # os.remove(output_path)
-        os.remove(video.path)
-
         # Save the contents of the file in the FileField of your model
         video.save(
             f'{output_name}/{output_name}.m3u8',
             content_file,
             save=True
         )
+
+        # os.remove(output_path)
+        os.remove(video.path)
