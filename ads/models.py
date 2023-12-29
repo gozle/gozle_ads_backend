@@ -7,7 +7,7 @@ from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from multiselectfield import MultiSelectField
 
-from helpers.mixins import TaskCreatorMixin
+# from helpers.mixins import TaskCreatorMixin
 from locations.models import City, Province
 
 from .fields import WEBPField
@@ -60,7 +60,7 @@ class AdvertisementQueryset(models.QuerySet):
         )
 
 
-class AdvertisementModelMixin(TaskCreatorMixin, models.Model):
+class AdvertisementModelMixin(models.Model):
     class Languages(models.TextChoices):
         TURKMEN = "tm", _("Turkmen")
         RUSSIAN = "ru", _("Russian")
@@ -257,8 +257,7 @@ class Video(AdvertisementModelMixin):
         self.save()
 
     def save(self, *args, **kwargs) -> None:
-        _id = self.id
-        if not _id:
+        if not self.video.name.endswith("m3u8"):
             self.status = self.Statuses.CONVERTING
 
         return super().save(*args, **kwargs)

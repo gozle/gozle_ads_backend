@@ -25,23 +25,25 @@ class AdsAdmin(admin.ModelAdmin):
 
 class VideoAdmin(AdsAdmin):
     def save_model(self, request, obj, form, change) -> None:
-        now = timezone.now() + timedelta(seconds=60)
-        model_name = obj._meta.model_name
+        # now = timezone.now() + timedelta(seconds=60)
+        # model_name = obj._meta.model_name
 
-        if not dates_are_valid(start_data=obj.starts_at, end_data=obj.ends_at):
-            raise ValidationError("Start or End dates are not valid!")
+        # if not dates_are_valid(start_data=obj.starts_at, end_data=obj.ends_at):
+        #     raise ValidationError("Start or End dates are not valid!")
 
-        if now > obj.starts_at:
-            schedule = Schedule.create_clock_schedule(seconds=60)
-            task = Task.create_set_status_task(
-                schedule=schedule,
-                status="active",
-                task_name=ADS_SET_STATUS_TASK_NAMES[model_name],
-                uuid=obj.uuid
-            )
+        # if now > obj.starts_at:
+        #     schedule = Schedule.create_clock_schedule(seconds=60)
+        #     task = Task.create_set_status_task(
+        #         schedule=schedule,
+        #         status="active",
+        #         task_name=ADS_SET_STATUS_TASK_NAMES[model_name],
+        #         uuid=obj.uuid
+        #     )
 
         super().save_model(request, obj, form, change)
-        convert_to_m3u8.delay(obj.uuid)
+
+        if not obj.video.name.endswith("m3u8"):
+            convert_to_m3u8.delay(obj.uuid)
 
 
 admin.site.register(Banner, AdsAdmin)
