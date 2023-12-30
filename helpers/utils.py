@@ -8,7 +8,12 @@ from django.db.models import QuerySet
 from ads.models import Video
 
 
-def ads_data(queryset: QuerySet, qs_count: int, serializer_class, request=None):
+def ads_data(
+    queryset: QuerySet,
+    qs_count: int,
+    serializer_class,
+    request=None
+):
     if qs_count >= 5:
         qs = queryset.order_by("score")[:5]
         qs_list = [x for x in qs]
