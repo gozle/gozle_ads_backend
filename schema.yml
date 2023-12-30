@@ -29,6 +29,20 @@ paths:
             type: integer
         explode: true
         style: form
+      - in: query
+        name: language
+        schema:
+          type: string
+          enum:
+          - en
+          - ru
+          - tm
+          - tr
+        description: |-
+          * `tm` - Turkmen
+          * `ru` - Russian
+          * `en` - English
+          * `tr` - Turkish
       - name: page
         required: false
         in: query
@@ -564,6 +578,20 @@ paths:
             type: integer
         explode: true
         style: form
+      - in: query
+        name: language
+        schema:
+          type: string
+          enum:
+          - en
+          - ru
+          - tm
+          - tr
+        description: |-
+          * `tm` - Turkmen
+          * `ru` - Russian
+          * `en` - English
+          * `tr` - Turkish
       - name: page
         required: false
         in: query
@@ -1086,6 +1114,20 @@ paths:
             type: integer
         explode: true
         style: form
+      - in: query
+        name: language
+        schema:
+          type: string
+          enum:
+          - en
+          - ru
+          - tm
+          - tr
+        description: |-
+          * `tm` - Turkmen
+          * `ru` - Russian
+          * `en` - English
+          * `tr` - Turkish
       - name: page
         required: false
         in: query
@@ -1336,7 +1378,7 @@ components:
         cycle_duration:
           type: integer
           maximum: 2147483647
-          minimum: 60
+          minimum: 1
         provinces:
           type: array
           items:
@@ -1351,6 +1393,8 @@ components:
         ends_at:
           type: string
           format: date-time
+        language:
+          $ref: '#/components/schemas/LanguageEnum'
       required:
       - cities
       - description
@@ -1446,6 +1490,8 @@ components:
         ends_at:
           type: string
           format: date-time
+        language:
+          $ref: '#/components/schemas/LanguageEnum'
       required:
       - cities
       - devices
@@ -1456,6 +1502,18 @@ components:
       - provinces
       - starts_at
       - view_count
+    LanguageEnum:
+      enum:
+      - tm
+      - ru
+      - en
+      - tr
+      type: string
+      description: |-
+        * `tm` - Turkmen
+        * `ru` - Russian
+        * `en` - English
+        * `tr` - Turkish
     PaginatedBannerList:
       type: object
       properties:
@@ -1559,7 +1617,7 @@ components:
         cycle_duration:
           type: integer
           maximum: 2147483647
-          minimum: 60
+          minimum: 1
         provinces:
           type: array
           items:
@@ -1574,6 +1632,8 @@ components:
         ends_at:
           type: string
           format: date-time
+        language:
+          $ref: '#/components/schemas/LanguageEnum'
     PatchedCity:
       type: object
       properties:
@@ -1650,6 +1710,8 @@ components:
         ends_at:
           type: string
           format: date-time
+        language:
+          $ref: '#/components/schemas/LanguageEnum'
     PatchedProvince:
       type: object
       properties:
@@ -1727,6 +1789,8 @@ components:
         ends_at:
           type: string
           format: date-time
+        language:
+          $ref: '#/components/schemas/LanguageEnum'
     PlatformsEnum:
       enum:
       - app
@@ -1827,6 +1891,8 @@ components:
         ends_at:
           type: string
           format: date-time
+        language:
+          $ref: '#/components/schemas/LanguageEnum'
       required:
       - cities
       - description
