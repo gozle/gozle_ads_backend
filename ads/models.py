@@ -10,7 +10,6 @@ from multiselectfield import MultiSelectField
 # from helpers.mixins import TaskCreatorMixin
 from locations.models import City, Province
 
-from .fields import WEBPField
 from .ranker import Ranker
 
 
