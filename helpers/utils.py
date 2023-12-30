@@ -8,7 +8,7 @@ from django.db.models import QuerySet
 from ads.models import Video
 
 
-def ads_data(queryset: QuerySet, qs_count: int, serializer_class):
+def ads_data(queryset: QuerySet, qs_count: int, serializer_class, request=None):
     if qs_count >= 5:
         qs = queryset.order_by("score")[:5]
         qs_list = [x for x in qs]
@@ -18,7 +18,7 @@ def ads_data(queryset: QuerySet, qs_count: int, serializer_class):
     else:
         queryset = queryset.first()
 
-    serializer = serializer_class(queryset)
+    serializer = serializer_class(queryset, context={"request": request})
     queryset.view_count_increase()
     return serializer.data
 
