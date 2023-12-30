@@ -180,8 +180,8 @@ class AdvertisementModelMixin(models.Model):
 class Banner(AdvertisementModelMixin):
     text = models.CharField(max_length=255)
     description = models.TextField()
-    image = WEBPField(
-        verbose_name='Image',
+    image = models.ImageField(
+        verbose_name="Image",
         upload_to=banner_folder,
     )
     cycle_duration = models.PositiveIntegerField(
@@ -214,9 +214,9 @@ class Video(AdvertisementModelMixin):
     )
     text = models.CharField(max_length=255)
     description = models.TextField()
-    image = WEBPField(
-        verbose_name='Image',
-        upload_to=video_folder,
+    image = models.ImageField(
+        verbose_name="Image",
+        upload_to=banner_folder,
     )
     video = models.FileField(
         upload_to='video/videos/',
@@ -270,9 +270,9 @@ class Video(AdvertisementModelMixin):
 
 
 class Imput(AdvertisementModelMixin):
-    image = WEBPField(
-        verbose_name='Image',
-        upload_to=imput_folder,
+    image = models.ImageField(
+        verbose_name="Image",
+        upload_to=banner_folder,
     )
 
     def __str__(self):
