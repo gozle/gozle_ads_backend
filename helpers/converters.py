@@ -42,7 +42,6 @@ def convert_to_m3u8(uuid):
     hls.output(output_path)
 
     connection.connect()
-    qs.set_as_completed()
 
     with open(output_path, 'rb') as file:
         # Reads content of file
@@ -60,3 +59,6 @@ def convert_to_m3u8(uuid):
 
         # os.remove(output_path)
         os.remove(video.path)
+
+        # Changing status
+        qs.set_as_completed()
