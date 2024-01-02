@@ -61,7 +61,7 @@ class AdvertisementQueryset(models.QuerySet):
 
 class AdvertisementModelMixin(models.Model):
     class Languages(models.TextChoices):
-        TURKMEN = "tm", _("Turkmen")
+        TURKMEN = "tk", _("Turkmen")
         RUSSIAN = "ru", _("Russian")
         ENGLISH = "en", _("English")
         TURKISH = "tr", _("Turkish")
