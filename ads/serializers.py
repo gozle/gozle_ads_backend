@@ -20,20 +20,6 @@ class AdvertisementCommonFieldsSerializer(serializers.ModelSerializer):
 
     def validate(self, data):
         return age_validator(data)
-    
-    # def to_representation(self, instance):
-    #     representation = super().to_representation(instance)
-        
-    #     # Getting an object's URL
-    #     url = representation.get('image')
-        
-    #     # Generating HTTPS URL
-    #     https_url = self.context['request'].build_absolute_uri(url)
-        
-    #     # Updating URLs in Serialized Data to HTTPS
-    #     representation['image'] = https_url
-        
-    #     return representation
 
 
 class BannerSerializer(AdvertisementCommonFieldsSerializer):
