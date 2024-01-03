@@ -57,8 +57,5 @@ def convert_to_m3u8(uuid):
             save=True
         )
 
-        # os.remove(output_path)
-        os.remove(video.path)
-
         # Changing status
         qs.set_as_completed()
