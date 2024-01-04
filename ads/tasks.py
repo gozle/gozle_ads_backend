@@ -5,8 +5,6 @@ from django.utils import timezone
 
 from ads.models import Banner, Imput
 from ads.serializers import BannerSerializer
-from helpers.celery_beat_scheduler import (ADS_SET_STATUS_TASK_NAMES, Schedule,
-                                           Task)
 from helpers.utils import ads_data, get_video_qs
 
 
@@ -32,20 +30,10 @@ def set_status_imput(uuid, status):
 def set_status_video(uuid, status: str):
     qs = get_video_qs(uuid)
     now = timezone.now()
-    if qs.is_converting and now < qs.ends_at:
-        seconds = 60 * 1  # 1 minute
-        schedule = Schedule.create_clock_schedule(seconds=seconds)
-        task = Task.create_set_status_task(
-            schedule=schedule,
-            status="active",
-            task_name=ADS_SET_STATUS_TASK_NAMES["video"],
-            uuid=qs.uuid
-        )
+    if status.lower() == "active" and now < qs.ends_at:
+        qs.set_as_active()
     else:
-        if status.lower() == "active" and now < qs.ends_at:
-            qs.set_as_active()
-        else:
-            qs.set_as_hidden()
+        qs.set_as_hidden()
 
 
 @shared_task

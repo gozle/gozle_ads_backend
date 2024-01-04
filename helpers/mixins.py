@@ -14,7 +14,8 @@ class TaskCreatorMixin:
             uuid = self.uuid
             ads_type = self._meta.verbose_name.lower()
             if dates_are_valid(start_data=starts_at, end_data=ends_at):
-                if not self.is_active:
+                if (not self.is_active
+                        and ads_type != "video"):
                     # Creating Celery task which sets object's status to active
                     create_set_status_task(
                         ads_type=ads_type,
