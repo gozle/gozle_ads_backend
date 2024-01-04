@@ -1,15 +1,17 @@
-import logging
-import os
+from datetime import timedelta
 from uuid import uuid4
 
 from celery import shared_task
 from django.db import connection
 from django.conf import settings
 from django.core.files.base import ContentFile
+from django.utils import timezone
 from ffmpeg_streaming import Bitrate, Formats, Representation, Size
 from ffmpeg_streaming import input as get_video
 
-from helpers.utils import get_video_qs
+from .celery_beat_scheduler import create_set_status_task
+from .utils import get_video_qs
+from .validators import dates_are_valid
 
 
 @shared_task
@@ -56,6 +58,24 @@ def convert_to_m3u8(uuid):
             content_file,
             save=True
         )
+    
+    # Validate dates
+    if dates_are_valid(qs.starts_at, qs.ends_at):
+        # Checks if start date less than now added 1 minute
+        now = timezone.now() + timedelta(minutes=1)
+        if qs.starts_at <= now:
+            qs.set_as_active()
+        else:
+            # Creates task to set status as active
+            create_set_status_task(
+                ads_type="video",
+                date=qs.starts_at,
+                status="active",
+                uuid=qs.uuid,
+            )
+            # Changing status
+            qs.set_as_completed()
+    else:
+        qs.set_as_hidden()
+    
 
-        # Changing status
-        qs.set_as_completed()

@@ -7,7 +7,7 @@ from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from multiselectfield import MultiSelectField
 
-# from helpers.mixins import TaskCreatorMixin
+from helpers.mixins import TaskCreatorMixin
 from locations.models import City, Province
 
 from .ranker import Ranker
@@ -59,7 +59,7 @@ class AdvertisementQueryset(models.QuerySet):
         )
 
 
-class AdvertisementModelMixin(models.Model):
+class AdvertisementModelMixin(TaskCreatorMixin, models.Model):
     class Languages(models.TextChoices):
         TURKMEN = "tk", _("Turkmen")
         RUSSIAN = "ru", _("Russian")
